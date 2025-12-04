@@ -16,7 +16,7 @@
     background: #555;
 }
 
-/* Animations */
+/* Animations - Blob Background */
 @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
     33% { transform: translate(30px, -50px) scale(1.1); }
@@ -30,18 +30,24 @@
     animation-delay: 2s;
 }
 
-/* Scroll Reveal Class */
+/* 
+   FIX FOR BLANK SCREEN 
+   I changed opacity to 1.
+   Now everything is visible immediately when the site loads.
+*/
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1; 
+    transform: translateY(0);
     transition: all 0.8s ease-out;
 }
+
+/* This class remains for compatibility, but content is already visible */
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Delay classes for staggered animations */
+/* Delay classes */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
