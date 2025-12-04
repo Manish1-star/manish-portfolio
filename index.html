@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (via CDN for instant usage) -->
+    <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -124,16 +124,17 @@
                 <div class="relative w-72 h-72 md:w-96 md:h-96">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-2xl transform rotate-6 opacity-70"></div>
                     <div class="absolute inset-0 bg-gray-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900">
-                        <!-- REPLACE THIS IMG SRC WITH YOUR PHOTO -->
                         <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover">
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white dark:bg-slate-800/50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
             <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
                 I am a tech enthusiast from Nepal with a diverse background. My journey started with hands-on experience in a 
                 <span class="text-blue-500 font-semibold">Mobile Shop</span> and practical work in <span class="text-green-500 font-semibold">Agriculture</span>. 
@@ -274,9 +275,10 @@
                     <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="YouTube Channel" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="absolute bottom-0 left-0 p-6 z-20 text-white">
                         <span class="bg-red-600 text-xs px-2 py-1 rounded mb-2 inline-block">Content Creation</span>
-                        <h3 class="text-xl font-bold">MwNisH YouTube Channel</h3>
+                        <h3 class="text-xl font-bold">MwNisH Melodies</h3>
                         <p class="text-sm text-gray-200 mt-1">Tech reviews, gaming, and creative video edits.</p>
-                        <a href="#" class="inline-block mt-3 text-sm font-semibold underline">Visit Channel &rarr;</a>
+                        <!-- ADDED YOUR YOUTUBE LINK HERE -->
+                        <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="inline-block mt-3 text-sm font-semibold underline">Visit Channel &rarr;</a>
                     </div>
                 </div>
 
@@ -303,9 +305,46 @@
                     <h2 class="text-3xl font-heading font-bold text-center mb-2">Get In Touch</h2>
                     <p class="text-center text-gray-500 mb-8">Have a project or just want to say hi? Send me a message!</p>
 
-                    <!-- Contact Form (Ready for Netlify or Formspree) -->
-                    <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+                    <!-- Contact Form -->
+                    <!-- IMPORTANT: Remember to replace 'YOUR_CODE_HERE' with your Formspree link if you haven't already -->
+                    <form action="https://formspree.io/f/YOUR_CODE_HERE" method="POST" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Name</label>
-                                <input type="text" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-50 da
+                                <input type="text" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="Your Name" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="How can I help you?" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
+                    </form>
+
+                    <div class="mt-10 flex justify-center space-x-8">
+                        <!-- UPDATED SOCIAL LINKS -->
+                        <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="text-gray-400 hover:text-red-600 text-2xl transition"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/manishghimire097" target="_blank" class="text-gray-400 hover:text-blue-600 text-2xl transition"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/mwnish2?igsh=NDVpaWplYmtwbmlk" target="_blank" class="text-gray-400 hover:text-pink-600 text-2xl transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 text-center">
+        <p class="text-gray-500 text-sm">
+            &copy; 2025 Manish Ghimire. All rights reserved. <br>
+            Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
+        </p>
+    </footer>
+
+    <!-- JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>
