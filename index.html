@@ -47,6 +47,7 @@
                     </h1>
                 </div>
                 
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#about" class="hover:text-blue-500 transition">About</a>
                     <a href="#skills" class="hover:text-blue-500 transition">Skills</a>
@@ -66,6 +67,7 @@
                     </button>
                 </div>
 
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-2xl focus:outline-none">
                         <i class="fas fa-bars"></i>
@@ -74,6 +76,7 @@
             </div>
         </div>
         
+        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 absolute w-full">
             <a href="#about" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">About</a>
             <a href="#skills" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Skills</a>
@@ -87,20 +90,61 @@
         </div>
     </nav>
 
-    <!-- FLOATING BUTTONS (Scroll Top & Music) -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
-        <!-- Scroll To Top Button (Initially Hidden) -->
+    <!-- FLOATING BUTTONS (Scroll Top, Music, AI) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4 items-end">
+        
+        <!-- AI Chat Button -->
+        <button id="ai-chat-btn" onclick="toggleChat()" class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition cursor-pointer animate-pulse border-2 border-white dark:border-slate-800">
+            <i class="fas fa-robot text-2xl"></i>
+        </button>
+
+        <!-- Scroll To Top Button (Hidden by default) -->
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-lg items-center justify-center hover:scale-110 transition">
             <i class="fas fa-arrow-up"></i>
         </button>
 
         <!-- Music Button -->
-        <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg flex items-center justify-center hover:scale-110 transition animate-bounce">
+        <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-gray-700 text-white shadow-lg flex items-center justify-center hover:scale-110 transition">
             <i class="fas fa-music"></i>
         </button>
         <audio id="bg-music" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
         </audio>
+    </div>
+
+    <!-- AI CHAT WINDOW (Hidden) -->
+    <div id="chat-window" class="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[450px] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 hidden flex flex-col overflow-hidden transform transition-all duration-300 scale-95 opacity-0 origin-bottom-right">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white flex justify-between items-center">
+            <h3 class="font-bold flex items-center gap-2"><i class="fas fa-robot"></i> MwNisH AI</h3>
+            <button onclick="toggleChat()" class="hover:text-gray-200 text-xl">&times;</button>
+        </div>
+        <!-- Messages -->
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50 dark:bg-slate-900/90">
+            <div class="flex items-start gap-2">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-lg">🤖</div>
+                <div class="bg-white dark:bg-slate-700 p-3 rounded-lg rounded-tl-none shadow-sm text-sm max-w-[85%] border border-gray-100 dark:border-slate-600">
+                    Hello! I am Manish's AI Assistant. Ask me anything or show me a photo! 📸
+                </div>
+            </div>
+        </div>
+        <!-- Input -->
+        <div class="p-3 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700">
+            <div id="image-preview-container" class="hidden mb-2 relative w-16 h-16 group">
+                <img id="image-preview" class="w-full h-full object-cover rounded-lg border border-gray-300">
+                <button onclick="clearImage()" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow-md">×</button>
+            </div>
+            <div class="flex gap-2 items-center">
+                <label for="image-upload" class="cursor-pointer text-gray-400 hover:text-blue-500 p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition">
+                    <i class="fas fa-image text-xl"></i>
+                    <input type="file" id="image-upload" accept="image/*" class="hidden" onchange="handleImageUpload(this)">
+                </label>
+                <input type="text" id="user-input" placeholder="Type a message..." class="flex-1 px-4 py-2 rounded-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-sm focus:outline-none focus:border-blue-500" onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()" class="bg-blue-600 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-700 shadow-md">
+                    <i class="fas fa-paper-plane text-sm"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Hero Section -->
@@ -200,29 +244,23 @@
         </div>
     </section>
 
-    <!-- NEW FEATURE: TIMELINE SECTION -->
+    <!-- TIMELINE SECTION -->
     <section id="timeline" class="py-20 bg-gray-50 dark:bg-slate-800/50">
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Journey 🛣️</h2>
             <div class="relative border-l-4 border-blue-500 ml-4 md:ml-0 space-y-12">
-                
-                <!-- 2024-25 -->
                 <div class="relative pl-8 md:pl-12 reveal">
                     <div class="absolute -left-3 top-0 bg-blue-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
                     <span class="text-sm text-blue-500 font-bold uppercase tracking-wider">2024 - Present</span>
                     <h3 class="text-2xl font-bold mt-1">Web Development & AI</h3>
                     <p class="text-gray-600 dark:text-gray-300 mt-2">Started learning HTML, CSS, JavaScript and exploring the power of Artificial Intelligence tools.</p>
                 </div>
-
-                <!-- 2022-23 -->
                 <div class="relative pl-8 md:pl-12 reveal delay-100">
                     <div class="absolute -left-3 top-0 bg-purple-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
                     <span class="text-sm text-purple-500 font-bold uppercase tracking-wider">2022 - 2023</span>
                     <h3 class="text-2xl font-bold mt-1">Mobile Shop & Tech</h3>
                     <p class="text-gray-600 dark:text-gray-300 mt-2">Gained technical skills by working in a mobile shop, handling software and hardware issues.</p>
                 </div>
-
-                <!-- 2020-21 -->
                 <div class="relative pl-8 md:pl-12 reveal delay-200">
                     <div class="absolute -left-3 top-0 bg-green-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
                     <span class="text-sm text-green-500 font-bold uppercase tracking-wider">2020 - 2021</span>
@@ -261,7 +299,7 @@
         </div>
     </section>
 
-    <!-- NEW FEATURE: TESTIMONIALS -->
+    <!-- TESTIMONIALS -->
     <section class="py-20 bg-blue-50 dark:bg-slate-900/50">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">What People Say ⭐</h2>
@@ -303,7 +341,7 @@
                         <span class="text-gray-400 text-xs ml-2">Today</span>
                         <h3 class="text-xl font-bold mt-2 mb-2">Website Updated!</h3>
                         <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                            Added Timeline, Testimonials and QR code features to my portfolio.
+                            Added AI Chatbot, Timeline, Testimonials and QR code features to my portfolio.
                         </p>
                         <a href="#" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
                     </div>
@@ -366,7 +404,7 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
-            <!-- NEW FEATURE: QR CODE -->
+            <!-- QR CODE -->
             <div class="text-center">
                 <p class="text-xs font-bold text-gray-500 uppercase mb-2">Scan to Share</p>
                 <div class="inline-block p-2 bg-white rounded-lg shadow-md">
