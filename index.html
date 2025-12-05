@@ -54,11 +54,6 @@
                     <a href="#timeline" class="hover:text-blue-500 transition">Journey</a>
                     <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
                     <a href="#blog" class="hover:text-blue-500 transition">Blog</a>
-                    
-                    <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-2">
-                        <i class="fab fa-google"></i> Google AI
-                    </a>
-
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition transform hover:scale-105">Contact</a>
                     
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition">
@@ -83,21 +78,13 @@
             <a href="#timeline" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Journey</a>
             <a href="#projects" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Projects</a>
             <a href="#blog" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Blog</a>
-            <a href="https://aistudio.google.com/" target="_blank" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 text-gray-700 dark:text-gray-200">
-                <i class="fab fa-google text-blue-500"></i> Google AI
-            </a>
             <a href="#contact" class="block px-4 py-3 text-blue-500 font-bold">Contact Me</a>
         </div>
     </nav>
 
-    <!-- FLOATING BUTTONS (Scroll Top, Music, AI) -->
+    <!-- FLOATING BUTTONS (Scroll Top & Music ONLY) -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4 items-end">
         
-        <!-- AI Chat Button -->
-        <button id="ai-chat-btn" onclick="toggleChat()" class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition cursor-pointer animate-pulse border-2 border-white dark:border-slate-800">
-            <i class="fas fa-robot text-2xl"></i>
-        </button>
-
         <!-- Scroll To Top Button (Hidden by default) -->
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-lg items-center justify-center hover:scale-110 transition">
             <i class="fas fa-arrow-up"></i>
@@ -110,41 +97,6 @@
         <audio id="bg-music" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
         </audio>
-    </div>
-
-    <!-- AI CHAT WINDOW (Hidden) -->
-    <div id="chat-window" class="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[450px] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 hidden flex flex-col overflow-hidden transform transition-all duration-300 scale-95 opacity-0 origin-bottom-right">
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white flex justify-between items-center">
-            <h3 class="font-bold flex items-center gap-2"><i class="fas fa-robot"></i> MwNisH AI</h3>
-            <button onclick="toggleChat()" class="hover:text-gray-200 text-xl">&times;</button>
-        </div>
-        <!-- Messages -->
-        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50 dark:bg-slate-900/90">
-            <div class="flex items-start gap-2">
-                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-lg">🤖</div>
-                <div class="bg-white dark:bg-slate-700 p-3 rounded-lg rounded-tl-none shadow-sm text-sm max-w-[85%] border border-gray-100 dark:border-slate-600">
-                    Hello! I am Manish's AI Assistant. Ask me anything or show me a photo! 📸
-                </div>
-            </div>
-        </div>
-        <!-- Input -->
-        <div class="p-3 bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700">
-            <div id="image-preview-container" class="hidden mb-2 relative w-16 h-16 group">
-                <img id="image-preview" class="w-full h-full object-cover rounded-lg border border-gray-300">
-                <button onclick="clearImage()" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow-md">×</button>
-            </div>
-            <div class="flex gap-2 items-center">
-                <label for="image-upload" class="cursor-pointer text-gray-400 hover:text-blue-500 p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition">
-                    <i class="fas fa-image text-xl"></i>
-                    <input type="file" id="image-upload" accept="image/*" class="hidden" onchange="handleImageUpload(this)">
-                </label>
-                <input type="text" id="user-input" placeholder="Type a message..." class="flex-1 px-4 py-2 rounded-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white text-sm focus:outline-none focus:border-blue-500" onkeypress="handleEnter(event)">
-                <button onclick="sendMessage()" class="bg-blue-600 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-700 shadow-md">
-                    <i class="fas fa-paper-plane text-sm"></i>
-                </button>
-            </div>
-        </div>
     </div>
 
     <!-- Hero Section -->
@@ -341,7 +293,7 @@
                         <span class="text-gray-400 text-xs ml-2">Today</span>
                         <h3 class="text-xl font-bold mt-2 mb-2">Website Updated!</h3>
                         <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                            Added AI Chatbot, Timeline, Testimonials and QR code features to my portfolio.
+                            Added Timeline, Testimonials and QR code features to my portfolio.
                         </p>
                         <a href="#" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
                     </div>
@@ -406,26 +358,4 @@
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
             <!-- QR CODE -->
             <div class="text-center">
-                <p class="text-xs font-bold text-gray-500 uppercase mb-2">Scan to Share</p>
-                <div class="inline-block p-2 bg-white rounded-lg shadow-md">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://manish1-star.github.io/manish-portfolio/" alt="QR Code">
-                </div>
-            </div>
-
-            <!-- VISITOR COUNTER -->
-            <div class="text-center">
-                <p class="text-xs text-gray-400 mb-1">Profile Visits:</p>
-                <img src="https://visitcount.itsvg.in/api?id=mwnish-portfolio&label=Views&color=8&icon=0&pretty=true" alt="Visitor Counter">
-            </div>
-        </div>
-
-        <p class="text-gray-500 text-sm">
-            &copy; 2025 Manish Ghimire. All rights reserved. <br>
-            Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
-        </p>
-    </footer>
-
-    <!-- JavaScript Link -->
-    <script src="script.js"></script>
-</body>
-</html>
+                <p class=
