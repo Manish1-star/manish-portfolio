@@ -63,3 +63,53 @@ const revealOnScroll = () => {
 window.addEventListener('scroll', revealOnScroll);
 // Trigger once on load
 revealOnScroll();
+// 6. Advanced Global Weather Search
+async function getWeather() {
+    const cityInput = document.getElementById('city-input').value.trim();
+    const display = document.getElementById('temp-display');
+
+    if (!cityInput) {
+        alert("Please enter a city name!");
+        return;
+    }
+
+    display.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+
+    try {
+        // Step 1: Find Latitude & Longitude of the City
+        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${cityInput}&count=1&language=en&format=json`;
+        const geoRes = await fetch(geoUrl);
+        const geoData = await geoRes.json();
+
+        if (!geoData.results) {
+            display.innerText = "City not found! Try again.";
+            return;
+        }
+
+        const { latitude, longitude, name, country } = geoData.results[0];
+
+        // Step 2: Get Weather for that Location
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+        const weatherRes = await fetch(weatherUrl);
+        const weatherData = await weatherRes.json();
+
+        const temp = weatherData.current_weather.temperature;
+        
+        // Show Result
+        display.innerHTML = `${name}, ${country}: <span class="text-blue-500 font-bold">${temp}°C</span>`;
+
+    } catch (error) {
+        console.error(error);
+        display.innerText = "Error fetching data.";
+    }
+}
+
+// Load default weather (Arghakhanchi) on startup
+window.onload = function() {
+    // You can keep default typing effect here if needed
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.96&longitude=83.18&current_weather=true')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('temp-display').innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
+    });
+};
