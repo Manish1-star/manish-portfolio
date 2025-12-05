@@ -107,143 +107,7 @@ function typeEffect() {
 document.addEventListener('DOMContentLoaded', typeEffect);
 
 // ==========================================
-// 3. MANISH AI ASSISTANT (Gemini)
-// ==========================================
-
-// ✅ YOUR API KEY IS SET HERE
-const API_KEY = "AIzaSyBFGoBYP_00nJRkPcC41bQJu_tVMaKi4os"; 
-
-const chatWindow = document.getElementById('chat-window');
-const chatMessages = document.getElementById('chat-messages');
-const userInput = document.getElementById('user-input');
-const chatBtn = document.getElementById('ai-chat-btn');
-let selectedImage = null;
-
-function toggleChat() {
-    if (chatWindow.classList.contains('hidden')) {
-        chatWindow.classList.remove('hidden');
-        setTimeout(() => {
-            chatWindow.classList.remove('scale-95', 'opacity-0');
-            chatWindow.classList.add('scale-100', 'opacity-100');
-        }, 10);
-        if(chatBtn) chatBtn.classList.remove('animate-pulse');
-    } else {
-        chatWindow.classList.remove('scale-100', 'opacity-100');
-        chatWindow.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            chatWindow.classList.add('hidden');
-        }, 300);
-    }
-}
-
-function handleEnter(e) {
-    if (e.key === 'Enter') sendMessage();
-}
-
-function handleImageUpload(input) {
-    const file = input.files[0];
-    if (file) {
-        if (file.size > 4 * 1024 * 1024) {
-            alert("Image too large! Please upload under 4MB.");
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            selectedImage = e.target.result.split(',')[1];
-            document.getElementById('image-preview').src = e.target.result;
-            document.getElementById('image-preview-container').classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-function clearImage() {
-    selectedImage = null;
-    document.getElementById('image-upload').value = '';
-    document.getElementById('image-preview-container').classList.add('hidden');
-}
-
-function addMessage(text, sender) {
-    const div = document.createElement('div');
-    div.className = "flex items-start gap-2 " + (sender === 'user' ? "justify-end" : "");
-    
-    const icon = sender === 'user' 
-        ? '<div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-sm">👤</div>'
-        : '<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-lg">🤖</div>';
-
-    const bubbleStyle = sender === 'user' 
-        ? 'bg-blue-600 text-white rounded-tr-none' 
-        : 'bg-white dark:bg-slate-700 rounded-tl-none border border-gray-100 dark:border-slate-600';
-
-    div.innerHTML = `
-        ${sender === 'ai' ? icon : ''}
-        <div class="${bubbleStyle} p-3 rounded-lg shadow-sm text-sm max-w-[85%] leading-relaxed">
-            ${text}
-        </div>
-        ${sender === 'user' ? icon : ''}
-    `;
-    
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-async function sendMessage() {
-    const text = userInput.value.trim();
-    if (!text && !selectedImage) return;
-
-    addMessage(text || "📷 [Sent an Image]", 'user');
-    userInput.value = '';
-    
-    const loadingId = "loading-" + Date.now();
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = loadingId;
-    loadingDiv.className = "flex items-center gap-2 ml-10 text-xs text-gray-500 dark:text-gray-400";
-    loadingDiv.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Thinking...';
-    chatMessages.appendChild(loadingDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    try {
-        let requestBody = {
-            contents: [{
-                parts: [{ text: text }]
-            }]
-        };
-
-        if (selectedImage) {
-            requestBody.contents[0].parts.push({
-                inline_data: {
-                    mime_type: "image/jpeg",
-                    data: selectedImage
-                }
-            });
-        }
-
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody)
-        });
-
-        const data = await response.json();
-        document.getElementById(loadingId).remove();
-
-        if (data.candidates && data.candidates[0].content) {
-            let aiResponse = data.candidates[0].content.parts[0].text;
-            aiResponse = aiResponse.replace(/\*\*(.*?)\*\*/g, '<b class="text-blue-600 dark:text-blue-400">$1</b>').replace(/\n/g, '<br>');
-            addMessage(aiResponse, 'ai');
-        } else {
-            addMessage("Sorry, I am having trouble connecting. Please check your internet.", 'ai');
-        }
-
-    } catch (error) {
-        if(document.getElementById(loadingId)) document.getElementById(loadingId).remove();
-        addMessage("Error connecting to AI.", 'ai');
-    }
-    clearImage();
-}
-
-// ==========================================
-// 4. MUSIC PLAYER
+// 3. MUSIC PLAYER
 // ==========================================
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
@@ -272,7 +136,7 @@ function toggleMusic() {
 }
 
 // ==========================================
-// 5. WEATHER WIDGET (Global Search)
+// 4. WEATHER WIDGET (Global Search)
 // ==========================================
 async function getWeather() {
     const cityInput = document.getElementById('city-input').value.trim();
