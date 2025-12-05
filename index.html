@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark"> <!-- 'dark' class added for default dark mode -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +41,7 @@
     <nav class="fixed w-full z-50 backdrop-blur-md bg-white/70 dark:bg-slate-900/80 border-b border-gray-200 dark:border-slate-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
                 <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <h1 class="font-heading font-bold text-2xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
                         MwNisH
@@ -54,6 +55,11 @@
                     <a href="#timeline" class="hover:text-blue-500 transition">Journey</a>
                     <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
                     <a href="#blog" class="hover:text-blue-500 transition">Blog</a>
+                    
+                    <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-2">
+                        <i class="fab fa-google"></i> Google AI
+                    </a>
+
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition transform hover:scale-105">Contact</a>
                     
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition">
@@ -64,7 +70,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-2xl focus:outline-none">
+                    <button id="mobile-menu-btn" class="text-2xl focus:outline-none p-2">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -78,22 +84,26 @@
             <a href="#timeline" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Journey</a>
             <a href="#projects" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Projects</a>
             <a href="#blog" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Blog</a>
+            <a href="https://aistudio.google.com/" target="_blank" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                <i class="fab fa-google text-blue-500"></i> Google AI
+            </a>
             <a href="#contact" class="block px-4 py-3 text-blue-500 font-bold">Contact Me</a>
         </div>
     </nav>
 
-    <!-- FLOATING BUTTONS (Scroll Top & Music ONLY) -->
+    <!-- FLOATING BUTTONS (Scroll Top & Music) -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4 items-end">
         
-        <!-- Scroll To Top Button (Hidden by default) -->
+        <!-- Scroll To Top Button -->
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-lg items-center justify-center hover:scale-110 transition">
             <i class="fas fa-arrow-up"></i>
         </button>
 
-        <!-- Music Button -->
-        <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-gray-700 text-white shadow-lg flex items-center justify-center hover:scale-110 transition">
-            <i class="fas fa-music"></i>
+        <!-- Music Button (COLOR FIXED HERE) -->
+        <button id="music-btn" onclick="toggleMusic()" class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition animate-bounce border-2 border-white dark:border-slate-800">
+            <i class="fas fa-music text-xl"></i>
         </button>
+        <!-- Audio Source -->
         <audio id="bg-music" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
         </audio>
@@ -358,4 +368,26 @@
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
             <!-- QR CODE -->
             <div class="text-center">
-                <p class=
+                <p class="text-xs font-bold text-gray-500 uppercase mb-2">Scan to Share</p>
+                <div class="inline-block p-2 bg-white rounded-lg shadow-md">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://manish1-star.github.io/manish-portfolio/" alt="QR Code">
+                </div>
+            </div>
+
+            <!-- VISITOR COUNTER -->
+            <div class="text-center">
+                <p class="text-xs text-gray-400 mb-1">Profile Visits:</p>
+                <img src="https://visitcount.itsvg.in/api?id=mwnish-portfolio&label=Views&color=8&icon=0&pretty=true" alt="Visitor Counter">
+            </div>
+        </div>
+
+        <p class="text-gray-500 text-sm">
+            &copy; 2025 Manish Ghimire. All rights reserved. <br>
+            Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
+        </p>
+    </footer>
+
+    <!-- JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>
