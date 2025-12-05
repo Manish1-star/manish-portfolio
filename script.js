@@ -31,8 +31,20 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// 3. Scroll Reveal Animation
+// 3. Scroll Reveal Animation & SCROLL TO TOP LOGIC
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
 const revealOnScroll = () => {
+    // Show/Hide Scroll to Top Button
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollTopBtn.classList.remove('hidden');
+        scrollTopBtn.classList.add('flex');
+    } else {
+        scrollTopBtn.classList.add('hidden');
+        scrollTopBtn.classList.remove('flex');
+    }
+
+    // Scroll Reveal
     const revealElements = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
     const elementVisible = 150;
@@ -44,6 +56,12 @@ const revealOnScroll = () => {
         }
     });
 };
+
+// Function to scroll to top
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
@@ -79,13 +97,12 @@ function typeEffect() {
 }
 document.addEventListener('DOMContentLoaded', typeEffect);
 
-// 5. Music Player Logic (Fixed)
+// 5. Music Player Logic
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 
 function toggleMusic() {
-    // Check if music exists
     if (!bgMusic) return;
 
     if (isPlaying) {
@@ -93,25 +110,21 @@ function toggleMusic() {
         musicBtn.innerHTML = '<i class="fas fa-music"></i>';
         musicBtn.classList.add('animate-bounce');
     } else {
-        // Promise to handle playback permissions
         const playPromise = bgMusic.play();
-        
         if (playPromise !== undefined) {
             playPromise.then(_ => {
-                // Play started successfully
                 musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 musicBtn.classList.remove('animate-bounce');
             })
             .catch(error => {
-                console.log("Audio play blocked by browser. User interaction needed.");
-                alert("Please tap anywhere on the page first, then try the music button!");
+                alert("Please tap anywhere on the page first!");
             });
         }
     }
     isPlaying = !isPlaying;
 }
 
-// 6. Advanced Global Weather Search (Fixed Location: Arghakhanchi)
+// 6. Advanced Global Weather Search
 async function getWeather() {
     const cityInput = document.getElementById('city-input').value.trim();
     const display = document.getElementById('temp-display');
@@ -134,30 +147,22 @@ async function getWeather() {
         }
 
         const { latitude, longitude, name, country } = geoData.results[0];
-
         const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
         const weatherRes = await fetch(weatherUrl);
         const weatherData = await weatherRes.json();
-
         const temp = weatherData.current_weather.temperature;
-        
         display.innerHTML = `${name}, ${country}: <span class="text-blue-500 font-bold">${temp}°C</span>`;
 
     } catch (error) {
-        console.error(error);
         display.innerText = "Error fetching data.";
     }
 }
 
-// Load default weather (Corrected Arghakhanchi Coords: 27.99, 83.05)
 window.onload = function() {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
     .then(res => res.json())
     .then(data => {
         const display = document.getElementById('temp-display');
-        if(display) {
-            display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
-        }
-    })
-    .catch(err => console.log("Weather load error"));
+        if(display) display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
+    });
 };
