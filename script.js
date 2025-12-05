@@ -2,12 +2,12 @@
 // 1. BASIC SITE FUNCTIONALITY
 // ==========================================
 
-// Dark Mode Toggle
+// Dark Mode Toggle (DEFAULT DARK)
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-if (localStorage.getItem('theme') === 'dark' || 
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+// Force Dark Mode if no preference (or keep dark)
+if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark');
 } else {
     html.classList.remove('dark');
@@ -18,20 +18,29 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Mobile Menu
+// Mobile Menu Fix
 const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 menuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
+    // Simple icon toggle
     const icon = menuBtn.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
+    if (mobileMenu.classList.contains('hidden')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    }
 });
 
+// Close menu on click
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').classList.remove('fa-times');
+        menuBtn.querySelector('i').classList.add('fa-bars');
     });
 });
 
@@ -107,7 +116,7 @@ function typeEffect() {
 document.addEventListener('DOMContentLoaded', typeEffect);
 
 // ==========================================
-// 3. MUSIC PLAYER
+// 3. MUSIC PLAYER (Fixed)
 // ==========================================
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
@@ -118,13 +127,13 @@ function toggleMusic() {
 
     if (isPlaying) {
         bgMusic.pause();
-        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
         musicBtn.classList.add('animate-bounce');
     } else {
         const playPromise = bgMusic.play();
         if (playPromise !== undefined) {
             playPromise.then(_ => {
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
                 musicBtn.classList.remove('animate-bounce');
             })
             .catch(error => {
