@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manish Ghimire | Web Developer & Digital Creator</title>
     <meta name="description" content="Portfolio of Manish Ghimire - Web Developer, AI Enthusiast, and Content Creator based in Nepal.">
-    <meta name="keywords" content="Manish Ghimire, MwNisH, Web Development, Nepal, AI, Video Editing">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (via CDN) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,8 +23,8 @@
                         heading: ['Poppins', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#3b82f6', // Blue 500
-                        secondary: '#9333ea', // Purple 600
+                        primary: '#3b82f6',
+                        secondary: '#9333ea',
                     }
                 }
             }
@@ -34,7 +33,6 @@
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -58,14 +56,13 @@
                     <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
                     <a href="#blog" class="hover:text-blue-500 transition">Blog</a>
                     
-                    <!-- Google AI Link (Desktop) -->
+                    <!-- Google AI Link -->
                     <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-2">
                         <i class="fab fa-google"></i> Google AI
                     </a>
 
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition transform hover:scale-105">Contact</a>
                     
-                    <!-- Dark Mode Toggle -->
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline text-yellow-400"></i>
@@ -87,15 +84,22 @@
             <a href="#skills" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Skills</a>
             <a href="#projects" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Projects</a>
             <a href="#blog" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Blog</a>
-            
-            <!-- Google AI Link (Mobile Menu) -->
             <a href="https://aistudio.google.com/" target="_blank" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 text-gray-700 dark:text-gray-200">
                 <i class="fab fa-google text-blue-500"></i> Google AI
             </a>
-
             <a href="#contact" class="block px-4 py-3 text-blue-500 font-bold">Contact Me</a>
         </div>
     </nav>
+
+    <!-- MUSIC PLAYER BUTTON (Fixed Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg flex items-center justify-center hover:scale-110 transition animate-bounce">
+            <i class="fas fa-music"></i>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
@@ -109,9 +113,14 @@
                     Manish <br>
                     <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">Ghimire</span>
                 </h1>
+                
+                <!-- TYPING ANIMATION HERE -->
                 <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-                    A passionate learner exploring Web Development, AI, Networking, and Digital Creativity. Based in <span class="text-red-500 font-bold">Nepal 🇳🇵</span>.
+                    I am a <span id="typing-text" class="text-purple-600 font-bold"></span><span class="animate-pulse">|</span>
+                    <br>
+                    Based in <span class="text-red-500 font-bold">Nepal 🇳🇵</span>.
                 </p>
+
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#projects" class="px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">View Work</a>
                     <a href="#contact" class="px-8 py-3 rounded-full border border-gray-300 dark:border-gray-600 hover:border-blue-500 hover:text-blue-500 transition font-medium">Contact Me</a>
@@ -179,7 +188,6 @@
     <section id="skills" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Skills</h2>
-            
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-blue-500 reveal">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-laptop-code"></i> Tech & IT</h3>
@@ -286,7 +294,6 @@
                         <a href="#" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -327,12 +334,33 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer with GLOBAL WEATHER SEARCH -->
     <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 text-center">
-        <p class="text-gray-500 text-sm">
+        
+        <!-- Global Weather Widget -->
+        <div class="max-w-xs mx-auto mb-6 px-4">
+            <p class="text-sm font-bold text-gray-500 mb-2">Check Worldwide Weather 🌍</p>
+            <div class="flex gap-2">
+                <input type="text" id="city-input" placeholder="Enter City (e.g. Kathmandu)" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 dark:text-white text-sm focus:outline-none focus:border-blue-500">
+                <button onclick="getWeather()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div id="weather-result" class="mt-3 text-sm font-semibold text-gray-600 dark:text-gray-300">
+                <i class="fas fa-cloud-sun text-yellow-500"></i> Weather: <span id="temp-display">Loading...</span>
+            </div>
+        </div>
+
+        <p class="text-gray-500 text-sm mb-2">
             &copy; 2025 Manish Ghimire. All rights reserved. <br>
             Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
         </p>
+        
+        <!-- Visitor Counter -->
+        <div class="mt-4">
+            <p class="text-xs text-gray-400 mb-1">Total Visitors:</p>
+            <img src="https://hitwebcounter.com/counter/counter.php?page=1723456&style=0006&nbdigits=5&type=page&initCount=100" title="Visitor Counter" Alt="web counter" />
+        </div>
     </footer>
 
     <!-- JavaScript Link -->
