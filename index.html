@@ -50,6 +50,7 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#about" class="hover:text-blue-500 transition">About</a>
                     <a href="#skills" class="hover:text-blue-500 transition">Skills</a>
+                    <a href="#timeline" class="hover:text-blue-500 transition">Journey</a>
                     <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
                     <a href="#blog" class="hover:text-blue-500 transition">Blog</a>
                     
@@ -76,6 +77,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 absolute w-full">
             <a href="#about" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">About</a>
             <a href="#skills" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Skills</a>
+            <a href="#timeline" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Journey</a>
             <a href="#projects" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Projects</a>
             <a href="#blog" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Blog</a>
             <a href="https://aistudio.google.com/" target="_blank" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 text-gray-700 dark:text-gray-200">
@@ -85,12 +87,17 @@
         </div>
     </nav>
 
-    <!-- MUSIC PLAYER BUTTON (Updated Source) -->
-    <div class="fixed bottom-6 right-6 z-50">
+    <!-- FLOATING BUTTONS (Scroll Top & Music) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+        <!-- Scroll To Top Button (Initially Hidden) -->
+        <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-lg items-center justify-center hover:scale-110 transition">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Music Button -->
         <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg flex items-center justify-center hover:scale-110 transition animate-bounce">
             <i class="fas fa-music"></i>
         </button>
-        <!-- New HTTPS Audio Source -->
         <audio id="bg-music" loop>
             <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
         </audio>
@@ -154,27 +161,8 @@
                 Today, I am diving deep into the world of technology. 
                 <br><br>
                 From editing videos for my YouTube channel <strong>"MwNisH"</strong> to building websites and exploring 
-                Artificial Intelligence, I am always learning. I believe in the power of digital tools to solve real-world problems.
+                Artificial Intelligence, I am always learning.
             </p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                <div class="p-4 bg-gray-50 dark:bg-slate-700 rounded-xl shadow-sm">
-                    <i class="fas fa-code text-2xl text-blue-500 mb-2"></i>
-                    <h3 class="font-bold">Coding</h3>
-                </div>
-                <div class="p-4 bg-gray-50 dark:bg-slate-700 rounded-xl shadow-sm">
-                    <i class="fas fa-video text-2xl text-purple-500 mb-2"></i>
-                    <h3 class="font-bold">Content</h3>
-                </div>
-                <div class="p-4 bg-gray-50 dark:bg-slate-700 rounded-xl shadow-sm">
-                    <i class="fas fa-robot text-2xl text-pink-500 mb-2"></i>
-                    <h3 class="font-bold">AI Tools</h3>
-                </div>
-                <div class="p-4 bg-gray-50 dark:bg-slate-700 rounded-xl shadow-sm">
-                    <i class="fas fa-seedling text-2xl text-green-500 mb-2"></i>
-                    <h3 class="font-bold">Agriculture</h3>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -190,35 +178,56 @@
                         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"><div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div></div>
                         <li class="flex justify-between"><span>Networking</span> <span class="text-blue-500 font-bold">75%</span></li>
                         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"><div class="bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div></div>
-                        <li class="flex justify-between"><span>JavaScript</span> <span class="text-blue-500 font-bold">60%</span></li>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"><div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div></div>
                     </ul>
                 </div>
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-purple-500 reveal delay-100">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-paint-brush"></i> Creative & AI</h3>
                     <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                        <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> Video Editing (Premiere/CapCut)</li>
+                        <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> Video Editing</li>
                         <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> AI Prompt Engineering</li>
-                        <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> Logo & Graphic Design</li>
-                        <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> AI Song Generation</li>
+                        <li><i class="fas fa-check-circle text-purple-500 mr-2"></i> Logo Design</li>
                     </ul>
                 </div>
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-green-500 reveal delay-200">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-briefcase"></i> Experience</h3>
-                    <ul class="space-y-4">
-                        <li class="border-l-2 border-green-200 pl-4">
-                            <h4 class="font-bold">Mobile Shop Experience</h4>
-                            <p class="text-sm text-gray-500">Hardware repair & Software solutions.</p>
-                        </li>
-                        <li class="border-l-2 border-green-200 pl-4">
-                            <h4 class="font-bold">Online Marketing</h4>
-                            <p class="text-sm text-gray-500">Social media growth strategies.</p>
-                        </li>
-                        <li class="border-l-2 border-green-200 pl-4">
-                            <h4 class="font-bold">Farming & Agriculture</h4>
-                            <p class="text-sm text-gray-500">Traditional knowledge & management.</p>
-                        </li>
+                    <ul class="space-y-4 text-gray-600 dark:text-gray-300">
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Mobile Shop (Repair & Sales)</li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Agriculture Management</li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Digital Marketing</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FEATURE: TIMELINE SECTION -->
+    <section id="timeline" class="py-20 bg-gray-50 dark:bg-slate-800/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Journey 🛣️</h2>
+            <div class="relative border-l-4 border-blue-500 ml-4 md:ml-0 space-y-12">
+                
+                <!-- 2024-25 -->
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div class="absolute -left-3 top-0 bg-blue-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-blue-500 font-bold uppercase tracking-wider">2024 - Present</span>
+                    <h3 class="text-2xl font-bold mt-1">Web Development & AI</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Started learning HTML, CSS, JavaScript and exploring the power of Artificial Intelligence tools.</p>
+                </div>
+
+                <!-- 2022-23 -->
+                <div class="relative pl-8 md:pl-12 reveal delay-100">
+                    <div class="absolute -left-3 top-0 bg-purple-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-purple-500 font-bold uppercase tracking-wider">2022 - 2023</span>
+                    <h3 class="text-2xl font-bold mt-1">Mobile Shop & Tech</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Gained technical skills by working in a mobile shop, handling software and hardware issues.</p>
+                </div>
+
+                <!-- 2020-21 -->
+                <div class="relative pl-8 md:pl-12 reveal delay-200">
+                    <div class="absolute -left-3 top-0 bg-green-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-green-500 font-bold uppercase tracking-wider">2020 - 2021</span>
+                    <h3 class="text-2xl font-bold mt-1">Agriculture & Farming</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Worked in the agriculture sector, learning the value of hard work and patience.</p>
                 </div>
             </div>
         </div>
@@ -252,21 +261,49 @@
         </div>
     </section>
 
+    <!-- NEW FEATURE: TESTIMONIALS -->
+    <section class="py-20 bg-blue-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">What People Say ⭐</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-md reveal">
+                    <p class="italic text-gray-600 dark:text-gray-300">"Manish is a very dedicated person. His skills in video editing and AI are amazing. Highly recommended!"</p>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Santosh K.</h4>
+                            <span class="text-xs text-gray-500">Colleague</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-md reveal delay-100">
+                    <p class="italic text-gray-600 dark:text-gray-300">"Great website! The design is clean and the features like Dark Mode work perfectly. Good job."</p>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold">R</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Ramesh B.</h4>
+                            <span class="text-xs text-gray-500">Friend</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Blog Section -->
-    <section id="blog" class="py-20 bg-gray-50 dark:bg-slate-800/50">
+    <section id="blog" class="py-20 bg-white dark:bg-slate-800">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Blogs & Updates</h2>
-            
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- NEW POST EXAMPLE -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden reveal">
+                <!-- Blog Post 1 -->
+                <div class="bg-gray-50 dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal">
                     <img src="profile.jpg" alt="Blog Image" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <span class="text-blue-500 text-xs font-bold uppercase">Update</span>
                         <span class="text-gray-400 text-xs ml-2">Today</span>
                         <h3 class="text-xl font-bold mt-2 mb-2">Website Updated!</h3>
                         <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                            Added new music player, visitor counter and weather features.
+                            Added Timeline, Testimonials and QR code features to my portfolio.
                         </p>
                         <a href="#" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
                     </div>
@@ -311,7 +348,7 @@
         </div>
     </section>
 
-    <!-- Footer with UPDATED COUNTER & WEATHER -->
+    <!-- Footer -->
     <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 text-center">
         
         <!-- Global Weather Widget -->
@@ -328,16 +365,26 @@
             </div>
         </div>
 
-        <p class="text-gray-500 text-sm mb-2">
+        <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
+            <!-- NEW FEATURE: QR CODE -->
+            <div class="text-center">
+                <p class="text-xs font-bold text-gray-500 uppercase mb-2">Scan to Share</p>
+                <div class="inline-block p-2 bg-white rounded-lg shadow-md">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://manish1-star.github.io/manish-portfolio/" alt="QR Code">
+                </div>
+            </div>
+
+            <!-- VISITOR COUNTER -->
+            <div class="text-center">
+                <p class="text-xs text-gray-400 mb-1">Profile Visits:</p>
+                <img src="https://visitcount.itsvg.in/api?id=mwnish-portfolio&label=Views&color=8&icon=0&pretty=true" alt="Visitor Counter">
+            </div>
+        </div>
+
+        <p class="text-gray-500 text-sm">
             &copy; 2025 Manish Ghimire. All rights reserved. <br>
             Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
         </p>
-        
-        <!-- VISITOR COUNTER (New Working SVG Link) -->
-        <div class="mt-4 flex justify-center flex-col items-center">
-            <p class="text-xs text-gray-400 mb-1">Profile Visits:</p>
-            <img src="https://visitcount.itsvg.in/api?id=mwnish-portfolio&label=Views&color=8&icon=0&pretty=true" alt="Visitor Counter">
-        </div>
     </footer>
 
     <!-- JavaScript Link -->
