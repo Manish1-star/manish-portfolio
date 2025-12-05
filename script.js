@@ -2,7 +2,6 @@
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-// Check local storage or system preference on load
 if (localStorage.getItem('theme') === 'dark' || 
     (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     html.classList.add('dark');
@@ -12,43 +11,29 @@ if (localStorage.getItem('theme') === 'dark' ||
 
 themeToggle.addEventListener('click', () => {
     html.classList.toggle('dark');
-    if (html.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
+    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// 2. Mobile Menu Toggle
+// 2. Mobile Menu
 const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 menuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
-    // Change icon based on state
     const icon = menuBtn.querySelector('i');
-    if(mobileMenu.classList.contains('hidden')){
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    } else {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-    }
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
 });
 
-// Close mobile menu when a link is clicked
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
-        menuBtn.querySelector('i').classList.remove('fa-times');
-        menuBtn.querySelector('i').classList.add('fa-bars');
     });
 });
 
 // 3. Scroll Reveal Animation
-const revealElements = document.querySelectorAll('.reveal');
-
 const revealOnScroll = () => {
+    const revealElements = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
     const elementVisible = 150;
 
@@ -59,11 +44,74 @@ const revealOnScroll = () => {
         }
     });
 };
-
 window.addEventListener('scroll', revealOnScroll);
-// Trigger once on load
 revealOnScroll();
-// 6. Advanced Global Weather Search
+
+// 4. Typing Animation
+const typingText = document.getElementById('typing-text');
+const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+    if (!typingText) return;
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+        typingText.textContent = currentWord.substring(0, charIndex--);
+    } else {
+        typingText.textContent = currentWord.substring(0, charIndex++);
+    }
+
+    let typeSpeed = isDeleting ? 100 : 200;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000; 
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500;
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+}
+document.addEventListener('DOMContentLoaded', typeEffect);
+
+// 5. Music Player Logic (Fixed)
+let isPlaying = false;
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+
+function toggleMusic() {
+    // Check if music exists
+    if (!bgMusic) return;
+
+    if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        musicBtn.classList.add('animate-bounce');
+    } else {
+        // Promise to handle playback permissions
+        const playPromise = bgMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Play started successfully
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                musicBtn.classList.remove('animate-bounce');
+            })
+            .catch(error => {
+                console.log("Audio play blocked by browser. User interaction needed.");
+                alert("Please tap anywhere on the page first, then try the music button!");
+            });
+        }
+    }
+    isPlaying = !isPlaying;
+}
+
+// 6. Advanced Global Weather Search (Fixed Location: Arghakhanchi)
 async function getWeather() {
     const cityInput = document.getElementById('city-input').value.trim();
     const display = document.getElementById('temp-display');
@@ -76,26 +124,23 @@ async function getWeather() {
     display.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
 
     try {
-        // Step 1: Find Latitude & Longitude of the City
         const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${cityInput}&count=1&language=en&format=json`;
         const geoRes = await fetch(geoUrl);
         const geoData = await geoRes.json();
 
         if (!geoData.results) {
-            display.innerText = "City not found! Try again.";
+            display.innerText = "City not found!";
             return;
         }
 
         const { latitude, longitude, name, country } = geoData.results[0];
 
-        // Step 2: Get Weather for that Location
         const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
         const weatherRes = await fetch(weatherUrl);
         const weatherData = await weatherRes.json();
 
         const temp = weatherData.current_weather.temperature;
         
-        // Show Result
         display.innerHTML = `${name}, ${country}: <span class="text-blue-500 font-bold">${temp}°C</span>`;
 
     } catch (error) {
@@ -104,12 +149,15 @@ async function getWeather() {
     }
 }
 
-// Load default weather (Arghakhanchi) on startup
+// Load default weather (Corrected Arghakhanchi Coords: 27.99, 83.05)
 window.onload = function() {
-    // You can keep default typing effect here if needed
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.96&longitude=83.18&current_weather=true')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
     .then(res => res.json())
     .then(data => {
-        document.getElementById('temp-display').innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
-    });
+        const display = document.getElementById('temp-display');
+        if(display) {
+            display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
+        }
+    })
+    .catch(err => console.log("Weather load error"));
 };
