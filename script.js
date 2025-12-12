@@ -1,4 +1,7 @@
+// ==========================================
 // 1. BASIC SITE FUNCTIONALITY
+// ==========================================
+
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
@@ -41,11 +44,10 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// 2. SCROLL REVEAL & SCROLL TO TOP
+// Scroll Animations
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 const revealOnScroll = () => {
-    // Show/Hide Scroll Button
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         if(scrollTopBtn) {
             scrollTopBtn.classList.remove('hidden');
@@ -58,7 +60,6 @@ const revealOnScroll = () => {
         }
     }
 
-    // Scroll Reveal Elements
     const revealElements = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
     const elementVisible = 50;
@@ -76,10 +77,11 @@ function scrollToTop() {
 }
 
 window.addEventListener('scroll', revealOnScroll);
-revealOnScroll(); // Trigger once on load
+revealOnScroll();
 
-// 3. PROJECT FILTER LOGIC
-// Ensure 'All' is selected by default on load
+// ==========================================
+// 2. PROJECT FILTER LOGIC
+// ==========================================
 window.addEventListener('load', () => {
     const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
     if(allBtn) allBtn.click();
@@ -90,12 +92,10 @@ const projectCards = document.querySelectorAll('.project-card');
 
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Remove active class from all
         filterBtns.forEach(b => {
             b.classList.remove('bg-blue-600', 'text-white');
             b.classList.add('bg-white', 'dark:bg-slate-800');
         });
-        // Add active class to clicked
         btn.classList.remove('bg-white', 'dark:bg-slate-800');
         btn.classList.add('bg-blue-600', 'text-white');
 
@@ -116,109 +116,139 @@ filterBtns.forEach(btn => {
     });
 });
 
+// ==========================================
+// 3. BLOG DATA (HARDCODED FOR STABILITY)
+// ==========================================
+const myBlogs = [
+    {
+        "image": "profile.jpg",
+        "category": "Technology",
+        "date": "Dec 12, 2025",
+        "title": "New Magic Features Added! ✨",
+        "desc": "I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode. It feels super professional now.",
+        "link": "#contact"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+        "category": "Coding",
+        "date": "Dec 10, 2025",
+        "title": "Starting React JS Journey",
+        "desc": "I have started learning React JS to build even more powerful applications. Stay tuned for updates!",
+        "link": "#projects"
+    },
+    {
+        "image": "profile.jpg",
+        "category": "AI Project",
+        "date": "Dec 12, 2025",
+        "title": "Built Advanced AI Voice Translator 🎙️",
+        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation and OCR.",
+        "link": "#projects"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+        "category": "AI Safety",
+        "date": "Dec 12, 2025",
+        "title": "How to Use AI Safely 🛡️",
+        "desc": "AI is powerful but needs care. Never share passwords or API keys. Click to read the full guide.",
+        "link": "ai-guide.html"
+    }
+];
+
+// Function to Load Blogs
+function loadBlogsDirectly() {
+    const container = document.getElementById('blog-container');
+    if (!container) return;
+
+    container.innerHTML = myBlogs.map(blog => `
+        <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger" data-tilt>
+            <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
+                <span class="text-gray-400 text-xs ml-2">${blog.date}</span>
+                
+                <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
+                
+                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
+            </div>
+        </div>
+    `).join('');
+    
+    // Re-init Tilt
+    if (window.VanillaTilt) {
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 });
+    }
+}
+
+// Call function immediately
+loadBlogsDirectly();
+
+
+// ==========================================
 // 4. MUSIC PLAYER
+// ==========================================
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 
 function toggleMusic() {
     if (!bgMusic) return;
-
     if (isPlaying) {
         bgMusic.pause();
         musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
         musicBtn.classList.add('animate-bounce');
         if(typeof showToast === "function") showToast("Music Paused ⏸️");
     } else {
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
-                musicBtn.classList.remove('animate-bounce');
-                if(typeof showToast === "function") showToast("Music Playing 🎵");
-            })
-            .catch(error => {
-                alert("Please tap anywhere on the page first to enable audio!");
-            });
-        }
+        bgMusic.play().then(() => {
+            musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
+            musicBtn.classList.remove('animate-bounce');
+            if(typeof showToast === "function") showToast("Music Playing 🎵");
+        }).catch(() => alert("Please tap anywhere on the page first!"));
     }
     isPlaying = !isPlaying;
 }
 
-// 5. TOAST NOTIFICATION
-function showToast(message) {
-    const container = document.getElementById('toast-container');
-    if(!container) return;
-    
-    const toast = document.createElement('div');
-    toast.className = "bg-white dark:bg-slate-800 text-gray-900 dark:text-white px-4 py-3 rounded-lg shadow-xl border-l-4 border-blue-500 flex items-center gap-2 transform transition-all duration-300 translate-x-full";
-    toast.innerHTML = `<i class="fas fa-check-circle text-blue-500"></i> <span class="font-medium text-sm">${message}</span>`;
-    
-    container.appendChild(toast);
-    
-    // Animate In
-    setTimeout(() => toast.classList.remove('translate-x-full'), 10);
-    
-    // Remove after 3 seconds
-    setTimeout(() => {
-        toast.classList.add('translate-x-full');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// 6. TYPING ANIMATION
+// ==========================================
+// 5. UTILS: WEATHER, TIME, BATTERY & EXTRAS
+// ==========================================
 const typingText = document.getElementById('typing-text');
 const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+let wordIndex = 0; let charIndex = 0; let isDeleting = false;
 
 function typeEffect() {
     if (!typingText) return;
     const currentWord = words[wordIndex];
-    
     if (isDeleting) {
         typingText.textContent = currentWord.substring(0, charIndex--);
     } else {
         typingText.textContent = currentWord.substring(0, charIndex++);
     }
-
     let typeSpeed = isDeleting ? 100 : 200;
-
     if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
+        typeSpeed = 2000; isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500;
+        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
     }
-
     setTimeout(typeEffect, typeSpeed);
 }
 document.addEventListener('DOMContentLoaded', typeEffect);
 
-// 7. UTILS: WEATHER, TIME, BATTERY & EXTRAS
 window.onload = function() {
-    // Weather Fetch (Arghakhanchi)
+    // Weather
     fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
     .then(res => res.json())
     .then(data => {
         const display = document.getElementById('temp-display');
         if(display) display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
-    })
-    .catch(() => {
-        const display = document.getElementById('temp-display');
-        if(display) display.innerText = "Nepal: --°C";
     });
 
-    // Live Time
+    // Time
     setInterval(() => {
-        const timeDisplay = document.getElementById('live-time');
-        if(timeDisplay) timeDisplay.innerText = new Date().toLocaleTimeString();
+        const t = document.getElementById('live-time');
+        if(t) t.innerText = new Date().toLocaleTimeString();
     }, 1000);
 
-    // Battery Status
+    // Battery
     if(navigator.getBattery) {
         navigator.getBattery().then(function(battery) {
             const updateBattery = () => {
@@ -226,18 +256,15 @@ window.onload = function() {
                 if(batDisplay) batDisplay.innerText = Math.round(battery.level * 100) + "%";
             };
             updateBattery();
-            battery.addEventListener('levelchange', updateBattery);
         });
     }
 
-    // Number Counters Animation
-    const counters = document.querySelectorAll('[data-target]');
-    counters.forEach(counter => {
+    // Counters
+    document.querySelectorAll('[data-target]').forEach(counter => {
         const updateCount = () => {
             const target = +counter.getAttribute('data-target');
             const count = +counter.innerText;
-            const inc = target / 200; // Speed of counting
-
+            const inc = target / 200; 
             if (count < target) {
                 counter.innerText = Math.ceil(count + inc);
                 setTimeout(updateCount, 20);
@@ -248,107 +275,54 @@ window.onload = function() {
         updateCount();
     });
 
-    // Particles JS (Background Effect)
+    // Particles
     if(window.particlesJS) {
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 40 }, // Optimized for mobile
+                "number": { "value": 40 },
                 "color": { "value": "#3b82f6" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5 },
                 "size": { "value": 3 },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#3b82f6",
-                    "opacity": 0.4,
-                    "width": 1
-                },
+                "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.4, "width": 1 },
                 "move": { "enable": true, "speed": 2 }
             },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" } },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } }
-            },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } },
             "retina_detect": true
         });
     }
-    
-    // Ensure project filter runs on load
-    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-    if(allBtn) allBtn.click();
 };
 
-// 8. MAGIC CURSOR
+// 6. MAGIC CURSOR
 const cursor = document.getElementById('cursor');
 if (cursor) {
     document.addEventListener('mousemove', (e) => {
-        // Only move cursor on desktop to save mobile performance
         if(window.innerWidth > 768) {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         }
     });
-
-    // Add hover effect to interactive elements
-    const hoverElements = document.querySelectorAll('.hover-trigger, a, button');
-    hoverElements.forEach(item => {
+    document.querySelectorAll('.hover-trigger, a, button').forEach(item => {
         item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
 }
 
-// 9. BANK MODAL LOGIC
-function openBankModal() {
-    const modal = document.getElementById('bank-modal');
-    if(modal) modal.classList.remove('hidden');
+// 7. TOAST NOTIFICATION
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    if(!container) return;
+    const toast = document.createElement('div');
+    toast.className = "bg-white dark:bg-slate-800 text-gray-900 dark:text-white px-4 py-3 rounded-lg shadow-xl border-l-4 border-blue-500 flex items-center gap-2 transform transition-all duration-300 translate-x-full";
+    toast.innerHTML = `<i class="fas fa-check-circle text-blue-500"></i> <span class="font-medium text-sm">${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.remove('translate-x-full'), 10);
+    setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
 
-function closeBankModal() {
-    const modal = document.getElementById('bank-modal');
-    if(modal) modal.classList.add('hidden');
-}
-// ==========================================
-// 10. DYNAMIC BLOG LOADER (JSON)
-// ==========================================
-async function loadBlogs() {
-    const container = document.getElementById('blog-container');
-    if (!container) return;
-
-    try {
-        const response = await fetch('blogs.json');
-        const blogs = await response.json();
-
-        container.innerHTML = blogs.map(blog => `
-            <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger" data-tilt>
-                <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
-                    <span class="text-gray-400 text-xs ml-2">${blog.date}</span>
-                    
-                    <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
-                    
-                    <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
-                </div>
-            </div>
-        `).join('');
-
-        // Re-initialize 3D Tilt for new elements
-        if (window.VanillaTilt) {
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 15,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.3,
-            });
-        }
-
-    } catch (error) {
-        console.error("Error loading blogs:", error);
-        container.innerHTML = `<p class="text-center text-gray-500 col-span-3">No blogs found currently.</p>`;
-    }
-}
-
-// Load blogs when page loads
-window.addEventListener('load', loadBlogs);
+// 8. BANK MODAL
+function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
+function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
