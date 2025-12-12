@@ -20,7 +20,7 @@
         "category": "AI Project",
         "date": "Dec 12, 2025",
         "title": "Built Advanced AI Voice Translator 🎙️",
-        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text characters.",
+        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text.",
         "link": "#projects"
     },
     {
@@ -31,3 +31,4 @@
         "desc": "AI is powerful but needs care. Never share passwords, API keys, or personal data. Click here to read the full guide.",
         "link": "ai-guide.html"
     }
+]
