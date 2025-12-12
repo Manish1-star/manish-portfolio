@@ -1,98 +1,56 @@
-/* 1. Google Fonts Import */
+/* 1. Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700;800&display=swap');
 
-/* 2. Basic Settings */
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; }
 
-body {
-    font-family: 'Inter', sans-serif;
-}
+/* 2. Custom Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+.dark ::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
 
-/* 3. Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-.dark ::-webkit-scrollbar-track {
-    background: #0f172a;
-}
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* 4. Magic Cursor Styles */
+/* 3. Magic Cursor */
 #cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 20px; height: 20px;
-    border: 2px solid #3b82f6; /* Blue Border */
-    border-radius: 50%;
-    pointer-events: none; /* Allows clicking through the cursor */
-    z-index: 9999;
+    position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+    border: 2px solid #3b82f6; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s, left 0.1s, top 0.1s;
-    mix-blend-mode: exclusion; /* Cool color blending effect */
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    mix-blend-mode: exclusion;
 }
-
-/* Cursor Hover Effect (Expands when hovering over links) */
 #cursor.hovered {
     width: 50px; height: 50px;
     background-color: rgba(59, 130, 246, 0.4);
     border-color: transparent;
 }
 
-/* 5. Particles Background */
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0; /* Stays behind the content */
-}
+/* 4. Particles & Animations */
+#particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
 
-/* 6. Blob Animations (Background Gradients) */
 @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
     33% { transform: translate(30px, -50px) scale(1.1); }
     66% { transform: translate(-20px, 20px) scale(0.9); }
     100% { transform: translate(0px, 0px) scale(1); }
 }
-.animate-blob {
-    animation: blob 7s infinite;
-}
-.animation-delay-2000 {
-    animation-delay: 2s;
-}
+.animate-blob { animation: blob 7s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
 
-/* 7. Scroll Reveal Animation */
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0; transform: translateY(30px);
     transition: all 0.8s ease-out;
 }
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+.reveal.active { opacity: 1; transform: translateY(0); }
 
-/* Delays for staggered animations */
+/* Delay classes */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 
-/* 8. Toast Notification Animation */
-#toast-container > div {
-    animation: slideIn 0.3s ease-out;
-}
+/* Toast */
+#toast-container > div { animation: slideIn 0.3s ease-out; }
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
