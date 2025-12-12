@@ -1,0 +1,18 @@
+[
+    {
+        "image": "profile.jpg",
+        "category": "Technology",
+        "date": "Dec 12, 2025",
+        "title": "New Magic Features Added! ✨",
+        "desc": "Hello friends! I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode. It feels super professional now.",
+        "link": "#contact"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+        "category": "Coding",
+        "date": "Dec 10, 2025",
+        "title": "Starting React JS Journey",
+        "desc": "I have started learning React JS to build even more powerful applications. Stay tuned for updates!",
+        "link": "#projects"
+    }
+]
