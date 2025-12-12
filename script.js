@@ -2,7 +2,6 @@
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-// Force Dark Mode Default
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark');
 } else {
@@ -32,12 +31,9 @@ menuBtn.addEventListener('click', () => {
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
-        menuBtn.querySelector('i').classList.remove('fa-times');
-        menuBtn.querySelector('i').classList.add('fa-bars');
     });
 });
 
-// Scroll Animations & Scroll To Top
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 const revealOnScroll = () => {
@@ -116,22 +112,24 @@ function toggleMusic() {
         bgMusic.pause();
         musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
         musicBtn.classList.add('animate-bounce');
+        showToast("Music Paused ⏸️");
     } else {
         const playPromise = bgMusic.play();
         if (playPromise !== undefined) {
             playPromise.then(_ => {
                 musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
                 musicBtn.classList.remove('animate-bounce');
+                showToast("Music Playing 🎵");
             })
             .catch(error => {
-                alert("Please tap anywhere on the page first to enable music!");
+                alert("Please tap anywhere on the page first!");
             });
         }
     }
     isPlaying = !isPlaying;
 }
 
-// 4. WEATHER WIDGET & LIVE TIME & BATTERY
+// 4. WEATHER & TIME
 async function getWeather() {
     const display = document.getElementById('temp-display');
     if(!display) return;
@@ -139,7 +137,6 @@ async function getWeather() {
 
     try {
         const display = document.getElementById('temp-display');
-        // Default Arghakhanchi
         const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true');
         const data = await response.json();
         if(display) display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
@@ -148,7 +145,6 @@ async function getWeather() {
     }
 }
 
-// Live Time
 function updateTime() {
     const timeDisplay = document.getElementById('live-time');
     if(timeDisplay) {
@@ -158,7 +154,6 @@ function updateTime() {
 }
 setInterval(updateTime, 1000);
 
-// Battery Status
 navigator.getBattery().then(function(battery) {
     const updateBattery = () => {
         document.getElementById('battery-status').innerText = Math.round(battery.level * 100) + "%";
@@ -167,15 +162,87 @@ navigator.getBattery().then(function(battery) {
     battery.addEventListener('levelchange', updateBattery);
 });
 
+// 5. TOAST NOTIFICATION (NEW)
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = "bg-white dark:bg-slate-800 text-gray-900 dark:text-white px-4 py-3 rounded-lg shadow-xl border-l-4 border-blue-500 flex items-center gap-2 transform transition-all duration-300 translate-x-full";
+    toast.innerHTML = `<i class="fas fa-check-circle text-blue-500"></i> <span class="font-medium text-sm">${message}</span>`;
+    
+    container.appendChild(toast);
+    
+    // Animate In
+    setTimeout(() => toast.classList.remove('translate-x-full'), 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// 6. COUNTER ANIMATION (NEW)
+const counters = document.querySelectorAll('[data-target]');
+const speed = 200;
+
+const startCounters = () => {
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 20);
+            } else {
+                counter.innerText = target + "+";
+            }
+        };
+        updateCount();
+    });
+};
+
 window.onload = function() {
     getWeather();
-    // 5. PROJECT FILTER LOGIC
+    
+    // Start Counters when loaded
+    startCounters();
+
+    // 7. PARTICLES BACKGROUND (NEW)
+    if(window.particlesJS) {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50 },
+                "color": { "value": "#3b82f6" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3b82f6",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
+                }
+            },
+            "retina_detect": true
+        });
+    }
+
+    // Filter Logic
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Active class
             filterBtns.forEach(b => {
                 b.classList.remove('bg-blue-600', 'text-white');
                 b.classList.add('bg-white', 'dark:bg-slate-800');
@@ -198,10 +265,21 @@ window.onload = function() {
     });
 };
 
-// 6. BANK MODAL LOGIC
-function openBankModal() {
-    document.getElementById('bank-modal').classList.remove('hidden');
-}
-function closeBankModal() {
-    document.getElementById('bank-modal').classList.add('hidden');
-}
+// 8. CUSTOM CURSOR (NEW)
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', (e) => {
+    if(window.innerWidth > 768) { // Only on desktop
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    }
+});
+
+// Cursor Hover Effect
+document.querySelectorAll('.hover-trigger').forEach(item => {
+    item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+    item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+});
+
+// Bank Modal
+function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
+function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
