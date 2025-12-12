@@ -308,3 +308,47 @@ function closeBankModal() {
     const modal = document.getElementById('bank-modal');
     if(modal) modal.classList.add('hidden');
 }
+// ==========================================
+// 10. DYNAMIC BLOG LOADER (JSON)
+// ==========================================
+async function loadBlogs() {
+    const container = document.getElementById('blog-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('blogs.json');
+        const blogs = await response.json();
+
+        container.innerHTML = blogs.map(blog => `
+            <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger" data-tilt>
+                <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
+                    <span class="text-gray-400 text-xs ml-2">${blog.date}</span>
+                    
+                    <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
+                    
+                    <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
+                </div>
+            </div>
+        `).join('');
+
+        // Re-initialize 3D Tilt for new elements
+        if (window.VanillaTilt) {
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.3,
+            });
+        }
+
+    } catch (error) {
+        console.error("Error loading blogs:", error);
+        container.innerHTML = `<p class="text-center text-gray-500 col-span-3">No blogs found currently.</p>`;
+    }
+}
+
+// Load blogs when page loads
+window.addEventListener('load', loadBlogs);
