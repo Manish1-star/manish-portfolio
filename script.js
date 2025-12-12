@@ -1,12 +1,8 @@
-// ==========================================
 // 1. BASIC SITE FUNCTIONALITY
-// ==========================================
-
-// Dark Mode Toggle (DEFAULT DARK)
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-// Force Dark Mode if no preference (or keep dark)
+// Force Dark Mode Default
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark');
 } else {
@@ -18,13 +14,11 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Mobile Menu Fix
 const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 menuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
-    // Simple icon toggle
     const icon = menuBtn.querySelector('i');
     if (mobileMenu.classList.contains('hidden')) {
         icon.classList.remove('fa-times');
@@ -35,7 +29,6 @@ menuBtn.addEventListener('click', () => {
     }
 });
 
-// Close menu on click
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
@@ -48,7 +41,6 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 const revealOnScroll = () => {
-    // Show/Hide Scroll Button
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         if(scrollTopBtn) {
             scrollTopBtn.classList.remove('hidden');
@@ -61,7 +53,6 @@ const revealOnScroll = () => {
         }
     }
 
-    // Reveal Elements
     const revealElements = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
     const elementVisible = 150;
@@ -81,9 +72,7 @@ function scrollToTop() {
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
-// ==========================================
 // 2. TYPING ANIMATION
-// ==========================================
 const typingText = document.getElementById('typing-text');
 const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
 let wordIndex = 0;
@@ -115,9 +104,7 @@ function typeEffect() {
 }
 document.addEventListener('DOMContentLoaded', typeEffect);
 
-// ==========================================
-// 3. MUSIC PLAYER (Fixed)
-// ==========================================
+// 3. MUSIC PLAYER
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
@@ -144,49 +131,77 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
-// ==========================================
-// 4. WEATHER WIDGET (Global Search)
-// ==========================================
+// 4. WEATHER WIDGET & LIVE TIME & BATTERY
 async function getWeather() {
-    const cityInput = document.getElementById('city-input').value.trim();
     const display = document.getElementById('temp-display');
-
-    if (!cityInput) {
-        alert("Please enter a city name!");
-        return;
-    }
-
-    display.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+    if(!display) return;
+    display.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
     try {
-        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${cityInput}&count=1&language=en&format=json`;
-        const geoRes = await fetch(geoUrl);
-        const geoData = await geoRes.json();
-
-        if (!geoData.results) {
-            display.innerText = "City not found!";
-            return;
-        }
-
-        const { latitude, longitude, name, country } = geoData.results[0];
-        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
-        const weatherRes = await fetch(weatherUrl);
-        const weatherData = await weatherRes.json();
-        const temp = weatherData.current_weather.temperature;
-        
-        display.innerHTML = `${name}, ${country}: <span class="text-blue-500 font-bold">${temp}°C</span>`;
-
+        const display = document.getElementById('temp-display');
+        // Default Arghakhanchi
+        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true');
+        const data = await response.json();
+        if(display) display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
     } catch (error) {
-        display.innerText = "Error fetching data.";
+        if(display) display.innerText = "Nepal: --°C";
     }
 }
 
-// Default Arghakhanchi Weather
+// Live Time
+function updateTime() {
+    const timeDisplay = document.getElementById('live-time');
+    if(timeDisplay) {
+        const now = new Date();
+        timeDisplay.innerText = now.toLocaleTimeString();
+    }
+}
+setInterval(updateTime, 1000);
+
+// Battery Status
+navigator.getBattery().then(function(battery) {
+    const updateBattery = () => {
+        document.getElementById('battery-status').innerText = Math.round(battery.level * 100) + "%";
+    };
+    updateBattery();
+    battery.addEventListener('levelchange', updateBattery);
+});
+
 window.onload = function() {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
-    .then(res => res.json())
-    .then(data => {
-        const display = document.getElementById('temp-display');
-        if(display) display.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
+    getWeather();
+    // 5. PROJECT FILTER LOGIC
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Active class
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-blue-600', 'text-white');
+                b.classList.add('bg-white', 'dark:bg-slate-800');
+            });
+            btn.classList.remove('bg-white', 'dark:bg-slate-800');
+            btn.classList.add('bg-blue-600', 'text-white');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.classList.remove('hidden');
+                    setTimeout(() => card.classList.add('opacity-100', 'scale-100'), 50);
+                } else {
+                    card.classList.add('hidden');
+                    card.classList.remove('opacity-100', 'scale-100');
+                }
+            });
+        });
     });
 };
+
+// 6. BANK MODAL LOGIC
+function openBankModal() {
+    document.getElementById('bank-modal').classList.remove('hidden');
+}
+function closeBankModal() {
+    document.getElementById('bank-modal').classList.add('hidden');
+}
