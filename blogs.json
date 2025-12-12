@@ -22,5 +22,12 @@
         "title": "Built Advanced AI Voice Translator 🎙️",
         "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text characters.",
         "link": "#projects"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+        "category": "AI Safety",
+        "date": "Dec 12, 2025",
+        "title": "How to Use AI Safely: Beginner Guide 🛡️",
+        "desc": "AI is powerful but needs care. Never share passwords, API keys, or personal data. Click here to read the full guide.",
+        "link": "ai-guide.html"
     }
-]
