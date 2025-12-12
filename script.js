@@ -2,11 +2,10 @@
 // 1. BASIC SITE FUNCTIONALITY
 // ==========================================
 
-// Dark Mode Toggle
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-// Force Dark Mode Default
+// Dark Mode Logic
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark');
 } else {
@@ -45,11 +44,14 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// Scroll Animations & Scroll To Top
+// Scroll to Top Button
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 const revealOnScroll = () => {
-    // Show/Hide Scroll Button
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         if(scrollTopBtn) {
             scrollTopBtn.classList.remove('hidden');
@@ -62,7 +64,6 @@ const revealOnScroll = () => {
         }
     }
 
-    // Reveal Elements
     const revealElements = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
     const elementVisible = 50;
@@ -74,53 +75,11 @@ const revealOnScroll = () => {
         }
     });
 };
-
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
 // ==========================================
-// 2. PROJECT FILTER LOGIC
-// ==========================================
-window.addEventListener('load', () => {
-    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-    if(allBtn) allBtn.click();
-});
-
-const filterBtns = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-            b.classList.remove('bg-blue-600', 'text-white');
-            b.classList.add('bg-white', 'dark:bg-slate-800');
-        });
-        btn.classList.remove('bg-white', 'dark:bg-slate-800');
-        btn.classList.add('bg-blue-600', 'text-white');
-
-        const filterValue = btn.getAttribute('data-filter');
-
-        projectCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                card.classList.remove('hidden');
-                setTimeout(() => {
-                    card.classList.remove('opacity-0', 'scale-95');
-                    card.classList.add('opacity-100', 'scale-100');
-                }, 10);
-            } else {
-                card.classList.add('hidden', 'opacity-0', 'scale-95');
-                card.classList.remove('opacity-100', 'scale-100');
-            }
-        });
-    });
-});
-
-// ==========================================
-// 3. BLOG DATA (HARDCODED - FIXED ARRAY)
+// 2. BLOG DATA & LOADER (FIXED)
 // ==========================================
 const myBlogs = [
     {
@@ -165,10 +124,9 @@ const myBlogs = [
     }
 ];
 
-// Function to Load Blogs
 function loadBlogsDirectly() {
     const container = document.getElementById('blog-container');
-    if (!container) return;
+    if (!container) return; // Stop if container not found
 
     container.innerHTML = myBlogs.map(blog => `
         <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger" data-tilt>
@@ -185,64 +143,26 @@ function loadBlogsDirectly() {
         </div>
     `).join('');
     
-    // Re-init Tilt
+    // Re-init Tilt for new elements
     if (window.VanillaTilt) {
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 });
     }
 }
 
-// Call function immediately
-loadBlogsDirectly();
-
-
 // ==========================================
-// 4. MUSIC PLAYER
+// 3. PAGE LOAD EVENTS (Weather, Filter, Blogs)
 // ==========================================
-let isPlaying = false;
-const bgMusic = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-btn');
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. Load Blogs Immediately
+    loadBlogsDirectly();
 
-function toggleMusic() {
-    if (!bgMusic) return;
-    if (isPlaying) {
-        bgMusic.pause();
-        musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
-        musicBtn.classList.add('animate-bounce');
-        if(typeof showToast === "function") showToast("Music Paused ⏸️");
-    } else {
-        bgMusic.play().then(() => {
-            musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
-            musicBtn.classList.remove('animate-bounce');
-            if(typeof showToast === "function") showToast("Music Playing 🎵");
-        }).catch(() => alert("Please tap anywhere on the page first!"));
-    }
-    isPlaying = !isPlaying;
-}
-
-// ==========================================
-// 5. UTILS: WEATHER, TIME, BATTERY & EXTRAS
-// ==========================================
-const typingText = document.getElementById('typing-text');
-const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
-let wordIndex = 0; let charIndex = 0; let isDeleting = false;
-
-function typeEffect() {
-    if (!typingText) return;
-    const currentWord = words[wordIndex];
-    if (isDeleting) {
-        typingText.textContent = currentWord.substring(0, charIndex--);
-    } else {
-        typingText.textContent = currentWord.substring(0, charIndex++);
-    }
-    let typeSpeed = isDeleting ? 100 : 200;
-    if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
-    }
-    setTimeout(typeEffect, typeSpeed);
-}
-document.addEventListener('DOMContentLoaded', typeEffect);
+    // 2. Load Project Filter
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    if(allBtn) allBtn.click();
+    
+    // 3. Typing Effect
+    typeEffect();
+});
 
 window.onload = function() {
     // Weather
@@ -290,7 +210,7 @@ window.onload = function() {
     if(window.particlesJS) {
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 40 },
+                "number": { "value": 30 },
                 "color": { "value": "#3b82f6" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5 },
@@ -304,7 +224,57 @@ window.onload = function() {
     }
 };
 
-// 6. MAGIC CURSOR
+// ==========================================
+// 4. MUSIC PLAYER
+// ==========================================
+let isPlaying = false;
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+
+function toggleMusic() {
+    if (!bgMusic) return;
+    if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
+        musicBtn.classList.add('animate-bounce');
+        showToast("Music Paused ⏸️");
+    } else {
+        bgMusic.play().then(() => {
+            musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
+            musicBtn.classList.remove('animate-bounce');
+            showToast("Music Playing 🎵");
+        }).catch(() => alert("Please tap anywhere on the page first!"));
+    }
+    isPlaying = !isPlaying;
+}
+
+// ==========================================
+// 5. TYPING ANIMATION
+// ==========================================
+const typingText = document.getElementById('typing-text');
+const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
+let wordIndex = 0; let charIndex = 0; let isDeleting = false;
+
+function typeEffect() {
+    if (!typingText) return;
+    const currentWord = words[wordIndex];
+    if (isDeleting) {
+        typingText.textContent = currentWord.substring(0, charIndex--);
+    } else {
+        typingText.textContent = currentWord.substring(0, charIndex++);
+    }
+    let typeSpeed = isDeleting ? 100 : 200;
+    if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000; isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
+    }
+    setTimeout(typeEffect, typeSpeed);
+}
+
+// ==========================================
+// 6. MAGIC CURSOR & TOAST & MODAL
+// ==========================================
 const cursor = document.getElementById('cursor');
 if (cursor) {
     document.addEventListener('mousemove', (e) => {
@@ -319,7 +289,6 @@ if (cursor) {
     });
 }
 
-// 7. TOAST NOTIFICATION
 function showToast(message) {
     const container = document.getElementById('toast-container');
     if(!container) return;
@@ -334,6 +303,28 @@ function showToast(message) {
     }, 3000);
 }
 
-// 8. BANK MODAL
 function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
-function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); } ,
+function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
+
+// Filter Buttons Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white');
+            b.classList.add('bg-white', 'dark:bg-slate-800');
+        });
+        btn.classList.remove('bg-white', 'dark:bg-slate-800');
+        btn.classList.add('bg-blue-600', 'text-white');
+        const filterValue = btn.getAttribute('data-filter');
+        projectCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    });
+});
