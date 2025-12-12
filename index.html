@@ -183,7 +183,7 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION (FIXED: NOW WITH GRID BOXES) -->
+    <!-- ABOUT SECTION -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-slate-800/50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
@@ -196,7 +196,6 @@
                 Artificial Intelligence, I am always learning.
             </p>
             
-            <!-- THESE BOXES WERE MISSING, NOW RESTORED WITH 3D TILT -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md hover-trigger" data-tilt data-tilt-scale="1.1">
                     <i class="fas fa-code text-2xl text-blue-500 mb-2"></i>
@@ -252,8 +251,35 @@
         </div>
     </section>
 
+    <!-- TIMELINE SECTION -->
+    <section id="timeline" class="py-20 bg-gray-50 dark:bg-slate-800/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Journey 🛣️</h2>
+            <div class="relative border-l-4 border-blue-500 ml-4 md:ml-0 space-y-12">
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div class="absolute -left-3 top-0 bg-blue-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-blue-500 font-bold uppercase tracking-wider">2024 - Present</span>
+                    <h3 class="text-2xl font-bold mt-1">Web Development & AI</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Started learning HTML, CSS, JavaScript and exploring the power of Artificial Intelligence tools.</p>
+                </div>
+                <div class="relative pl-8 md:pl-12 reveal delay-100">
+                    <div class="absolute -left-3 top-0 bg-purple-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-purple-500 font-bold uppercase tracking-wider">2022 - 2023</span>
+                    <h3 class="text-2xl font-bold mt-1">Mobile Shop & Tech</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Gained technical skills by working in a mobile shop, handling software and hardware issues.</p>
+                </div>
+                <div class="relative pl-8 md:pl-12 reveal delay-200">
+                    <div class="absolute -left-3 top-0 bg-green-500 h-6 w-6 rounded-full border-4 border-white dark:border-slate-900"></div>
+                    <span class="text-sm text-green-500 font-bold uppercase tracking-wider">2020 - 2021</span>
+                    <h3 class="text-2xl font-bold mt-1">Agriculture & Farming</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Worked in the agriculture sector, learning the value of hard work and patience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-slate-900">
+    <section id="projects" class="py-20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-8 text-center reveal">Featured Projects</h2>
             
@@ -281,74 +307,4 @@
                     <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="absolute bottom-0 left-0 p-6 z-20 text-white">
                         <span class="bg-purple-600 text-xs px-2 py-1 rounded mb-2 inline-block">AI Tools</span>
-                        <h3 class="text-xl font-bold">AI Songs & Scripts</h3>
-                        <p class="text-sm text-gray-200 mt-1">Generating unique music using AI.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 text-center relative z-20">
-        
-        <div class="flex flex-col md:flex-row justify-center gap-6 mb-6 text-sm text-gray-500 font-bold">
-            <div id="weather-widget"><i class="fas fa-cloud-sun text-yellow-500"></i> <span id="temp-display">Loading...</span></div>
-            <div><i class="fas fa-clock text-blue-500"></i> <span id="live-time">00:00:00</span></div>
-            <div><i class="fas fa-battery-half text-green-500"></i> <span id="battery-status">Checking...</span></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
-            <div class="text-center">
-                <p class="text-xs font-bold text-gray-500 uppercase mb-2">Scan to Share</p>
-                <div class="inline-block p-2 bg-white rounded-lg shadow-md hover-trigger">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://manish1-star.github.io/manish-portfolio/" alt="QR Code">
-                </div>
-            </div>
-
-            <div class="text-center">
-                <p class="text-xs text-gray-400 mb-2">Support My Work ❤️</p>
-                <button onclick="openBankModal()" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition flex items-center justify-center gap-2 mx-auto hover-trigger">
-                    <i class="fas fa-university"></i> Bank Details
-                </button>
-            </div>
-        </div>
-
-        <p class="text-gray-500 text-sm">
-            &copy; 2025 Manish Ghimire. All rights reserved. <br>
-            Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
-        </p>
-    </footer>
-
-    <!-- BANK MODAL -->
-    <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl border border-gray-200 dark:border-gray-700 p-8 shadow-2xl relative text-center">
-            <button onclick="closeBankModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-university text-green-600 text-3xl"></i>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">Bank Transfer</h3>
-            <p class="text-sm text-gray-500 mb-6">Thank you for your support!</p>
-            <div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-xl text-left space-y-3 mb-6">
-                <div><p class="text-xs text-gray-400 uppercase">Bank Name</p><p class="font-bold text-lg">NIC ASIA BANK</p></div>
-                <div><p class="text-xs text-gray-400 uppercase">Account Number</p><p class="font-mono text-lg tracking-wider">123456789012345</p></div>
-                <div><p class="text-xs text-gray-400 uppercase">Account Holder</p><p class="font-bold">Manish Ghimire</p></div>
-            </div>
-            <button onclick="closeBankModal()" class="w-full py-3 bg-gray-200 dark:bg-slate-600 rounded-xl font-bold hover:bg-gray-300 transition">Close</button>
-        </div>
-    </div>
-
-    <!-- JavaScript Link -->
-    <script src="script.js"></script>
-    
-    <!-- Initialize Tilt -->
-    <script>
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.3,
-        });
-    </script>
-</body>
-</html>
+                        <h3 class="text-xl font-bold">AI Songs & Scr
