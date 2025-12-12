@@ -16,3 +16,12 @@
         "link": "#projects"
     }
 ]
+,
+{
+        "image": "profile.jpg",
+        "category": "AI Project",
+        "date": "Dec 12, 2025",
+        "title": "Built Advanced AI Voice Translator 🎙️",
+        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text characters. Check it out in my projects section!",
+        "link": "#projects"
+}
