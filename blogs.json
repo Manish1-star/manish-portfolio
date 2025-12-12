@@ -14,12 +14,13 @@
         "title": "Starting React JS Journey",
         "desc": "I have started learning React JS to build even more powerful applications. Stay tuned for updates!",
         "link": "#projects"
-    } ,
-{
+    },
+    {
         "image": "profile.jpg",
         "category": "AI Project",
         "date": "Dec 12, 2025",
         "title": "Built Advanced AI Voice Translator 🎙️",
-        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text characters. Check it out in my projects section!",
+        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation, image scanning (OCR), and supports unlimited text characters.",
         "link": "#projects"
-}
+    }
+]
