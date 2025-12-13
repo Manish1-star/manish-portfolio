@@ -1,3 +1,4 @@
+
 // ==========================================
 // 1. BASIC SITE FUNCTIONALITY
 // ==========================================
@@ -121,15 +122,9 @@ const myBlogs = [
         "title": "What is Biology? The Science of Life 🧬",
         "desc": "Biology is the scientific study of life. It explores how living things function, grow, interact, and evolve.",
         "link": "biology.html"
-    },
-    {
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
-    category: "Education",
-    date: "Dec 13, 2025",
-    title: "What is Chemistry? 🧪",
-    desc: "Chemistry is the branch of science that studies matter, its properties, composition, and chemical reactions.",
-    link: "chemistry.html"
     }
+];
+
 function loadBlogsDirectly() {
     const container = document.getElementById('blog-container');
     if (!container) return; // Stop if container not found
@@ -144,7 +139,7 @@ function loadBlogsDirectly() {
                 <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
                 
-                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
+                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More →</a>
             </div>
         </div>
     `).join('');
@@ -172,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.onload = function() {
     // Weather
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538¤t_weather=true')
     .then(res => res.json())
     .then(data => {
         const display = document.getElementById('temp-display');
