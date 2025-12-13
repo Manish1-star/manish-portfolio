@@ -130,7 +130,7 @@ const myBlogs = [
         "title": "Chemistry: The Central Science 🧪",
         "desc": "Chemistry connects physics with biology. Explore how atoms, molecules, and reactions shape our world and daily lives.",
         "link": "chemistry.html"
-    },
+    }
 function loadBlogsDirectly() {
     const container = document.getElementById('blog-container');
     if (!container) return; // Stop if container not found
