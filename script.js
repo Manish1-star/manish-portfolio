@@ -122,9 +122,15 @@ const myBlogs = [
         "title": "What is Biology? The Science of Life 🧬",
         "desc": "Biology is the scientific study of life. It explores how living things function, grow, interact, and evolve.",
         "link": "biology.html"
-    }
-];
-
+    },
+    {
+    "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        "category": "Science",
+        "date": "Dec 13, 2025",
+        "title": "Chemistry: The Central Science 🧪",
+        "desc": "Chemistry connects physics with biology. Explore how atoms, molecules, and reactions shape our world and daily lives.",
+        "link": "chemistry.html"
+    },
 function loadBlogsDirectly() {
     const container = document.getElementById('blog-container');
     if (!container) return; // Stop if container not found
