@@ -1,11 +1,8 @@
-// ==========================================
 // 1. BASIC SITE FUNCTIONALITY
-// ==========================================
-
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
-// Dark Mode Logic
+// Force Dark Mode Default
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') {
     html.classList.add('dark');
 } else {
@@ -44,12 +41,8 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// Scroll to Top Button
+// Scroll Animations
 const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
 const revealOnScroll = () => {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -75,44 +68,63 @@ const revealOnScroll = () => {
         }
     });
 };
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 
 // ==========================================
-// 2. BLOG DATA & LOADER (FIXED)
+// 2. PROJECT FILTER LOGIC
+// ==========================================
+window.addEventListener('load', () => {
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    if(allBtn) allBtn.click();
+});
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white');
+            b.classList.add('bg-white', 'dark:bg-slate-800');
+        });
+        btn.classList.remove('bg-white', 'dark:bg-slate-800');
+        btn.classList.add('bg-blue-600', 'text-white');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                card.classList.remove('hidden');
+                setTimeout(() => {
+                    card.classList.remove('opacity-0', 'scale-95');
+                    card.classList.add('opacity-100', 'scale-100');
+                }, 10);
+            } else {
+                card.classList.add('hidden', 'opacity-0', 'scale-95');
+                card.classList.remove('opacity-100', 'scale-100');
+            }
+        });
+    });
+});
+
+// ==========================================
+// 3. BLOG DATA (WITH VIEWS COUNTER)
 // ==========================================
 const myBlogs = [
     {
-        "image": "profile.jpg",
-        "category": "Technology",
-        "date": "Dec 12, 2025",
-        "title": "New Magic Features Added! ✨",
-        "desc": "I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode. It feels super professional now.",
-        "link": "#contact"
-    },
-    {
-        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-        "category": "Coding",
-        "date": "Dec 10, 2025",
-        "title": "Starting React JS Journey",
-        "desc": "I have started learning React JS to build even more powerful applications. Stay tuned for updates!",
-        "link": "#projects"
-    },
-    {
-        "image": "profile.jpg",
-        "category": "AI Project",
-        "date": "Dec 12, 2025",
-        "title": "Built Advanced AI Voice Translator 🎙️",
-        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation and OCR.",
-        "link": "#projects"
-    },
-    {
-        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
-        "category": "AI Safety",
-        "date": "Dec 12, 2025",
-        "title": "How to Use AI Safely 🛡️",
-        "desc": "AI is powerful but needs care. Never share passwords or API keys. Click to read the full guide.",
-        "link": "ai-guide.html"
+        "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        "category": "Science",
+        "date": "Dec 13, 2025",
+        "title": "Chemistry: The Central Science 🧪",
+        "desc": "Chemistry connects physics with biology. Explore how atoms, molecules, and reactions shape our world and daily lives.",
+        "link": "chemistry.html",
+        "views": 342 // Random initial view count
     },
     {
         "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1000&auto=format&fit=crop", 
@@ -120,61 +132,142 @@ const myBlogs = [
         "date": "Dec 12, 2025",
         "title": "What is Biology? The Science of Life 🧬",
         "desc": "Biology is the scientific study of life. It explores how living things function, grow, interact, and evolve.",
-        "link": "biology.html"
+        "link": "biology.html",
+        "views": 521
     },
     {
-        "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
-        "category": "Science",
-        "date": "Dec 13, 2025",
-        "title": "Chemistry: The Central Science 🧪",
-        "desc": "Chemistry connects physics with biology. Explore how atoms, molecules, and reactions shape our world and daily lives.",
-        "link": "chemistry.html"
+        "image": "profile.jpg",
+        "category": "Technology",
+        "date": "Dec 12, 2025",
+        "title": "New Magic Features Added! ✨",
+        "desc": "I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode. It feels super professional now.",
+        "link": "#contact",
+        "views": 189
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+        "category": "Coding",
+        "date": "Dec 10, 2025",
+        "title": "Starting React JS Journey",
+        "desc": "I have started learning React JS to build even more powerful applications. Stay tuned for updates!",
+        "link": "#projects",
+        "views": 275
+    },
+    {
+        "image": "profile.jpg",
+        "category": "AI Project",
+        "date": "Dec 12, 2025",
+        "title": "Built Advanced AI Voice Translator 🎙️",
+        "desc": "I created a powerful translation tool using JavaScript. It features real-time voice translation and OCR.",
+        "link": "#projects",
+        "views": 890
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+        "category": "AI Safety",
+        "date": "Dec 12, 2025",
+        "title": "How to Use AI Safely 🛡️",
+        "desc": "AI is powerful but needs care. Never share passwords or API keys. Click to read the full guide.",
+        "link": "ai-guide.html",
+        "views": 412
     }
 ];
 
+// Function to Load Blogs with Views
 function loadBlogsDirectly() {
     const container = document.getElementById('blog-container');
-    if (!container) return; // Stop if container not found
+    if (!container) return;
 
     container.innerHTML = myBlogs.map(blog => `
         <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger" data-tilt>
             <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover">
             <div class="p-6">
-                <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
-                <span class="text-gray-400 text-xs ml-2">${blog.date}</span>
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
+                    <span class="text-gray-400 text-xs flex items-center gap-1"><i class="fas fa-eye"></i> ${blog.views}</span>
+                </div>
+                <span class="text-gray-400 text-xs block mb-2">${blog.date}</span>
                 
                 <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
                 <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
                 
-                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More →</a>
+                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
             </div>
         </div>
     `).join('');
     
-    // Re-init Tilt for new elements
+    // Re-init Tilt
     if (window.VanillaTilt) {
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400 });
     }
 }
 
-// ==========================================
-// 3. PAGE LOAD EVENTS (Weather, Filter, Blogs)
-// ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-    // 1. Load Blogs Immediately
-    loadBlogsDirectly();
+loadBlogsDirectly();
 
-    // 2. Load Project Filter
-    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
-    if(allBtn) allBtn.click();
-    
-    // 3. Typing Effect
-    typeEffect();
-});
+
+// ==========================================
+// 4. MUSIC PLAYER
+// ==========================================
+let isPlaying = false;
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+
+function toggleMusic() {
+    if (!bgMusic) return;
+    if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
+        musicBtn.classList.add('animate-bounce');
+        if(typeof showToast === "function") showToast("Music Paused ⏸️");
+    } else {
+        bgMusic.play().then(() => {
+            musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
+            musicBtn.classList.remove('animate-bounce');
+            if(typeof showToast === "function") showToast("Music Playing 🎵");
+        }).catch(() => alert("Please tap anywhere on the page first!"));
+    }
+    isPlaying = !isPlaying;
+}
+
+// ==========================================
+// 5. UTILS & LIVE STATUS
+// ==========================================
+const typingText = document.getElementById('typing-text');
+const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
+let wordIndex = 0; let charIndex = 0; let isDeleting = false;
+
+function typeEffect() {
+    if (!typingText) return;
+    const currentWord = words[wordIndex];
+    if (isDeleting) {
+        typingText.textContent = currentWord.substring(0, charIndex--);
+    } else {
+        typingText.textContent = currentWord.substring(0, charIndex++);
+    }
+    let typeSpeed = isDeleting ? 100 : 200;
+    if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000; isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
+    }
+    setTimeout(typeEffect, typeSpeed);
+}
+document.addEventListener('DOMContentLoaded', typeEffect);
 
 window.onload = function() {
+    // Live Status Updater
+    const statusText = document.getElementById('current-status');
+    const statuses = ["Currently: Coding 💻", "Currently: Learning AI 🤖", "Currently: Sleeping 😴", "Currently: Coffee Time ☕"];
+    if(statusText) {
+        let statusIdx = 0;
+        setInterval(() => {
+            statusIdx = (statusIdx + 1) % statuses.length;
+            statusText.innerText = statuses[statusIdx];
+        }, 5000); // Change status every 5 seconds
+    }
+
     // Weather
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538¤t_weather=true')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
     .then(res => res.json())
     .then(data => {
         const display = document.getElementById('temp-display');
@@ -218,7 +311,7 @@ window.onload = function() {
     if(window.particlesJS) {
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 30 },
+                "number": { "value": 40 },
                 "color": { "value": "#3b82f6" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5 },
@@ -232,57 +325,7 @@ window.onload = function() {
     }
 };
 
-// ==========================================
-// 4. MUSIC PLAYER
-// ==========================================
-let isPlaying = false;
-const bgMusic = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-btn');
-
-function toggleMusic() {
-    if (!bgMusic) return;
-    if (isPlaying) {
-        bgMusic.pause();
-        musicBtn.innerHTML = '<i class="fas fa-music text-xl"></i>';
-        musicBtn.classList.add('animate-bounce');
-        showToast("Music Paused ⏸️");
-    } else {
-        bgMusic.play().then(() => {
-            musicBtn.innerHTML = '<i class="fas fa-pause text-xl"></i>';
-            musicBtn.classList.remove('animate-bounce');
-            showToast("Music Playing 🎵");
-        }).catch(() => alert("Please tap anywhere on the page first!"));
-    }
-    isPlaying = !isPlaying;
-}
-
-// ==========================================
-// 5. TYPING ANIMATION
-// ==========================================
-const typingText = document.getElementById('typing-text');
-const words = ["Web Developer", "Video Editor", "AI Enthusiast", "Creative Thinker"];
-let wordIndex = 0; let charIndex = 0; let isDeleting = false;
-
-function typeEffect() {
-    if (!typingText) return;
-    const currentWord = words[wordIndex];
-    if (isDeleting) {
-        typingText.textContent = currentWord.substring(0, charIndex--);
-    } else {
-        typingText.textContent = currentWord.substring(0, charIndex++);
-    }
-    let typeSpeed = isDeleting ? 100 : 200;
-    if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
-    }
-    setTimeout(typeEffect, typeSpeed);
-}
-
-// ==========================================
-// 6. MAGIC CURSOR & TOAST & MODAL
-// ==========================================
+// 6. MAGIC CURSOR
 const cursor = document.getElementById('cursor');
 if (cursor) {
     document.addEventListener('mousemove', (e) => {
@@ -297,6 +340,7 @@ if (cursor) {
     });
 }
 
+// 7. TOAST NOTIFICATION
 function showToast(message) {
     const container = document.getElementById('toast-container');
     if(!container) return;
@@ -311,28 +355,6 @@ function showToast(message) {
     }, 3000);
 }
 
+// 8. BANK MODAL
 function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
 function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
-
-// Filter Buttons Logic
-const filterBtns = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-            b.classList.remove('bg-blue-600', 'text-white');
-            b.classList.add('bg-white', 'dark:bg-slate-800');
-        });
-        btn.classList.remove('bg-white', 'dark:bg-slate-800');
-        btn.classList.add('bg-blue-600', 'text-white');
-        const filterValue = btn.getAttribute('data-filter');
-        projectCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
-        });
-    });
-});
