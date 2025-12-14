@@ -44,7 +44,7 @@
         <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-purple-600 w-0 transition-all duration-100"></div>
     </div>
 
-    <!-- MAGIC CURSOR & TOAST -->
+    <!-- MAGIC CURSOR -->
     <div id="cursor" class="hidden md:block"></div>
     <div id="toast-container" class="fixed top-24 right-5 z-[100] flex flex-col gap-2"></div>
 
@@ -57,6 +57,7 @@
                     <a href="#about" class="hover:text-blue-500 transition hover-trigger">About</a>
                     <a href="#library" class="hover:text-blue-500 transition hover-trigger">Library</a>
                     <a href="#projects" class="hover:text-blue-500 transition hover-trigger">Projects</a>
+                    <!-- GOOGLE AI LINK -->
                     <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-1 hover-trigger"><i class="fab fa-google"></i> AI Studio</a>
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition hover-trigger">Contact</a>
                     <button id="theme-toggle" class="p-2 hover-trigger"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline text-yellow-400"></i></button>
@@ -170,7 +171,7 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (WITH SOCIAL LINKS RESTORED) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="py-20 bg-gray-100 dark:bg-slate-900">
         <div class="max-w-3xl mx-auto px-4">
             <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden reveal hover-trigger" data-tilt>
@@ -186,7 +187,7 @@
                         <button type="submit" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
                     </form>
 
-                    <!-- ✅ RESTORED SOCIAL LINKS (IMPORTANT) -->
+                    <!-- ✅ SOCIAL MEDIA LINKS -->
                     <div class="mt-10 flex justify-center space-x-8">
                         <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="text-gray-400 hover:text-red-600 text-3xl transition transform hover:scale-125"><i class="fab fa-youtube"></i></a>
                         <a href="https://www.facebook.com/manishghimire097" target="_blank" class="text-gray-400 hover:text-blue-600 text-3xl transition transform hover:scale-125"><i class="fab fa-facebook"></i></a>
@@ -210,13 +211,16 @@
                 <a href="https://info.flagcounter.com/your-id"><img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" class="mx-auto rounded opacity-80 hover:opacity-100 transition"></a>
             </div>
             <div class="text-center">
-                <button onclick="openBankModal()" class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition w-full md:w-auto hover-trigger"><i class="fas fa-heart"></i> Support My Work</button>
+                <button onclick="openBankModal()" class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition w-full md:w-auto hover-trigger">
+                    <i class="fas fa-heart"></i> Support My Work
+                </button>
             </div>
         </div>
         <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire. Built for the Future.</p>
     </footer>
 
     <!-- MODALS -->
+    <!-- Bank Modal (With QR) -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-gray-900 w-full max-w-sm rounded-3xl border border-gray-700 p-8 text-center relative">
             <button onclick="closeBankModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">&times;</button>
@@ -242,13 +246,8 @@
         </div>
     </div>
 
+    <!-- Floating Buttons -->
     <div class="fixed bottom-8 right-8 z-40 flex flex-col gap-4 items-end">
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl items-center justify-center hover:scale-110 transition border border-gray-200 dark:border-gray-700"><i class="fas fa-arrow-up"></i></button>
         <button id="music-btn" onclick="toggleMusic()" class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition animate-bounce"><i class="fas fa-music text-xl"></i></button>
-        <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg"></audio>
-    </div>
-
-    <script src="script.js"></script>
-    <script>VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400, glare: true, "max-glare": 0.3 });</script>
-</body>
-                                </html>
+        <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/
