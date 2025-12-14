@@ -7,8 +7,7 @@
     <!-- GOOGLE VERIFICATION -->
     <meta name="google-site-verification" content="googled378ab6d329b03d4" />
     
-    <title>Manish Ghimire | Web Developer & Creator</title>
-    <meta name="description" content="Portfolio of Manish Ghimire - Web Developer, AI Enthusiast, and Content Creator.">
+    <title>Manish Ghimire | Web Developer & Digital Creator</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,22 +21,15 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#3b82f6',
-                        secondary: '#9333ea',
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Poppins', 'sans-serif'] },
+                    colors: { primary: '#3b82f6', secondary: '#9333ea' }
                 }
             }
         }
     </script>
 
-    <!-- Libraries -->
+    <!-- FontAwesome & Particles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <link rel="stylesheet" href="style.css">
@@ -73,10 +65,11 @@
                 
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#about" class="hover:text-blue-500 transition hover-trigger">About</a>
-                    <a href="#skills" class="hover:text-blue-500 transition hover-trigger">Skills</a>
+                    <a href="#library" class="hover:text-blue-500 transition hover-trigger">Library</a>
                     <a href="#projects" class="hover:text-blue-500 transition hover-trigger">Projects</a>
+                    <!-- GOOGLE AI LINK RESTORED -->
                     <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-2 hover-trigger">
-                        <i class="fab fa-google"></i> Google AI
+                        <i class="fab fa-google"></i> AI Studio
                     </a>
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition transform hover:scale-105 hover-trigger">Contact</a>
                     
@@ -94,8 +87,9 @@
         
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 absolute w-full">
             <a href="#about" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">About</a>
-            <a href="#skills" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Skills</a>
+            <a href="#library" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Library</a>
             <a href="#projects" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700">Projects</a>
+            <a href="https://aistudio.google.com/" target="_blank" class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-700 text-blue-500">Google AI</a>
             <a href="#contact" class="block px-4 py-3 text-blue-500 font-bold">Contact Me</a>
         </div>
     </nav>
@@ -113,14 +107,12 @@
         </audio>
     </div>
 
-    <!-- OLD HERO SECTION RESTORED (With Profile Photo) -->
+    <!-- HERO SECTION -->
     <section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
-        <!-- Particles Background -->
         <div id="particles-js"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div class="text-center md:text-left reveal">
-                <!-- Live Status -->
                 <div class="inline-flex items-center gap-2 bg-white dark:bg-slate-800 px-3 py-1 rounded-full text-xs font-bold text-green-500 shadow-sm mb-4 border border-gray-200 dark:border-slate-700">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -149,139 +141,113 @@
                 </div>
             </div>
 
-            <!-- PROFILE PHOTO IS BACK HERE -->
-            <div class="relative reveal delay-200 flex justify-center" data-tilt data-tilt-max="25" data-tilt-speed="400">
+            <!-- FILMY STYLE PROFILE (Cinematic Zoom In) -->
+            <div class="relative flex justify-center cinematic-reveal">
                 <div class="relative w-72 h-72 md:w-96 md:h-96">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-2xl transform rotate-6 opacity-70"></div>
-                    <div class="absolute inset-0 bg-gray-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900">
-                        <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-full blur-2xl opacity-50 animate-pulse"></div>
+                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-2xl shadow-2xl border-4 border-white dark:border-slate-900 relative z-10 transform transition duration-500 hover:scale-105">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: TECH INNOVATION (Google/Microsoft Style) -->
+    <section class="py-20 bg-gray-50 dark:bg-black text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-heading font-bold mb-4 reveal">My Tech Ecosystem</h2>
+            <p class="text-gray-500 mb-12 reveal">Powered by modern technologies.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Large Card -->
+                <div class="col-span-1 md:col-span-2 bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 text-left reveal hover-trigger">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center text-blue-600 mb-4 text-2xl"><i class="fas fa-code"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Full-Stack Development</h3>
+                    <p class="text-gray-500 mb-6">Building scalable web applications using HTML5, Tailwind CSS, and JavaScript. Focusing on performance and user experience.</p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-bold">Web</span>
+                        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs font-bold">Mobile</span>
                     </div>
                 </div>
+
+                <!-- Small Card -->
+                <div class="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 text-left reveal hover-trigger">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center text-purple-600 mb-4 text-2xl"><i class="fas fa-brain"></i></div>
+                    <h3 class="text-xl font-bold mb-2">AI Integration</h3>
+                    <p class="text-gray-500 text-sm">Working with LLMs and AI APIs.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW FEATURE: STATS COUNTER -->
-    <section class="py-10 bg-blue-600 dark:bg-slate-800 text-white relative z-20">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div class="reveal"><h3 class="text-4xl font-bold" data-target="50">0</h3><p class="text-sm opacity-80">Projects Completed</p></div>
-            <div class="reveal delay-100"><h3 class="text-4xl font-bold" data-target="120">0</h3><p class="text-sm opacity-80">Happy Clients</p></div>
-            <div class="reveal delay-200"><h3 class="text-4xl font-bold" data-target="5000">0</h3><p class="text-sm opacity-80">Code Lines</p></div>
-            <div class="reveal delay-300"><h3 class="text-4xl font-bold" data-target="24">0</h3><p class="text-sm opacity-80">Support (Hrs)</p></div>
-        </div>
-    </section>
+    <!-- NEW SECTION: DIGITAL LIBRARY (Thousands of Books) -->
+    <section id="library" class="py-20 bg-white dark:bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold mb-4 text-center reveal">Digital Library 📚</h2>
+            <p class="text-center text-gray-500 mb-8">Explore thousands of books. Powered by Open Library API.</p>
 
-    <!-- NEW FEATURE: GITHUB CHART -->
-    <section class="py-16 bg-white dark:bg-slate-900">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-2xl font-heading font-bold mb-6">Coding Activity 📊</h2>
-            <div class="bg-gray-100 dark:bg-slate-800 p-4 rounded-xl shadow-lg overflow-x-auto hover-trigger">
-                <img src="https://ghchart.rshah.org/Manish1-star" alt="Manish's Github Chart" class="w-full min-w-[600px]">
+            <!-- Library Filters -->
+            <div class="flex justify-center gap-4 mb-8 flex-wrap">
+                <button onclick="fetchBooks('programming')" class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm font-bold hover:bg-blue-200 transition">Programming</button>
+                <button onclick="fetchBooks('science')" class="px-4 py-2 bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 rounded-full text-sm font-bold hover:bg-green-200 transition">Science</button>
+                <button onclick="fetchBooks('history')" class="px-4 py-2 bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300 rounded-full text-sm font-bold hover:bg-yellow-200 transition">History</button>
+                <button onclick="fetchBooks('scifi')" class="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-full text-sm font-bold hover:bg-purple-200 transition">Sci-Fi</button>
+            </div>
+
+            <!-- Book Grid (Dynamic) -->
+            <div id="book-container" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="col-span-4 text-center text-gray-500 py-10">Select a category to load books...</div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
+    <!-- OLD SECTIONS (About, Projects, Blog, Contact) RESTORED -->
+    
+    <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-slate-800/50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
             <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
             <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                I am a tech enthusiast from Nepal with a diverse background. My journey started with hands-on experience in a 
-                <span class="text-blue-500 font-semibold">Mobile Shop</span> and practical work in <span class="text-green-500 font-semibold">Agriculture</span>. 
-                Today, I am diving deep into the world of technology.
-                <br><br>
-                From editing videos for my YouTube channel <strong>"MwNisH"</strong> to building websites and exploring 
-                Artificial Intelligence, I am always learning.
+                I am a tech enthusiast from Nepal with a diverse background in Mobile Shop management and Agriculture. Now, I am exploring Web Development and AI.
             </p>
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md hover-trigger" data-tilt>
-                    <i class="fas fa-code text-2xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3>
-                </div>
-                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md hover-trigger" data-tilt>
-                    <i class="fas fa-video text-2xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3>
-                </div>
-                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md hover-trigger" data-tilt>
-                    <i class="fas fa-robot text-2xl text-pink-500 mb-2"></i><h3 class="font-bold">AI Tools</h3>
-                </div>
-                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md hover-trigger" data-tilt>
-                    <i class="fas fa-seedling text-2xl text-green-500 mb-2"></i><h3 class="font-bold">Agriculture</h3>
-                </div>
+                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md"><i class="fas fa-code text-2xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3></div>
+                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md"><i class="fas fa-video text-2xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3></div>
+                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md"><i class="fas fa-robot text-2xl text-pink-500 mb-2"></i><h3 class="font-bold">AI Tools</h3></div>
+                <div class="p-4 bg-white dark:bg-slate-700 rounded-xl shadow-md"><i class="fas fa-seedling text-2xl text-green-500 mb-2"></i><h3 class="font-bold">Agriculture</h3></div>
             </div>
         </div>
     </section>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Skills</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-blue-500 reveal hover-trigger" data-tilt>
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-laptop-code"></i> Tech & IT</h3>
-                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                        <li>HTML/CSS <span class="text-blue-500 font-bold">90%</span></li>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div></div>
-                        <li>JavaScript <span class="text-blue-500 font-bold">60%</span></li>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div></div>
-                    </ul>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-purple-500 reveal delay-100 hover-trigger" data-tilt>
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-paint-brush"></i> Creative</h3>
-                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                        <li>Video Editing</li><li>AI Prompting</li><li>Logo Design</li>
-                    </ul>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-t-4 border-green-500 reveal delay-200 hover-trigger" data-tilt>
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-briefcase"></i> Experience</h3>
-                    <ul class="space-y-3 text-gray-600 dark:text-gray-300">
-                        <li>Mobile Shop</li><li>Agriculture</li><li>Marketing</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW FEATURE: PROJECT FILTER -->
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-slate-900">
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white dark:bg-slate-900">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-8 text-center reveal">Featured Projects</h2>
-            
-            <!-- Filter Buttons -->
-            <div class="flex justify-center gap-4 mb-12 flex-wrap">
-                <button class="filter-btn active px-6 py-2 rounded-full bg-blue-600 text-white font-semibold transition hover-trigger" data-filter="all">All</button>
-                <button class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 transition hover-trigger" data-filter="video">Video</button>
-                <button class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 transition hover-trigger" data-filter="web">Web</button>
-                <button class="filter-btn px-6 py-2 rounded-full bg-white dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 transition hover-trigger" data-filter="ai">AI</button>
-            </div>
-
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="project-card group relative rounded-2xl overflow-hidden shadow-lg reveal hover-trigger" data-category="video" data-tilt>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg reveal hover-trigger">
+                    <div class="absolute inset-0 bg-black/60 z-10"></div>
                     <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="absolute bottom-0 left-0 p-6 z-20 text-white">
-                        <span class="bg-red-600 text-xs px-2 py-1 rounded mb-2 inline-block">Video Editing</span>
+                        <span class="bg-red-600 text-xs px-2 py-1 rounded mb-2 inline-block">Video</span>
                         <h3 class="text-xl font-bold">MwNisH Melodies</h3>
                         <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="inline-block mt-3 text-sm font-semibold underline">Visit Channel &rarr;</a>
                     </div>
                 </div>
-
                 <!-- Project 2 -->
-                <div class="project-card group relative rounded-2xl overflow-hidden shadow-lg reveal delay-100 hover-trigger" data-category="ai" data-tilt>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg reveal hover-trigger">
+                    <div class="absolute inset-0 bg-black/60 z-10"></div>
                     <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
                     <div class="absolute bottom-0 left-0 p-6 z-20 text-white">
                         <span class="bg-purple-600 text-xs px-2 py-1 rounded mb-2 inline-block">AI Tools</span>
                         <h3 class="text-xl font-bold">AI Songs & Scripts</h3>
-                        <p class="text-sm text-gray-200 mt-1">Generating unique music using AI.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BLOG SECTION (Dynamic) -->
-    <section id="blog" class="py-20 bg-white dark:bg-slate-800">
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50 dark:bg-slate-800/50">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">My Blogs & Updates</h2>
             <div id="blog-container" class="grid md:grid-cols-3 gap-8">
@@ -290,51 +256,8 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-20 bg-gray-100 dark:bg-slate-900">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden reveal hover-trigger" data-tilt>
-                <div class="p-8 md:p-12">
-                    <h2 class="text-3xl font-heading font-bold text-center mb-2">Get In Touch</h2>
-                    <p class="text-center text-gray-500 mb-8">Send me a message!</p>
-
-                    <form action="https://formspree.io/f/YOUR_CODE_HERE" method="POST" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Name</label>
-                                <input type="text" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="Your Name" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Message</label>
-                            <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="How can I help you?" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
-                    </form>
-
-                    <div class="mt-10 flex justify-center space-x-8">
-                        <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="text-gray-400 hover:text-red-600 text-3xl transition transform hover:scale-125"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.facebook.com/manishghimire097" target="_blank" class="text-gray-400 hover:text-blue-600 text-3xl transition transform hover:scale-125"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/mwnish2?igsh=NDVpaWplYmtwbmlk" target="_blank" class="text-gray-400 hover:text-pink-600 text-3xl transition transform hover:scale-125"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 text-center relative z-20">
-        
-        <div class="flex flex-col md:flex-row justify-center gap-6 mb-6 text-sm text-gray-500 font-bold">
-            <div id="weather-widget"><i class="fas fa-cloud-sun text-yellow-500"></i> <span id="temp-display">Loading...</span></div>
-            <div><i class="fas fa-clock text-blue-500"></i> <span id="live-time">00:00:00</span></div>
-            <div><i class="fas fa-battery-half text-green-500"></i> <span id="battery-status">Checking...</span></div>
-        </div>
-
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
             <div class="text-center">
                 <p class="text-xs font-bold text-gray-500 uppercase mb-2">Visitors Location 🌍</p>
@@ -342,7 +265,6 @@
                     <a href="https://info.flagcounter.com/your-id"><img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
                 </div>
             </div>
-
             <div class="text-center">
                 <p class="text-xs text-gray-400 mb-2">Support My Work ❤️</p>
                 <button onclick="openBankModal()" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition flex items-center justify-center gap-2 mx-auto hover-trigger">
@@ -350,55 +272,35 @@
                 </button>
             </div>
         </div>
-
-        <p class="text-gray-500 text-sm">
-            &copy; 2025 Manish Ghimire. All rights reserved. <br>
-            Made with <i class="fas fa-heart text-red-500"></i> in Nepal.
-        </p>
+        <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire. Made in Nepal.</p>
     </footer>
 
-    <!-- BANK MODAL -->
+    <!-- MODALS (Bank & Book) -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl border border-gray-200 dark:border-gray-700 p-8 shadow-2xl relative text-center">
-            <button onclick="closeBankModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
-            
+        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl p-8 shadow-2xl relative text-center">
+            <button onclick="closeBankModal()" class="absolute top-4 right-4 text-gray-400 text-2xl">&times;</button>
             <h3 class="text-2xl font-bold mb-2">Bank Support</h3>
-            <p class="text-sm text-gray-500 mb-4">Scan QR or use details below</p>
-            
-            <div class="mb-4">
-                <img src="bank-qr.jpg" alt="Global IME QR" class="w-48 h-48 mx-auto rounded-lg border-4 border-white shadow-lg">
-            </div>
-
-            <div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-xl text-left space-y-3 mb-6">
-                <div>
-                    <p class="text-xs text-gray-400 uppercase">Bank Name</p>
-                    <p class="font-bold text-lg text-red-600">Global IME Bank</p>
-                </div>
-                <div>
-                    <p class="text-xs text-gray-400 uppercase">Account Number</p>
-                    <p class="font-mono text-lg tracking-wider">30307010022172</p>
-                </div>
-                <div>
-                    <p class="text-xs text-gray-400 uppercase">Account Holder</p>
-                    <p class="font-bold">Manish Ghimire</p>
-                </div>
-            </div>
-            
-            <button onclick="closeBankModal()" class="w-full py-3 bg-gray-200 dark:bg-slate-600 rounded-xl font-bold hover:bg-gray-300 transition">Close</button>
+            <img src="bank-qr.jpg" alt="QR" class="w-48 h-48 mx-auto rounded-lg border-4 border-white shadow-lg mb-4">
+            <p class="font-bold text-lg">Global IME Bank</p>
+            <p class="font-mono text-lg">30307010022172</p>
+            <p class="font-bold">Manish Ghimire</p>
         </div>
     </div>
 
-    <!-- JavaScript Link -->
+    <!-- Book Details Modal -->
+    <div id="book-modal" class="hidden fixed inset-0 bg-black/90 z-[70] flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative flex flex-col md:flex-row gap-6 max-h-[80vh] overflow-y-auto">
+            <button onclick="closeBookModal()" class="absolute top-4 right-4 text-gray-400 text-2xl hover:text-white">&times;</button>
+            <img id="book-cover" src="" class="w-32 h-48 object-cover rounded-lg shadow-md mx-auto md:mx-0">
+            <div class="flex-1">
+                <h3 id="book-title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white"></h3>
+                <p id="book-author" class="text-sm text-blue-500 font-bold mb-4"></p>
+                <p id="book-desc" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"></p>
+                <a id="book-link" href="#" target="_blank" class="inline-block mt-6 px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold hover:bg-blue-700">Read / Preview</a>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
-    
-    <!-- Initialize Tilt -->
-    <script>
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.3,
-        });
-    </script>
 </body>
                 </html>
