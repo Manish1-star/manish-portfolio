@@ -1,106 +1,130 @@
-// Basic Setup
-const themeToggle = document.getElementById('theme-toggle');
+// 1. SYSTEM INIT & PRELOADER
 const html = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+
+// Force Dark Mode for Pro Look
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') { html.classList.add('dark'); }
 themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
 
-// Mobile Menu
-const menuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+window.addEventListener('load', () => {
+    // Preloader Fade Out
+    setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            document.body.classList.remove('loading');
+            
+            // TRIGGER CINEMATIC ENTRY
+            document.getElementById('profile-wrapper').classList.add('cinematic-entry');
+        }, 500);
+    }, 1500);
 
-// Scroll Logic
-const revealOnScroll = () => {
-    document.querySelectorAll('.reveal').forEach((reveal) => {
-        if (reveal.getBoundingClientRect().top < window.innerHeight - 50) reveal.classList.add('active');
-    });
-};
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll();
+    // Initial Library Load
+    fetchBooks('artificial_intelligence');
+});
 
-// === NEW LIBRARY LOGIC (API) ===
+// 2. LIBRARY LOGIC (Open Library API)
 async function fetchBooks(subject) {
     const container = document.getElementById('book-container');
-    container.innerHTML = '<div class="col-span-4 text-center"><i class="fas fa-spinner fa-spin text-3xl text-blue-500"></i><p class="mt-2">Fetching books from global library...</p></div>';
+    container.innerHTML = '<div class="col-span-4 text-center py-10"><i class="fas fa-circle-notch fa-spin text-4xl text-blue-500"></i><p class="mt-2 text-gray-500">Connecting to Global Library...</p></div>';
 
     try {
         const res = await fetch(`https://openlibrary.org/subjects/${subject}.json?limit=8`);
         const data = await res.json();
 
         container.innerHTML = data.works.map(book => {
-            const coverId = book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` : 'https://via.placeholder.com/150x200?text=No+Cover';
-            const author = book.authors ? book.authors[0].name : 'Unknown Author';
-            const desc = "Click to read details about this book."; // API often lacks simple desc in list view
-            
+            const cover = book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg` : 'https://via.placeholder.com/150x200?text=No+Cover';
             return `
-            <div class="bg-gray-100 dark:bg-slate-800 p-4 rounded-xl shadow hover:shadow-xl transition cursor-pointer hover:-translate-y-2" onclick="openBookModal('${book.title}', '${author}', '${coverId}', '${book.key}')">
-                <img src="${coverId}" class="w-full h-48 object-cover rounded-lg mb-4 shadow-sm">
-                <h3 class="font-bold text-sm truncate">${book.title}</h3>
-                <p class="text-xs text-gray-500">${author}</p>
+            <div class="bg-gray-100 dark:bg-[#111] border border-gray-200 dark:border-gray-800 p-4 rounded-xl cursor-pointer hover:-translate-y-2 transition shadow-lg group" onclick="openBookModal('${book.title}', '${book.authors[0].name}', '${cover}', '${book.key}')">
+                <div class="h-48 overflow-hidden rounded-lg mb-4 relative">
+                    <img src="${cover}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <h3 class="font-bold text-sm truncate text-gray-900 dark:text-white">${book.title}</h3>
+                <p class="text-xs text-gray-500">${book.authors[0].name}</p>
             </div>
             `;
         }).join('');
-    } catch (error) {
-        container.innerHTML = '<p class="col-span-4 text-center text-red-500">Error loading books. Try again.</p>';
+    } catch (e) {
+        container.innerHTML = '<p class="col-span-4 text-center text-red-500">Library System Offline. Please try again.</p>';
     }
 }
 
-// Book Modal Logic
+// Book Modal
 async function openBookModal(title, author, cover, key) {
-    const modal = document.getElementById('book-modal');
-    document.getElementById('book-title').innerText = title;
-    document.getElementById('book-author').innerText = author;
-    document.getElementById('book-cover').src = cover;
-    document.getElementById('book-desc').innerText = "Loading description...";
-    document.getElementById('book-link').href = `https://openlibrary.org${key}`;
-    
-    modal.classList.remove('hidden');
+    document.getElementById('book-modal').classList.remove('hidden');
+    document.getElementById('modal-book-title').innerText = title;
+    document.getElementById('modal-book-author').innerText = "By " + author;
+    document.getElementById('modal-book-cover').src = cover;
+    document.getElementById('modal-book-desc').innerText = "Fetching book details from archives...";
+    document.getElementById('modal-book-link').href = `https://openlibrary.org${key}`;
 
-    // Fetch Description if possible
     try {
         const res = await fetch(`https://openlibrary.org${key}.json`);
         const data = await res.json();
-        const descText = typeof data.description === 'string' ? data.description : (data.description?.value || "No description available.");
-        document.getElementById('book-desc').innerText = descText.substring(0, 500) + "...";
+        const desc = typeof data.description === 'string' ? data.description : (data.description?.value || "No description available in the archive.");
+        document.getElementById('modal-book-desc').innerText = desc.substring(0, 400) + "...";
     } catch (e) {
-        document.getElementById('book-desc').innerText = "No detailed description available.";
+        document.getElementById('modal-book-desc').innerText = "Details not available.";
     }
 }
-
 function closeBookModal() { document.getElementById('book-modal').classList.add('hidden'); }
 
-// Load default books (Programming)
-window.addEventListener('load', () => fetchBooks('programming'));
+// 3. UTILS (Battery, Time, Weather, Status)
+function updateLiveStats() {
+    // Time
+    const now = new Date();
+    document.getElementById('live-time').innerText = now.toLocaleTimeString();
+    
+    // Status (Cycling)
+    const statuses = ["System Online 🟢", "AI Analyzing 🤖", "Coding 💻", "Reading 📚"];
+    const statusEl = document.getElementById('current-status');
+    if(statusEl) statusEl.innerText = statuses[Math.floor((Date.now() / 3000) % statuses.length)];
+}
+setInterval(updateLiveStats, 1000);
 
-// Blog Data (Keep your existing data)
+// Battery
+if(navigator.getBattery) {
+    navigator.getBattery().then(bat => {
+        document.getElementById('battery-status').innerText = Math.round(bat.level * 100) + "%";
+    });
+}
+
+// Weather
+fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('temp-display').innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
+    });
+
+// 4. BLOGS (Hardcoded for Stability)
 const myBlogs = [
-    {
-        "image": "profile.jpg",
-        "category": "Technology",
-        "date": "Dec 12, 2025",
-        "title": "New Magic Features Added! ✨",
-        "desc": "I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode.",
-        "link": "#contact"
-    }
-    // ... add other blogs here ...
+    { title: "New AI Features", category: "Tech", date: "Dec 14", desc: "Added Library and AI Voice.", link: "#" },
+    { title: "React Journey", category: "Code", date: "Dec 10", desc: "Learning React JS.", link: "#" }
 ];
-// Load blogs
-const blogContainer = document.getElementById('blog-container');
-if(blogContainer) {
-    blogContainer.innerHTML = myBlogs.map(blog => `
-        <div class="bg-white dark:bg-slate-700 rounded-2xl shadow-lg overflow-hidden reveal hover-trigger">
-            <img src="${blog.image}" class="w-full h-48 object-cover">
-            <div class="p-6">
-                <span class="text-blue-500 text-xs font-bold uppercase">${blog.category}</span>
-                <span class="text-gray-400 text-xs ml-2">${blog.date}</span>
-                <h3 class="text-xl font-bold mt-2 mb-2">${blog.title}</h3>
-                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${blog.desc}</p>
-                <a href="${blog.link}" class="text-blue-500 font-semibold text-sm hover:underline">Read More &rarr;</a>
-            </div>
+const blogCont = document.getElementById('blog-container');
+if(blogCont) {
+    blogCont.innerHTML = myBlogs.map(b => `
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-2xl hover:border-blue-500 transition cursor-pointer">
+            <span class="text-xs font-bold text-blue-500 uppercase">${b.category}</span>
+            <h3 class="text-xl font-bold mt-2 mb-2">${b.title}</h3>
+            <p class="text-sm text-gray-500">${b.desc}</p>
         </div>
     `).join('');
 }
 
-// Bank Modal
+// 5. MODALS & MENUS
 function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
 function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
+const menuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+// 6. SCROLL REVEAL
+window.addEventListener('scroll', () => {
+    document.querySelectorAll('.reveal').forEach(r => {
+        if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active');
+    });
+    // Progress Bar
+    const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + "%";
+});
