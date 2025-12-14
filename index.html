@@ -7,6 +7,11 @@
     
     <!-- ✅ GOOGLE VERIFICATION CODE -->
     <meta name="google-site-verification" content="googled378ab6d329b03d4" />
+
+    <!-- ✅ WEBSITE LOGO (FAVICON) -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,12 +57,15 @@
     <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <h1 class="font-heading font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 cursor-pointer hover-trigger" onclick="window.scrollTo(0,0)">MwNisH</h1>
+                <!-- ✅ LOGO REPLACED TEXT HERE -->
+                <div class="flex-shrink-0 cursor-pointer hover-trigger" onclick="window.scrollTo(0,0)">
+                    <img src="logo.png" alt="MwNisH" class="h-10 w-auto object-contain drop-shadow-lg">
+                </div>
+                
                 <div class="hidden md:flex space-x-8 items-center text-sm font-bold">
                     <a href="#about" class="hover:text-blue-500 transition hover-trigger">About</a>
                     <a href="#library" class="hover:text-blue-500 transition hover-trigger">Library</a>
                     <a href="#projects" class="hover:text-blue-500 transition hover-trigger">Projects</a>
-                    <!-- GOOGLE AI LINK -->
                     <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-1 hover-trigger"><i class="fab fa-google"></i> AI Studio</a>
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition hover-trigger">Contact</a>
                     <button id="theme-toggle" class="p-2 hover-trigger"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline text-yellow-400"></i></button>
@@ -187,7 +195,7 @@
                         <button type="submit" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
                     </form>
 
-                    <!-- ✅ SOCIAL MEDIA LINKS -->
+                    <!-- ✅ RESTORED SOCIAL LINKS -->
                     <div class="mt-10 flex justify-center space-x-8">
                         <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="text-gray-400 hover:text-red-600 text-3xl transition transform hover:scale-125"><i class="fab fa-youtube"></i></a>
                         <a href="https://www.facebook.com/manishghimire097" target="_blank" class="text-gray-400 hover:text-blue-600 text-3xl transition transform hover:scale-125"><i class="fab fa-facebook"></i></a>
@@ -220,7 +228,6 @@
     </footer>
 
     <!-- MODALS -->
-    <!-- Bank Modal (With QR) -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-gray-900 w-full max-w-sm rounded-3xl border border-gray-700 p-8 text-center relative">
             <button onclick="closeBankModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">&times;</button>
