@@ -1,6 +1,4 @@
-// ==========================================
-// 1. SYSTEM INIT & PRELOADER FIX (महत्त्वपूर्ण)
-// ==========================================
+// 1. SYSTEM INIT & PRELOADER FIX
 const html = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
 
@@ -8,90 +6,95 @@ const themeToggle = document.getElementById('theme-toggle');
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') { html.classList.add('dark'); }
 themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
 
-// --- PRELOADER FIX START ---
-function removePreloader() {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-            document.body.classList.remove('loading');
-            
-            // Trigger Profile Animation
-            const profileWrapper = document.getElementById('profile-wrapper');
-            if(profileWrapper) profileWrapper.classList.add('cinematic-entry');
-        }, 500);
-    }
-}
-
-// 1. Normal Load
+// Preloader Logic
 window.addEventListener('load', () => {
-    setTimeout(removePreloader, 1500); // 1.5 sec delay for style
-    
-    // Load initial data
-    if(typeof fetchBooks === 'function') fetchBooks('artificial_intelligence');
+    setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            document.body.classList.remove('loading');
+        }, 500);
+    }, 1500);
+
+    // Initial Load
+    loadBooks('programming');
 });
 
-// 2. SAFETY BACKUP (यदि १.५ सेकेन्डमा खुलेन भने ५ सेकेन्डमा जबरजस्ती खुल्छ)
-setTimeout(removePreloader, 5000);
-// --- PRELOADER FIX END ---
+// Force remove preloader if stuck
+setTimeout(() => { document.getElementById('preloader').style.display = 'none'; document.body.classList.remove('loading'); }, 5000);
 
 
 // ==========================================
-// 2. LIBRARY LOGIC (Open Library API)
+// 2. SMART LIBRARY LOGIC (With Backup)
 // ==========================================
-async function fetchBooks(subject) {
+
+// Backup Data (Safety Net for Presentation)
+const libraryBackup = {
+    'programming': [
+        { title: "Clean Code", author: "Robert C. Martin", cover: "https://covers.openlibrary.org/b/id/8303028-L.jpg", key: "/works/OL3432026W" },
+        { title: "The Pragmatic Programmer", author: "Andrew Hunt", cover: "https://covers.openlibrary.org/b/id/10578643-L.jpg", key: "/works/OL32402W" },
+        { title: "JavaScript: The Good Parts", author: "Douglas Crockford", cover: "https://covers.openlibrary.org/b/id/8292671-L.jpg", key: "/works/OL3146440W" },
+        { title: "Introduction to Algorithms", author: "Thomas H. Cormen", cover: "https://covers.openlibrary.org/b/id/7238641-L.jpg", key: "/works/OL3145465W" }
+    ],
+    'ai': [
+        { title: "Artificial Intelligence", author: "Stuart Russell", cover: "https://covers.openlibrary.org/b/id/8243657-L.jpg", key: "/works/OL3145465W" },
+        { title: "Life 3.0", author: "Max Tegmark", cover: "https://covers.openlibrary.org/b/id/8381831-L.jpg", key: "/works/OL17354964W" },
+        { title: "Superintelligence", author: "Nick Bostrom", cover: "https://covers.openlibrary.org/b/id/8303028-L.jpg", key: "/works/OL17072974W" },
+        { title: "Deep Learning", author: "Ian Goodfellow", cover: "https://covers.openlibrary.org/b/id/8390886-L.jpg", key: "/works/OL25675276W" }
+    ]
+};
+
+async function loadBooks(category) {
     const container = document.getElementById('book-container');
-    if(!container) return;
-    
-    container.innerHTML = '<div class="col-span-4 text-center py-10"><i class="fas fa-circle-notch fa-spin text-4xl text-blue-500"></i><p class="mt-2 text-gray-500">Connecting to Global Library...</p></div>';
+    container.innerHTML = '<div class="col-span-full text-center py-10"><i class="fas fa-circle-notch fa-spin text-4xl text-blue-500"></i><p class="mt-2 text-gray-500">Accessing Digital Library...</p></div>';
 
+    // 1. Try API First
     try {
+        let subject = category;
+        if(category === 'ai') subject = 'artificial_intelligence';
+
         const res = await fetch(`https://openlibrary.org/subjects/${subject}.json?limit=8`);
         const data = await res.json();
 
-        container.innerHTML = data.works.map(book => {
-            const cover = book.cover_id ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg` : 'https://via.placeholder.com/150x200?text=No+Cover';
-            const author = book.authors ? book.authors[0].name : 'Unknown Author';
-            // Escape quotes for JS string safety
-            const safeTitle = book.title.replace(/'/g, "\\'");
-            const safeAuthor = author.replace(/'/g, "\\'");
-            
-            return `
-            <div class="bg-gray-100 dark:bg-[#111] border border-gray-200 dark:border-gray-800 p-4 rounded-xl cursor-pointer hover:-translate-y-2 transition shadow-lg group" onclick="openBookModal('${safeTitle}', '${safeAuthor}', '${cover}', '${book.key}')">
-                <div class="h-48 overflow-hidden rounded-lg mb-4 relative">
-                    <img src="${cover}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <h3 class="font-bold text-sm truncate text-gray-900 dark:text-white">${book.title}</h3>
-                <p class="text-xs text-gray-500">${author}</p>
-            </div>
-            `;
-        }).join('');
+        if (data.works.length > 0) {
+            renderBooks(data.works.map(b => ({
+                title: b.title,
+                author: b.authors[0].name,
+                cover: b.cover_id ? `https://covers.openlibrary.org/b/id/${b.cover_id}-L.jpg` : 'https://via.placeholder.com/150x200?text=No+Cover',
+                key: b.key
+            })));
+        } else {
+            throw new Error("No books found");
+        }
     } catch (e) {
-        container.innerHTML = '<p class="col-span-4 text-center text-red-500">Library System Offline (Check Internet).</p>';
+        // 2. If API Fails, Use Backup (Safety Net)
+        console.log("API Failed, Using Backup Data");
+        const backupData = libraryBackup[category] || libraryBackup['programming'];
+        renderBooks(backupData);
     }
 }
 
+function renderBooks(books) {
+    const container = document.getElementById('book-container');
+    container.innerHTML = books.map(book => `
+        <div class="bg-gray-100 dark:bg-[#111] border border-gray-200 dark:border-gray-800 p-4 rounded-xl cursor-pointer hover:-translate-y-2 transition shadow-lg group" onclick="openBookModal('${book.title.replace(/'/g, "\\'")}', '${book.author.replace(/'/g, "\\'")}', '${book.cover}', '${book.key}')">
+            <div class="h-48 overflow-hidden rounded-lg mb-4 relative">
+                <img src="${book.cover}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+            <h3 class="font-bold text-sm truncate text-gray-900 dark:text-white">${book.title}</h3>
+            <p class="text-xs text-gray-500">${book.author}</p>
+        </div>
+    `).join('');
+}
+
 // Book Modal Logic
-async function openBookModal(title, author, cover, key) {
-    const modal = document.getElementById('book-modal');
-    if(!modal) return;
-    
+function openBookModal(title, author, cover, key) {
     document.getElementById('book-modal').classList.remove('hidden');
     document.getElementById('modal-book-title').innerText = title;
     document.getElementById('modal-book-author').innerText = "By " + author;
     document.getElementById('modal-book-cover').src = cover;
-    document.getElementById('modal-book-desc').innerText = "Fetching book details from archives...";
+    document.getElementById('modal-book-desc').innerText = "This is a premium book from our digital collection. Click 'Read More' to view full details on Open Library.";
     document.getElementById('modal-book-link').href = `https://openlibrary.org${key}`;
-
-    try {
-        const res = await fetch(`https://openlibrary.org${key}.json`);
-        const data = await res.json();
-        const desc = typeof data.description === 'string' ? data.description : (data.description?.value || "No description available.");
-        document.getElementById('modal-book-desc').innerText = desc.substring(0, 400) + "...";
-    } catch (e) {
-        document.getElementById('modal-book-desc').innerText = "Details not available.";
-    }
 }
 function closeBookModal() { document.getElementById('book-modal').classList.add('hidden'); }
 
@@ -100,59 +103,31 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // 3. UTILS (Battery, Time, Weather, Status)
 // ==========================================
 function updateLiveStats() {
-    // Time
-    const timeEl = document.getElementById('live-time');
-    if(timeEl) timeEl.innerText = new Date().toLocaleTimeString();
+    const now = new Date();
+    document.getElementById('live-time').innerText = now.toLocaleTimeString();
     
-    // Status (Cycling)
     const statuses = ["System Online 🟢", "AI Analyzing 🤖", "Coding 💻", "Reading 📚"];
     const statusEl = document.getElementById('current-status');
     if(statusEl) statusEl.innerText = statuses[Math.floor((Date.now() / 3000) % statuses.length)];
 }
 setInterval(updateLiveStats, 1000);
 
-// Battery
 if(navigator.getBattery) {
     navigator.getBattery().then(bat => {
-        const batEl = document.getElementById('battery-status');
-        if(batEl) batEl.innerText = Math.round(bat.level * 100) + "%";
+        document.getElementById('battery-status').innerText = Math.round(bat.level * 100) + "%";
     });
 }
 
-// Weather
 const tempEl = document.getElementById('temp-display');
 if(tempEl) {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=27.9972&longitude=83.0538&current_weather=true')
     .then(res => res.json())
-    .then(data => {
-        tempEl.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`;
-    })
+    .then(data => { tempEl.innerHTML = `Arghakhanchi: <b>${data.current_weather.temperature}°C</b>`; })
     .catch(() => tempEl.innerText = "Weather Offline");
 }
 
 // ==========================================
-// 4. BLOGS (Load from JSON if possible, else use backup)
-// ==========================================
-const myBlogs = [
-    { title: "New AI Features", category: "Tech", date: "Dec 14", desc: "Added Library and AI Voice.", link: "#" },
-    { title: "React Journey", category: "Code", date: "Dec 10", desc: "Learning React JS.", link: "#" },
-    { title: "AI Safety Guide", category: "Security", date: "Dec 12", desc: "How to use AI safely.", link: "ai-guide.html" }
-];
-const blogCont = document.getElementById('blog-container');
-if(blogCont) {
-    blogCont.innerHTML = myBlogs.map(b => `
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 rounded-2xl hover:border-blue-500 transition cursor-pointer reveal">
-            <span class="text-xs font-bold text-blue-500 uppercase">${b.category}</span>
-            <h3 class="text-xl font-bold mt-2 mb-2 text-gray-900 dark:text-white">${b.title}</h3>
-            <p class="text-sm text-gray-500">${b.desc}</p>
-            <a href="${b.link}" class="text-blue-500 text-xs font-bold mt-3 inline-block">READ MORE</a>
-        </div>
-    `).join('');
-}
-
-
-// ==========================================
-// 5. MODALS, MENUS & SCROLL
+// 4. MODALS, MENUS & SCROLL
 // ==========================================
 function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
 function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
@@ -161,19 +136,18 @@ const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-// Scroll Reveal
+// Scroll Reveal & Magic Cursor
 window.addEventListener('scroll', () => {
     document.querySelectorAll('.reveal').forEach(r => {
         if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active');
     });
-    // Progress Bar
+    
     const bar = document.getElementById('progress-bar');
     if(bar) {
         const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
         bar.style.width = scrolled + "%";
     }
     
-    // Scroll Top Button
     const topBtn = document.getElementById('scrollTopBtn');
     if(topBtn) {
         if(window.scrollY > 300) { topBtn.classList.remove('hidden'); topBtn.classList.add('flex'); }
@@ -183,7 +157,6 @@ window.addEventListener('scroll', () => {
 
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-// Music Player (Simple)
 let isPlaying = false;
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
@@ -207,4 +180,4 @@ if(typeText) {
         setTimeout(type, del ? 100 : 200);
     }
     type();
-            }
+}
