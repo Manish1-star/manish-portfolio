@@ -1,4 +1,6 @@
+// ==========================================
 // 1. SYSTEM INIT & PRELOADER FIX
+// ==========================================
 const html = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
 
@@ -8,59 +10,84 @@ themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); loc
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('preloader').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('preloader').style.display = 'none';
-            document.body.classList.remove('loading');
-            
-            // Trigger Profile Animation
-            const profileWrapper = document.getElementById('profile-wrapper');
-            if(profileWrapper) profileWrapper.classList.add('cinematic-entry');
-        }, 500);
+        const preloader = document.getElementById('preloader');
+        if(preloader) {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                document.body.classList.remove('loading');
+                const profileWrapper = document.getElementById('profile-wrapper');
+                if(profileWrapper) profileWrapper.classList.add('cinematic-entry');
+            }, 500);
+        }
     }, 1500);
 
-    // Initial Library Load (MUST READ)
-    loadBooks('must_read');
+    // Initial Library Load (MUST READ BOOKS)
+    if(typeof loadBooks === 'function') loadBooks('must_read');
 });
 
+// Safety: Force remove preloader if stuck
+setTimeout(() => { 
+    const p = document.getElementById('preloader'); 
+    if(p) p.style.display = 'none'; 
+    document.body.classList.remove('loading'); 
+}, 5000);
+
 // ==========================================
-// 2. BLOG DATA RESTORED (All your blogs)
+// 2. BLOG DATA (UPDATED WITH NEW POSTS)
 // ==========================================
 const myBlogs = [
     {
-        "image": "profile.jpg",
-        "category": "Tech",
+        "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Web Development",
         "date": "Dec 14, 2025",
-        "title": "New Features Added! ✨",
-        "desc": "Updated portfolio with Library, Cinematic Profile, and Bank Support.",
-        "link": "#"
+        "title": "How I Built My Portfolio Website 💻",
+        "desc": "From coding in HTML/CSS to deploying on GitHub Pages and adding AI features. Read the full story behind this website.",
+        "link": "building-portfolio.html"
     },
     {
-        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
-        "category": "AI Safety",
-        "date": "Dec 12, 2025",
-        "title": "How to Use AI Safely 🛡️",
-        "desc": "Never share passwords or API keys. Click to read the full guide.",
-        "link": "ai-guide.html"
+        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Education",
+        "date": "Dec 14, 2025",
+        "title": "Man: The Complex Masterpiece 🧍",
+        "desc": "What defines a man? Explore the biological, social, and technological evolution of human beings.",
+        "link": "man.html"
     },
     {
         "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
         "category": "Science",
         "date": "Dec 13, 2025",
         "title": "Chemistry: The Central Science 🧪",
-        "desc": "Chemistry connects physics with biology.",
+        "desc": "Chemistry connects physics with biology. Explore how atoms, molecules, and reactions shape our world.",
         "link": "chemistry.html"
     },
     {
         "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1000&auto=format&fit=crop", 
         "category": "Education",
         "date": "Dec 12, 2025",
-        "title": "What is Biology? 🧬",
-        "desc": "Biology is the scientific study of life.",
+        "title": "What is Biology? The Science of Life 🧬",
+        "desc": "Biology is the scientific study of life. It explores how living things function, grow, interact, and evolve.",
         "link": "biology.html"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+        "category": "AI Safety",
+        "date": "Dec 12, 2025",
+        "title": "How to Use AI Safely 🛡️",
+        "desc": "AI is powerful but needs care. Never share passwords or API keys. Click to read the full guide.",
+        "link": "ai-guide.html"
+    },
+    {
+        "image": "profile.jpg",
+        "category": "Technology",
+        "date": "Dec 12, 2025",
+        "title": "New Magic Features Added! ✨",
+        "desc": "I have updated my portfolio with 3D Tilt, Magic Cursor, and Dark Mode. It feels super professional now.",
+        "link": "#contact"
     }
 ];
 
+// Load Blogs Function
 const blogCont = document.getElementById('blog-container');
 if(blogCont) {
     blogCont.innerHTML = myBlogs.map(b => `
@@ -77,7 +104,7 @@ if(blogCont) {
 }
 
 // ==========================================
-// 3. LIBRARY LOGIC (With Must-Read Backup)
+// 3. LIBRARY LOGIC (With Backup)
 // ==========================================
 const libraryBackup = {
     'must_read': [
@@ -89,6 +116,10 @@ const libraryBackup = {
     'ai': [
         { title: "Life 3.0", author: "Max Tegmark", cover: "https://covers.openlibrary.org/b/id/8381831-L.jpg", key: "/works/OL17354964W" },
         { title: "Superintelligence", author: "Nick Bostrom", cover: "https://covers.openlibrary.org/b/id/8303028-L.jpg", key: "/works/OL17072974W" }
+    ],
+    'programming': [
+        { title: "Clean Code", author: "Robert C. Martin", cover: "https://covers.openlibrary.org/b/id/8303028-L.jpg", key: "/works/OL3432026W" },
+        { title: "The Pragmatic Programmer", author: "Andrew Hunt", cover: "https://covers.openlibrary.org/b/id/10578643-L.jpg", key: "/works/OL32402W" }
     ]
 };
 
@@ -98,10 +129,9 @@ async function loadBooks(category) {
 
     try {
         if(category === 'must_read') {
-            renderBooks(libraryBackup['must_read']); // Always load backup for Must Read
+            renderBooks(libraryBackup['must_read']); 
             return;
         }
-
         let subject = category;
         if(category === 'ai') subject = 'artificial_intelligence';
 
@@ -119,8 +149,9 @@ async function loadBooks(category) {
             throw new Error("API Limit");
         }
     } catch (e) {
-        console.log("Using Backup");
-        renderBooks(libraryBackup['must_read']);
+        // Fallback to backup if API fails
+        if(libraryBackup[category]) renderBooks(libraryBackup[category]);
+        else renderBooks(libraryBackup['must_read']);
     }
 }
 
@@ -149,7 +180,7 @@ async function openBookModal(title, author, cover, key) {
     try {
         const res = await fetch(`https://openlibrary.org${key}.json`);
         const data = await res.json();
-        const desc = typeof data.description === 'string' ? data.description : (data.description?.value || "This is a must-read book available in our digital collection.");
+        const desc = typeof data.description === 'string' ? data.description : (data.description?.value || "This is a premium book from our digital collection.");
         document.getElementById('modal-book-desc').innerText = desc.substring(0, 400) + "...";
     } catch (e) {
         document.getElementById('modal-book-desc').innerText = "Detailed description unavailable.";
@@ -162,9 +193,10 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 function updateLiveStats() {
     const now = new Date();
-    document.getElementById('live-time').innerText = now.toLocaleTimeString();
+    const timeEl = document.getElementById('live-time');
+    if(timeEl) timeEl.innerText = now.toLocaleTimeString();
     
-    const statuses = ["System Online 🟢", " Subscribe My YouTube channel 🤖", "Coding 💻", "Reading 📚"];
+    const statuses = ["System Online 🟢", "AI Analyzing 🤖", "Coding 💻", "Reading 📚"];
     const statusEl = document.getElementById('current-status');
     if(statusEl) statusEl.innerText = statuses[Math.floor((Date.now() / 3000) % statuses.length)];
 }
@@ -172,7 +204,8 @@ setInterval(updateLiveStats, 1000);
 
 if(navigator.getBattery) {
     navigator.getBattery().then(bat => {
-        document.getElementById('battery-status').innerText = Math.round(bat.level * 100) + "%";
+        const batEl = document.getElementById('battery-status');
+        if(batEl) batEl.innerText = Math.round(bat.level * 100) + "%";
     });
 }
 
@@ -189,20 +222,23 @@ if(tempEl) {
 // ==========================================
 function openBankModal() { document.getElementById('bank-modal').classList.remove('hidden'); }
 function closeBankModal() { document.getElementById('bank-modal').classList.add('hidden'); }
+
 const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-// Scroll Reveal
+// Scroll Reveal & Magic Cursor
 window.addEventListener('scroll', () => {
     document.querySelectorAll('.reveal').forEach(r => {
         if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active');
     });
+    
     const bar = document.getElementById('progress-bar');
     if(bar) {
         const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
         bar.style.width = scrolled + "%";
     }
+    
     const topBtn = document.getElementById('scrollTopBtn');
     if(topBtn) {
         if(window.scrollY > 300) { topBtn.classList.remove('hidden'); topBtn.classList.add('flex'); }
@@ -235,4 +271,4 @@ if(typeText) {
         setTimeout(type, del ? 100 : 200);
     }
     type();
-}
+         }
