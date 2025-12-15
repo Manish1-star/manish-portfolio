@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <!-- Home Page -->
    <url>
       <loc>https://manish1-star.github.io/manish-portfolio/</loc>
-      <lastmod>2025-12-13</lastmod>
+      <lastmod>2025-12-14</lastmod>
       <priority>1.0</priority>
    </url>
-   
-   <!-- Biology Page -->
-   <url>
-      <loc>https://manish1-star.github.io/manish-portfolio/biology.html</loc>
-      <lastmod>2025-12-13</lastmod>
-      <priority>0.8</priority>
-   </url>
-
-   <!-- Chemistry Page -->
-   <url>
-      <loc>https://manish1-star.github.io/manish-portfolio/chemistry.html</loc>
-      <lastmod>2025-12-13</lastmod>
-      <priority>0.8</priority>
-   </url>
-
-   <!-- AI Guide Page -->
-   <url>
-      <loc>https://manish1-star.github.io/manish-portfolio/ai-guide.html</loc>
-      <lastmod>2025-12-13</lastmod>
-      <priority>0.8</priority>
-   </url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/biology.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/chemistry.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/ai-guide.html</loc></url>
 </url>
