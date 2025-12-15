@@ -29,7 +29,15 @@ setTimeout(() => { document.getElementById('preloader').style.display = 'none'; 
 // ==========================================
 // 2. BLOG DATA
 // ==========================================
-const myBlogs = [
+const myBlogs = [ 
+    {
+        "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Tech & AI",
+        "date": "Dec 15, 2025",
+        "title": "The Future of Web Development & AI 🤖",
+        "desc": "Explore how AI is revolutionizing coding, UI/UX design, and the future of the internet.",
+        "link": "future-web-ai.html"
+    },
     {
         "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1000&auto=format&fit=crop", 
         "category": "Web Development",
