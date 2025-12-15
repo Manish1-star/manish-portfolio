@@ -1,6 +1,4 @@
-// ==========================================
 // 1. SYSTEM INIT & PRELOADER FIX
-// ==========================================
 const html = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
 
@@ -10,42 +8,26 @@ themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); loc
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('preloader').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('preloader').style.display = 'none';
-            document.body.classList.remove('loading');
-            
-            // GSAP ANIMATIONS
-            if(window.gsap && window.ScrollTrigger) {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.from(".gsap-hero-text", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
-                gsap.from("#profile-wrapper", { duration: 1.2, scale: 0.5, opacity: 0, delay: 0.2, ease: "back.out(1.7)" });
-                gsap.utils.toArray(".gsap-fade-up").forEach(elem => {
-                    gsap.from(elem, {
-                        scrollTrigger: { trigger: elem, start: "top 85%" },
-                        y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
-                    });
-                });
-            } else {
-                document.getElementById('profile-wrapper').classList.add('cinematic-entry');
-            }
-        }, 500);
+        const preloader = document.getElementById('preloader');
+        if(preloader) {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                document.body.classList.remove('loading');
+                const profileWrapper = document.getElementById('profile-wrapper');
+                if(profileWrapper) profileWrapper.classList.add('profile-entry');
+            }, 500);
+        }
     }, 1500);
 
     // Initial Library Load
     if(typeof loadBooks === 'function') loadBooks('must_read');
 });
 
-// Force remove preloader backup
-setTimeout(() => { 
-    const p = document.getElementById('preloader'); 
-    if(p) p.style.display = 'none'; 
-    document.body.classList.remove('loading'); 
-}, 5000);
-
+setTimeout(() => { document.getElementById('preloader').style.display = 'none'; document.body.classList.remove('loading'); }, 5000);
 
 // ==========================================
-// 2. BLOG DATA (ENGLISH ONLY)
+// 2. BLOG DATA
 // ==========================================
 const myBlogs = [
     {
@@ -206,4 +188,4 @@ if(typeText) {
         setTimeout(type, del ? 100 : 200);
     }
     type();
-                                                                                                                                    }
+        }
