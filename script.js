@@ -1,7 +1,10 @@
+// ==========================================
 // 1. SYSTEM INIT & PRELOADER FIX
+// ==========================================
 const html = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
 
+// Force Dark Mode
 if (!('theme' in localStorage) || localStorage.getItem('theme') === 'dark') { html.classList.add('dark'); }
 themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
 
@@ -12,18 +15,19 @@ window.addEventListener('load', () => {
             document.getElementById('preloader').style.display = 'none';
             document.body.classList.remove('loading');
             
-            // GSAP Animations (Premium Feel)
-            if(window.gsap) {
+            // GSAP ANIMATIONS
+            if(window.gsap && window.ScrollTrigger) {
+                gsap.registerPlugin(ScrollTrigger);
                 gsap.from(".gsap-hero-text", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
                 gsap.from("#profile-wrapper", { duration: 1.2, scale: 0.5, opacity: 0, delay: 0.2, ease: "back.out(1.7)" });
-                
-                // Scroll Trigger for Sections
                 gsap.utils.toArray(".gsap-fade-up").forEach(elem => {
-                    gsap.to(elem, {
-                        scrollTrigger: { trigger: elem, start: "top 80%" },
-                        y: 0, opacity: 1, duration: 0.8, ease: "power2.out"
+                    gsap.from(elem, {
+                        scrollTrigger: { trigger: elem, start: "top 85%" },
+                        y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
                     });
                 });
+            } else {
+                document.getElementById('profile-wrapper').classList.add('cinematic-entry');
             }
         }, 500);
     }, 1500);
@@ -39,8 +43,9 @@ setTimeout(() => {
     document.body.classList.remove('loading'); 
 }, 5000);
 
+
 // ==========================================
-// 2. BLOG DATA (SAFE & RESTORED)
+// 2. BLOG DATA (ENGLISH ONLY)
 // ==========================================
 const myBlogs = [
     {
@@ -108,7 +113,9 @@ if(blogCont) {
     `).join('');
 }
 
-// ... (Library Logic & Utils are same as before - Ensuring nothing is lost) ...
+// ==========================================
+// 3. LIBRARY LOGIC (With Backup)
+// ==========================================
 const libraryBackup = {
     'must_read': [ { title: "Atomic Habits", author: "James Clear", cover: "https://covers.openlibrary.org/b/id/8563855-L.jpg", key: "/works/OL17930368W" }, { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki", cover: "https://covers.openlibrary.org/b/id/8344686-L.jpg", key: "/works/OL3340646W" } ],
     'ai': [ { title: "Life 3.0", author: "Max Tegmark", cover: "https://covers.openlibrary.org/b/id/8381831-L.jpg", key: "/works/OL17354964W" } ]
@@ -167,6 +174,7 @@ const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
+// Scroll Reveal
 window.addEventListener('scroll', () => {
     document.querySelectorAll('.reveal').forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active'); });
     const bar = document.getElementById('progress-bar');
@@ -198,4 +206,4 @@ if(typeText) {
         setTimeout(type, del ? 100 : 200);
     }
     type();
-    }
+                                                                                                                                    }
