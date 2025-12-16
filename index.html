@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manish Ghimire | Future AI Tech</title>
     
-    <!-- ✅ GOOGLE VERIFICATION CODE -->
+    <!-- ✅ GOOGLE VERIFICATION & SEO (Safe) -->
     <meta name="google-site-verification" content="googled378ab6d329b03d4" />
+    <title>Manish Ghimire | Future AI Tech</title>
+    <meta name="description" content="Portfolio of Manish Ghimire - Web Developer & AI Enthusiast.">
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="logo.png">
@@ -14,6 +15,8 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,7 +31,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Animation Libs -->
+    <!-- Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -38,7 +41,7 @@
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-[#050505] dark:text-gray-100 transition-colors duration-300 loading">
 
-    <!-- PRELOADER -->
+    <!-- PRELOADER (Old Style Preserved) -->
     <div id="preloader" class="fixed inset-0 z-[9999] bg-white dark:bg-black flex flex-col items-center justify-center">
         <div class="relative flex items-center justify-center">
             <div class="w-40 h-40 border-4 border-transparent border-t-blue-500 border-b-purple-600 rounded-full animate-spin absolute"></div>
@@ -47,15 +50,20 @@
         <p class="mt-24 text-xs text-gray-400 font-mono tracking-widest">INITIALIZING...</p>
     </div>
 
-    <!-- MAGIC CURSOR & TOAST -->
+    <!-- PROGRESS BAR -->
+    <div id="progress-container" class="fixed top-0 left-0 w-full h-1 z-[100]">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-purple-600 w-0 transition-all duration-100"></div>
+    </div>
+
+    <!-- MAGIC CURSOR -->
     <div id="cursor" class="hidden md:block"></div>
     <div id="toast-container" class="fixed top-24 right-5 z-[100] flex flex-col gap-2"></div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <!-- LOGO -->
+                <!-- LOGO/NAME -->
                 <div class="flex-shrink-0 cursor-pointer hover-trigger" onclick="window.scrollTo(0,0)">
                     <img src="logo.png" alt="MwNisH" class="h-10 w-auto object-contain drop-shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                     <h1 class="font-heading font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 hidden">MwNisH</h1>
@@ -65,6 +73,7 @@
                     <a href="#about" class="hover:text-blue-500 transition hover-trigger">About</a>
                     <a href="#library" class="hover:text-blue-500 transition hover-trigger">Library</a>
                     <a href="#projects" class="hover:text-blue-500 transition hover-trigger">Projects</a>
+                    <!-- Google AI Studio Link -->
                     <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-1 hover-trigger"><i class="fab fa-google"></i> AI Studio</a>
                     <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition hover-trigger">Contact</a>
                     <button id="theme-toggle" class="p-2 hover-trigger"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline text-yellow-400"></i></button>
@@ -72,6 +81,8 @@
                 <button id="mobile-menu-btn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
             </div>
         </div>
+        
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-black border-b border-gray-800 absolute w-full p-4 space-y-3">
             <a href="#about" class="block">About</a>
             <a href="#library" class="block">Library</a>
@@ -86,6 +97,7 @@
         <div id="particles-js"></div>
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div class="text-center md:text-left gsap-hero-text">
+                <!-- Status Badge -->
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-gray-300 dark:border-white/20 px-4 py-1 rounded-full text-xs font-bold text-green-600 dark:text-green-400 mb-6">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
                     <span id="current-status">System Online: Coding 💻</span>
@@ -104,9 +116,9 @@
             
             <!-- Cinematic Profile -->
             <div class="relative flex justify-center gsap-hero-img">
-                <div id="profile-wrapper" class="relative w-72 h-72 md:w-96 md:h-96">
+                <div id="profile-wrapper" class="relative w-72 h-72 md:w-96 md:h-96 opacity-0 transform scale-50 transition-all duration-1000 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full blur-2xl opacity-40 animate-pulse"></div>
-                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10" data-tilt>
+                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10 transform transition duration-500 hover:scale-105" data-tilt>
                 </div>
             </div>
         </div>
@@ -120,7 +132,7 @@
                 <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-blue-500 transition group hover-trigger gsap-fade-up" data-tilt>
                     <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-brain"></i></div>
                     <h3 class="text-2xl font-bold mb-3">Artificial Intelligence</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Leveraging LLMs and Neural Networks to build smart applications.</p>
+                    <p class="text-gray-500 dark:text-gray-400">Leveraging LLMs and Neural Networks.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-purple-500 transition group delay-100 hover-trigger gsap-fade-up" data-tilt>
                     <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-laptop-code"></i></div>
@@ -136,23 +148,21 @@
         </div>
     </section>
 
-    <!-- NEW FEATURE: AI NARRATOR IN ABOUT SECTION -->
+    <!-- ABOUT ME & AI NARRATOR -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-slate-900/50">
         <div class="max-w-4xl mx-auto px-4 text-center gsap-fade-up">
             <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
-            
             <div class="relative bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 mb-10">
                 <p id="about-text" class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-6">
                     "I am not just a developer; I am a creator." <br>
                     My journey began in the fields of <strong>Agriculture</strong> and the busy counters of a <strong>Mobile Shop</strong> in Nepal. 
-                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>.
+                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>, building tools that solve real-world problems.
                 </p>
-                <!-- AI NARRATOR BUTTON -->
                 <button onclick="readAboutMe()" id="read-btn" class="px-6 py-2 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 rounded-full font-bold text-sm hover:scale-105 transition flex items-center gap-2 mx-auto">
                     <i class="fas fa-volume-up"></i> Listen to my Story
                 </button>
             </div>
-
+            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-code text-3xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3></div>
                 <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-video text-3xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3></div>
@@ -213,10 +223,18 @@
             <div class="flex items-center gap-2"><i class="fas fa-cloud text-yellow-500"></i> <span id="temp-display">Loading...</span></div>
         </div>
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
+            
+            <!-- ✅ SMART MAP (Fixed: No Broken Image) -->
             <div class="text-center p-4 bg-gray-100 dark:bg-gray-900 rounded-2xl">
                 <p class="text-xs font-bold text-gray-500 uppercase mb-2">Live Visitor Map</p>
-                <a href="https://info.flagcounter.com/your-id"><img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" class="mx-auto rounded opacity-80 hover:opacity-100 transition" onerror="this.style.display='none'"></a>
+                <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                    <img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" 
+                         alt="Visitor Map" 
+                         class="mx-auto hover:opacity-90 transition w-full"
+                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg'; this.style.opacity='0.5';">
+                </div>
             </div>
+
             <div class="text-center">
                 <button onclick="openBankModal()" class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition w-full md:w-auto hover-trigger">
                     <i class="fas fa-heart"></i> Support My Work
@@ -226,7 +244,7 @@
         <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire. Built for the Future.</p>
     </footer>
 
-    <!-- MODALS -->
+    <!-- MODALS & BUTTONS -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-gray-900 w-full max-w-sm rounded-3xl border border-gray-700 p-8 text-center relative">
             <button onclick="closeBankModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">&times;</button>
@@ -237,54 +255,34 @@
             <p class="font-bold mt-1">Manish Ghimire</p>
         </div>
     </div>
-
-    <!-- Book Details Modal -->
-    <div id="book-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-md">
-        <div class="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative flex flex-col md:flex-row gap-6 max-h-[80vh] overflow-y-auto border border-gray-700">
-            <button onclick="closeBookModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
-            <img id="modal-book-cover" src="" class="w-40 h-60 object-cover rounded-lg shadow-lg mx-auto md:mx-0">
-            <div class="flex-1 text-center md:text-left">
-                <h3 id="modal-book-title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white"></h3>
-                <p id="modal-book-author" class="text-blue-400 font-bold mb-4"></p>
-                <p id="modal-book-desc" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6"></p>
-                <a id="modal-book-link" href="#" target="_blank" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition">Read Book</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- NEW: SMART SCROLL PROGRESS BUTTON (Replaced simple button) -->
+    
+    <!-- Floating Buttons -->
     <div class="fixed bottom-8 right-8 z-40 flex flex-col gap-4 items-end">
-        <div id="scrollTopBtn" onclick="scrollToTop()" class="hidden relative w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-2xl cursor-pointer hover:scale-110 transition items-center justify-center">
-            <svg class="absolute top-0 left-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#ddd" stroke-width="8" />
-                <circle id="scroll-circle" cx="50" cy="50" r="45" fill="none" stroke="#3b82f6" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round" />
-            </svg>
-            <i class="fas fa-arrow-up text-sm z-10 text-gray-600 dark:text-gray-300"></i>
-        </div>
-
+        <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl items-center justify-center hover:scale-110 transition border border-gray-200 dark:border-gray-700"><i class="fas fa-arrow-up"></i></button>
         <button id="music-btn" onclick="toggleMusic()" class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition animate-bounce"><i class="fas fa-music text-xl"></i></button>
         <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg"></audio>
     </div>
 
     <script src="script.js"></script>
     <script>
-        // Init GSAP & Tilt
+        // Init GSAP & Tilt on Load
         window.onload = function() {
             setTimeout(() => {
                 const profile = document.getElementById('profile-wrapper');
                 if(profile) profile.classList.add('profile-entry');
-            }, 1000);
-            if(window.gsap && window.ScrollTrigger) {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.utils.toArray(".gsap-fade-up").forEach(elem => {
-                    gsap.from(elem, {
-                        scrollTrigger: { trigger: elem, start: "top 85%" },
-                        y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
+                
+                if(window.gsap && window.ScrollTrigger) {
+                    gsap.registerPlugin(ScrollTrigger);
+                    gsap.utils.toArray(".gsap-fade-up").forEach(elem => {
+                        gsap.from(elem, {
+                            scrollTrigger: { trigger: elem, start: "top 85%" },
+                            y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
+                        });
                     });
-                });
-            }
+                }
+            }, 1000);
         };
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400, glare: true, "max-glare": 0.3 });
     </script>
 </body>
-</html>
+                    </html>
