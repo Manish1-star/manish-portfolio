@@ -8,36 +8,66 @@ themeToggle.addEventListener('click', () => { html.classList.toggle('dark'); loc
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        const preloader = document.getElementById('preloader');
-        if(preloader) {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-                document.body.classList.remove('loading');
-                const profileWrapper = document.getElementById('profile-wrapper');
-                if(profileWrapper) profileWrapper.classList.add('profile-entry');
-            }, 500);
-        }
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            document.body.classList.remove('loading');
+            const profileWrapper = document.getElementById('profile-wrapper');
+            if(profileWrapper) profileWrapper.classList.add('cinematic-entry');
+            
+            // GSAP (If loaded)
+            if(window.gsap) {
+                gsap.from(".gsap-hero-text", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
+                gsap.from("#profile-wrapper", { duration: 1.2, scale: 0.5, opacity: 0, delay: 0.2, ease: "back.out(1.7)" });
+            }
+        }, 500);
     }, 1500);
 
-    // Initial Library Load
     if(typeof loadBooks === 'function') loadBooks('must_read');
 });
 
 setTimeout(() => { document.getElementById('preloader').style.display = 'none'; document.body.classList.remove('loading'); }, 5000);
 
 // ==========================================
-// 2. BLOG DATA
+// 2. NEW FEATURE: AI NARRATOR (READ ABOUT ME)
 // ==========================================
-const myBlogs = [ 
-    {
-        "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=1000&auto=format&fit=crop", 
-        "category": "Tech & AI",
-        "date": "Dec 15, 2025",
-        "title": "The Future of Web Development & AI 🤖",
-        "desc": "Explore how AI is revolutionizing coding, UI/UX design, and the future of the internet.",
-        "link": "future-web-ai.html"
-    },
+let isReading = false;
+function readAboutMe() {
+    const text = document.getElementById('about-text').innerText;
+    const btn = document.getElementById('read-btn');
+
+    if (isReading) {
+        window.speechSynthesis.cancel();
+        btn.innerHTML = '<i class="fas fa-volume-up"></i> Listen to my Story';
+        isReading = false;
+    } else {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.9;
+        
+        // Find best voice
+        const voices = window.speechSynthesis.getVoices();
+        const googleVoice = voices.find(v => v.name.includes("Google"));
+        if(googleVoice) utterance.voice = googleVoice;
+
+        utterance.onend = () => {
+            btn.innerHTML = '<i class="fas fa-volume-up"></i> Listen to my Story';
+            isReading = false;
+        };
+
+        window.speechSynthesis.speak(utterance);
+        btn.innerHTML = '<i class="fas fa-stop-circle"></i> Stop Listening';
+        isReading = true;
+    }
+}
+// Load voices
+window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+
+
+// ==========================================
+// 3. BLOG DATA
+// ==========================================
+const myBlogs = [
     {
         "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1000&auto=format&fit=crop", 
         "category": "Web Development",
@@ -104,7 +134,7 @@ if(blogCont) {
 }
 
 // ==========================================
-// 3. LIBRARY LOGIC (With Backup)
+// 4. LIBRARY LOGIC
 // ==========================================
 const libraryBackup = {
     'must_read': [ { title: "Atomic Habits", author: "James Clear", cover: "https://covers.openlibrary.org/b/id/8563855-L.jpg", key: "/works/OL17930368W" }, { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki", cover: "https://covers.openlibrary.org/b/id/8344686-L.jpg", key: "/works/OL3340646W" } ],
@@ -144,7 +174,9 @@ function openBookModal(title, author, cover, key) {
 }
 function closeBookModal() { document.getElementById('book-modal').classList.add('hidden'); }
 
-// Utils
+// ==========================================
+// 5. UTILS (Battery, Time, Weather, Status)
+// ==========================================
 function updateLiveStats() {
     const now = new Date(); document.getElementById('live-time').innerText = now.toLocaleTimeString();
     const statuses = ["System Online 🟢", "AI Analyzing 🤖", "Coding 💻", "Reading 📚"];
@@ -164,13 +196,24 @@ const menuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-// Scroll Reveal
+// NEW: SMART SCROLL & CIRCLE PROGRESS
 window.addEventListener('scroll', () => {
     document.querySelectorAll('.reveal').forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active'); });
     const bar = document.getElementById('progress-bar');
     if(bar) bar.style.width = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100 + "%";
+    
+    // Circular Button Logic
     const topBtn = document.getElementById('scrollTopBtn');
-    if(topBtn) { if(window.scrollY > 300) { topBtn.classList.remove('hidden'); topBtn.classList.add('flex'); } else { topBtn.classList.add('hidden'); topBtn.classList.remove('flex'); } }
+    const scrollCircle = document.getElementById('scroll-circle');
+    if(topBtn && scrollCircle) {
+        if(window.scrollY > 300) { 
+            topBtn.classList.remove('hidden'); topBtn.classList.add('flex'); 
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = window.scrollY / totalHeight;
+            const dashoffset = 283 - (progress * 283);
+            scrollCircle.style.strokeDashoffset = dashoffset;
+        } else { topBtn.classList.add('hidden'); topBtn.classList.remove('flex'); }
+    }
 });
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
