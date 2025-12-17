@@ -1,33 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700;900&display=swap');
 
+:root {
+    --primary-color: #3b82f6;
+}
+
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-.dark ::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { background: #888; border-radius: 5px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
 
-/* Preloader Animation */
 body.loading { overflow: hidden; }
 
-/* Cinematic Profile */
 .profile-entry {
     animation: zoomIn 1.5s ease-out forwards;
-    opacity: 0;
-    transform: scale(0.5);
+    opacity: 0; transform: scale(0.5);
 }
 @keyframes zoomIn {
     0% { opacity: 0; transform: scale(0.5) translateY(20px); }
     100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Magic Cursor */
 @media (min-width: 768px) {
     #cursor {
         position: fixed; top: 0; left: 0; width: 20px; height: 20px;
-        border: 2px solid #3b82f6; border-radius: 50%; pointer-events: none; z-index: 9999;
+        border: 2px solid var(--primary-color); border-radius: 50%; pointer-events: none; z-index: 9999;
         transform: translate(-50%, -50%); transition: transform 0.1s, background 0.2s; mix-blend-mode: exclusion;
     }
     #cursor.hovered { transform: translate(-50%, -50%) scale(2.5); background: rgba(59, 130, 246, 0.2); }
@@ -37,3 +37,15 @@ body.loading { overflow: hidden; }
 .gsap-fade-up { opacity: 0; transform: translateY(30px); }
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
+
+/* GOOGLE TRANSLATE CUSTOM STYLE */
+.goog-te-banner-frame { display: none !important; }
+.goog-te-gadget-simple { background-color: transparent !important; border: none !important; }
+.goog-te-gadget-simple .goog-te-menu-value span { color: #3b82f6 !important; font-weight: bold; }
+body { top: 0px !important; }
+
+/* TEXT HIGHLIGHT COLOR */
+.bg-primary { background-color: var(--primary-color) !important; }
+.text-primary { color: var(--primary-color) !important; }
+.border-primary { border-color: var(--primary-color) !important; }
+.hover\:border-primary:hover { border-color: var(--primary-color) !important; }
