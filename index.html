@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ✅ GOOGLE VERIFICATION & SEO (Safe) -->
-    <meta name="google-site-verification" content="googled378ab6d329b03d4" />
     <title>Manish Ghimire | Future AI Tech</title>
-    <meta name="description" content="Portfolio of Manish Ghimire - Web Developer & AI Enthusiast.">
     
-    <!-- FAVICON -->
+    <!-- ✅ GOOGLE VERIFICATION -->
+    <meta name="google-site-verification" content="googled378ab6d329b03d4" />
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Fonts & Icons -->
@@ -24,24 +21,25 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Poppins', 'sans-serif'] },
-                    colors: { primary: '#3b82f6', secondary: '#9333ea', dark: '#0a0a0a' }
+                    colors: { primary: 'var(--primary-color)', secondary: '#9333ea', dark: '#0a0a0a' }
                 }
             }
         }
     </script>
+
+    <!-- Icons & Libs -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-[#050505] dark:text-gray-100 transition-colors duration-300 loading">
 
-    <!-- PRELOADER (Old Style Preserved) -->
+    <!-- PRELOADER -->
     <div id="preloader" class="fixed inset-0 z-[9999] bg-white dark:bg-black flex flex-col items-center justify-center">
         <div class="relative flex items-center justify-center">
             <div class="w-40 h-40 border-4 border-transparent border-t-blue-500 border-b-purple-600 rounded-full animate-spin absolute"></div>
@@ -63,32 +61,43 @@
     <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <!-- LOGO/NAME -->
+                <!-- Logo -->
                 <div class="flex-shrink-0 cursor-pointer hover-trigger" onclick="window.scrollTo(0,0)">
                     <img src="logo.png" alt="MwNisH" class="h-10 w-auto object-contain drop-shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                     <h1 class="font-heading font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 hidden">MwNisH</h1>
                 </div>
                 
-                <div class="hidden md:flex space-x-8 items-center text-sm font-bold">
+                <div class="hidden md:flex space-x-6 items-center text-sm font-bold">
                     <a href="#about" class="hover:text-blue-500 transition hover-trigger">About</a>
                     <a href="#library" class="hover:text-blue-500 transition hover-trigger">Library</a>
                     <a href="#projects" class="hover:text-blue-500 transition hover-trigger">Projects</a>
-                    <!-- Google AI Studio Link -->
-                    <a href="https://aistudio.google.com/" target="_blank" class="hover:text-blue-500 transition flex items-center gap-1 hover-trigger"><i class="fab fa-google"></i> AI Studio</a>
-                    <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90 transition hover-trigger">Contact</a>
+                    
+                    <!-- LANGUAGE TRANSLATOR (GOOGLE) -->
+                    <div id="google_translate_element" class="hover-trigger scale-90 origin-right"></div>
+
                     <button id="theme-toggle" class="p-2 hover-trigger"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline text-yellow-400"></i></button>
+                    
+                    <!-- COLOR PICKER BUTTON -->
+                    <div class="relative group">
+                        <button class="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-500"><i class="fas fa-palette"></i></button>
+                        <div class="absolute right-0 top-10 w-32 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-xl hidden group-hover:grid grid-cols-3 gap-2 border border-gray-200 dark:border-gray-700">
+                            <button onclick="changeTheme('#3b82f6')" class="w-6 h-6 rounded-full bg-blue-500"></button>
+                            <button onclick="changeTheme('#ef4444')" class="w-6 h-6 rounded-full bg-red-500"></button>
+                            <button onclick="changeTheme('#10b981')" class="w-6 h-6 rounded-full bg-green-500"></button>
+                            <button onclick="changeTheme('#f59e0b')" class="w-6 h-6 rounded-full bg-yellow-500"></button>
+                            <button onclick="changeTheme('#8b5cf6')" class="w-6 h-6 rounded-full bg-purple-500"></button>
+                            <button onclick="changeTheme('#ec4899')" class="w-6 h-6 rounded-full bg-pink-500"></button>
+                        </div>
+                    </div>
                 </div>
                 <button id="mobile-menu-btn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-black border-b border-gray-800 absolute w-full p-4 space-y-3">
             <a href="#about" class="block">About</a>
             <a href="#library" class="block">Library</a>
             <a href="#projects" class="block">Projects</a>
-            <a href="https://aistudio.google.com/" target="_blank" class="block text-blue-500">Google AI</a>
-            <a href="#contact" class="block font-bold">Contact</a>
+            <div id="google_translate_mobile"></div> <!-- Mobile Translator -->
         </div>
     </nav>
 
@@ -96,29 +105,27 @@
     <section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
         <div id="particles-js"></div>
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="text-center md:text-left gsap-hero-text">
-                <!-- Status Badge -->
+            <div class="text-center md:text-left reveal">
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-gray-300 dark:border-white/20 px-4 py-1 rounded-full text-xs font-bold text-green-600 dark:text-green-400 mb-6">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
                     <span id="current-status">System Online: Coding 💻</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-heading font-extrabold mb-4 leading-tight">
-                    Future of <br><span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">Digital AI</span>
+                    Future of <br><span class="text-primary">Digital AI</span>
                 </h1>
                 <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto md:mx-0">
-                    I am <strong class="text-blue-500">Manish Ghimire</strong>. A visionary developer merging <span id="typing-text" class="text-purple-500 font-bold"></span><span class="animate-pulse">|</span>
+                    I am <strong class="text-primary">Manish Ghimire</strong>. A visionary developer merging <span id="typing-text" class="text-purple-500 font-bold"></span><span class="animate-pulse">|</span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#library" class="px-8 py-3 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-blue-500/50 hover-trigger">Explore Library</a>
-                    <a href="#contact" class="px-8 py-3 rounded-full border border-gray-400 dark:border-gray-600 hover:border-blue-500 transition font-bold hover-trigger">Connect</a>
+                    <a href="#library" class="px-8 py-3 rounded-full bg-primary text-white font-bold hover:opacity-90 transition shadow-lg hover:shadow-blue-500/50 hover-trigger">Explore Library</a>
+                    <a href="#contact" class="px-8 py-3 rounded-full border border-gray-400 dark:border-gray-600 hover:border-primary transition font-bold hover-trigger">Connect</a>
                 </div>
             </div>
-            
             <!-- Cinematic Profile -->
             <div class="relative flex justify-center gsap-hero-img">
-                <div id="profile-wrapper" class="relative w-72 h-72 md:w-96 md:h-96 opacity-0 transform scale-50 transition-all duration-1000 ease-out">
+                <div id="profile-wrapper" class="relative w-72 h-72 md:w-96 md:h-96">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full blur-2xl opacity-40 animate-pulse"></div>
-                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10 transform transition duration-500 hover:scale-105" data-tilt>
+                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10" data-tilt>
                 </div>
             </div>
         </div>
@@ -148,32 +155,55 @@
         </div>
     </section>
 
+    <!-- NEW: CERTIFICATES & ACHIEVEMENTS -->
+    <section id="achievements" class="py-20 bg-gray-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold mb-12 text-center gsap-fade-up">Achievements 🏆</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-yellow-500 hover-trigger gsap-fade-up" data-tilt>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-xl"><i class="fas fa-certificate"></i></div>
+                        <div><h3 class="font-bold text-lg">AI & ML</h3><p class="text-xs text-gray-500">Google / Coursera</p></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Completed comprehensive training on Neural Networks and LLMs.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-blue-500 hover-trigger gsap-fade-up" data-tilt>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl"><i class="fas fa-code"></i></div>
+                        <div><h3 class="font-bold text-lg">Web Developer</h3><p class="text-xs text-gray-500">Certified Professional</p></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Mastered HTML, CSS, JS, and React to build scalable applications.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border-l-4 border-red-500 hover-trigger gsap-fade-up" data-tilt>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xl"><i class="fab fa-youtube"></i></div>
+                        <div><h3 class="font-bold text-lg">Content Creator</h3><p class="text-xs text-gray-500">MwNisH Melodies</p></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Growing community of tech and music enthusiasts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ABOUT ME & AI NARRATOR -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-slate-900/50">
+    <section id="about" class="py-20 bg-white dark:bg-black">
         <div class="max-w-4xl mx-auto px-4 text-center gsap-fade-up">
             <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
-            <div class="relative bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 mb-10">
+            <div class="relative bg-gray-50 dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 mb-10">
                 <p id="about-text" class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-6">
                     "I am not just a developer; I am a creator." <br>
                     My journey began in the fields of <strong>Agriculture</strong> and the busy counters of a <strong>Mobile Shop</strong> in Nepal. 
-                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>, building tools that solve real-world problems.
+                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>.
                 </p>
                 <button onclick="readAboutMe()" id="read-btn" class="px-6 py-2 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 rounded-full font-bold text-sm hover:scale-105 transition flex items-center gap-2 mx-auto">
                     <i class="fas fa-volume-up"></i> Listen to my Story
                 </button>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-code text-3xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-video text-3xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-robot text-3xl text-pink-500 mb-2"></i><h3 class="font-bold">AI Tools</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-seedling text-3xl text-green-500 mb-2"></i><h3 class="font-bold">Agriculture</h3></div>
-            </div>
         </div>
     </section>
 
-    <!-- LIBRARY -->
-    <section id="library" class="py-24 bg-white dark:bg-black">
+    <!-- LIBRARY & BLOG (No Changes) -->
+    <section id="library" class="py-24 bg-gray-50 dark:bg-slate-900/50">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-4xl font-heading font-bold mb-4 text-center gsap-fade-up">Knowledge Hub 📚</h2>
             <div id="book-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[300px] mt-8">
@@ -182,15 +212,14 @@
         </div>
     </section>
 
-    <!-- BLOG SECTION -->
-    <section id="blog" class="py-20 bg-gray-50 dark:bg-slate-900/50">
+    <section id="blog" class="py-20 bg-white dark:bg-black">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-heading font-bold mb-12 text-center gsap-fade-up">Latest Blogs</h2>
             <div id="blog-container" class="grid md:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <!-- CONTACT & FOOTER -->
     <section id="contact" class="py-20 bg-gray-100 dark:bg-slate-900">
         <div class="max-w-3xl mx-auto px-4">
             <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden hover-trigger gsap-fade-up" data-tilt>
@@ -203,7 +232,7 @@
                             <input type="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="Email" required>
                         </div>
                         <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 focus:outline-none focus:border-blue-500 transition" placeholder="Message" required></textarea>
-                        <button type="submit" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
+                        <button type="submit" onclick="fireConfetti()" class="w-full py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-[1.01]">Send Message</button>
                     </form>
                     <div class="mt-10 flex justify-center space-x-8">
                         <a href="https://youtube.com/@mwnishmelodies?si=mxja42ieWb8wDzH0" target="_blank" class="text-gray-400 hover:text-red-600 text-3xl transition transform hover:scale-125"><i class="fab fa-youtube"></i></a>
@@ -217,34 +246,21 @@
 
     <!-- FOOTER -->
     <footer class="py-10 bg-white dark:bg-black border-t border-gray-800 text-center relative z-20">
-        <div class="flex flex-wrap justify-center gap-6 mb-8 text-xs font-mono text-gray-500 border-b border-gray-200 dark:border-gray-800 pb-8 mx-auto max-w-4xl">
-            <div class="flex items-center gap-2"><i class="fas fa-clock text-blue-500"></i> <span id="live-time">--:--:--</span></div>
-            <div class="flex items-center gap-2"><i class="fas fa-battery-half text-green-500"></i> <span id="battery-status">Checking...</span></div>
-            <div class="flex items-center gap-2"><i class="fas fa-cloud text-yellow-500"></i> <span id="temp-display">Loading...</span></div>
-        </div>
         <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto px-4 mb-8">
-            
-            <!-- ✅ SMART MAP (Fixed: No Broken Image) -->
             <div class="text-center p-4 bg-gray-100 dark:bg-gray-900 rounded-2xl">
                 <p class="text-xs font-bold text-gray-500 uppercase mb-2">Live Visitor Map</p>
-                <div class="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                    <img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" 
-                         alt="Visitor Map" 
-                         class="mx-auto hover:opacity-90 transition w-full"
-                         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg'; this.style.opacity='0.5';">
-                </div>
+                <a href="https://info.flagcounter.com/your-id"><img src="https://s11.flagcounter.com/count2/1Yx/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" class="mx-auto rounded opacity-80 hover:opacity-100 transition" onerror="this.style.display='none'"></a>
             </div>
-
             <div class="text-center">
-                <button onclick="openBankModal()" class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition w-full md:w-auto hover-trigger">
+                <button onclick="openBankModal(); fireConfetti()" class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition w-full md:w-auto hover-trigger">
                     <i class="fas fa-heart"></i> Support My Work
                 </button>
             </div>
         </div>
-        <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire. Built for the Future.</p>
+        <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire.</p>
     </footer>
 
-    <!-- MODALS & BUTTONS -->
+    <!-- MODALS (Bank, Book) -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-gray-900 w-full max-w-sm rounded-3xl border border-gray-700 p-8 text-center relative">
             <button onclick="closeBankModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">&times;</button>
@@ -252,10 +268,21 @@
             <img src="bank-qr.jpg" alt="QR" class="w-48 h-48 mx-auto rounded-lg mb-4 border-4 border-white">
             <p class="font-bold text-lg text-blue-500">Global IME Bank</p>
             <p class="font-mono text-lg text-gray-400">30307010022172</p>
-            <p class="font-bold mt-1">Manish Ghimire</p>
         </div>
     </div>
-    
+    <div id="book-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative flex flex-col md:flex-row gap-6 max-h-[80vh] overflow-y-auto border border-gray-700">
+            <button onclick="closeBookModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <img id="modal-book-cover" src="" class="w-40 h-60 object-cover rounded-lg shadow-lg mx-auto md:mx-0">
+            <div class="flex-1 text-center md:text-left">
+                <h3 id="modal-book-title" class="text-2xl font-bold mb-2 text-gray-900 dark:text-white"></h3>
+                <p id="modal-book-author" class="text-blue-400 font-bold mb-4"></p>
+                <p id="modal-book-desc" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6"></p>
+                <a id="modal-book-link" href="#" target="_blank" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition">Read Book</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Buttons -->
     <div class="fixed bottom-8 right-8 z-40 flex flex-col gap-4 items-end">
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl items-center justify-center hover:scale-110 transition border border-gray-200 dark:border-gray-700"><i class="fas fa-arrow-up"></i></button>
@@ -263,21 +290,26 @@
         <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg"></audio>
     </div>
 
+    <!-- GOOGLE TRANSLATE SCRIPT -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_mobile');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script src="script.js"></script>
     <script>
-        // Init GSAP & Tilt on Load
+        // Force Profile Animation & Init GSAP
         window.onload = function() {
             setTimeout(() => {
                 const profile = document.getElementById('profile-wrapper');
                 if(profile) profile.classList.add('profile-entry');
-                
                 if(window.gsap && window.ScrollTrigger) {
                     gsap.registerPlugin(ScrollTrigger);
                     gsap.utils.toArray(".gsap-fade-up").forEach(elem => {
-                        gsap.from(elem, {
-                            scrollTrigger: { trigger: elem, start: "top 85%" },
-                            y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
-                        });
+                        gsap.from(elem, { scrollTrigger: { trigger: elem, start: "top 85%" }, y: 50, opacity: 0, duration: 0.8, ease: "power2.out" });
                     });
                 }
             }, 1000);
@@ -285,4 +317,4 @@
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400, glare: true, "max-glare": 0.3 });
     </script>
 </body>
-                    </html>
+    </html>
