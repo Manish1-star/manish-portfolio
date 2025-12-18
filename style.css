@@ -9,8 +9,19 @@ body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-/* Preloader */
+/* PRELOADER */
 body.loading { overflow: hidden; }
+
+/* CINEMATIC PROFILE ANIMATION (Important) */
+.profile-entry {
+    animation: zoomIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0; 
+    transform: scale(0.5);
+}
+@keyframes zoomIn {
+    0% { opacity: 0; transform: scale(0.5) translateY(20px); filter: blur(10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
 
 /* Magic Cursor */
 @media (min-width: 768px) {
@@ -22,11 +33,8 @@ body.loading { overflow: hidden; }
     #cursor.hovered { transform: translate(-50%, -50%) scale(2.5); background: rgba(59, 130, 246, 0.2); }
 }
 
-/* Animations */
+#particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
+
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
-
-/* Mobile Fix: Always show content if JS delays */
-@media (max-width: 768px) {
-    .reveal { opacity: 1 !important; transform: translateY(0) !important; }
-}
+@media (max-width: 768px) { .reveal { opacity: 1 !important; transform: translateY(0) !important; } }
