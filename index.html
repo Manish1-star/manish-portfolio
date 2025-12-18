@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manish Ghimire | Future AI Tech</title>
     
-    <!-- ✅ GOOGLE VERIFICATION -->
+    <!-- ✅ GOOGLE VERIFICATION CODE -->
     <meta name="google-site-verification" content="googled378ab6d329b03d4" />
+    
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Fonts & Icons -->
@@ -25,35 +27,40 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     
-    <!-- ✅ Force New CSS -->
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <!-- Animation Libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-[#050505] dark:text-gray-100 transition-colors duration-300 loading">
 
-    <!-- PRELOADER -->
+    <!-- 1. PRELOADER -->
     <div id="preloader" class="fixed inset-0 z-[9999] bg-white dark:bg-black flex flex-col items-center justify-center">
         <div class="relative flex items-center justify-center">
             <div class="w-40 h-40 border-4 border-transparent border-t-blue-500 border-b-purple-600 rounded-full animate-spin absolute"></div>
             <h2 class="text-2xl font-heading font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse">MwNisH</h2>
         </div>
-        <p class="mt-24 text-xs text-gray-400 font-mono tracking-widest">INITIALIZING...</p>
+        <p class="mt-24 text-xs text-gray-400 font-mono tracking-widest">INITIALIZING SYSTEM...</p>
     </div>
 
-    <!-- PROGRESS BAR -->
+    <!-- 2. PROGRESS BAR -->
     <div id="progress-container" class="fixed top-0 left-0 w-full h-1 z-[100]">
         <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-purple-600 w-0 transition-all duration-100"></div>
     </div>
 
-    <!-- MAGIC CURSOR -->
+    <!-- 3. MAGIC CURSOR -->
     <div id="cursor" class="hidden md:block"></div>
     <div id="toast-container" class="fixed top-24 right-5 z-[100] flex flex-col gap-2"></div>
 
-    <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800">
+    <!-- 4. NAVIGATION -->
+    <nav class="fixed w-full z-50 backdrop-blur-xl bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-800 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
+                <!-- LOGO -->
                 <div class="flex-shrink-0 cursor-pointer hover-trigger" onclick="window.scrollTo(0,0)">
                     <img src="logo.png" alt="MwNisH" class="h-10 w-auto object-contain drop-shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                     <h1 class="font-heading font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 hidden">MwNisH</h1>
@@ -74,14 +81,16 @@
             <a href="#about" class="block">About</a>
             <a href="#library" class="block">Library</a>
             <a href="#projects" class="block">Projects</a>
+            <a href="https://aistudio.google.com/" target="_blank" class="block text-blue-500">Google AI</a>
             <a href="#contact" class="block font-bold">Contact</a>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- 5. HERO SECTION -->
     <section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+        <div id="particles-js"></div>
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="text-center md:text-left reveal">
+            <div class="text-center md:text-left gsap-hero-text">
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-gray-300 dark:border-white/20 px-4 py-1 rounded-full text-xs font-bold text-green-600 dark:text-green-400 mb-6">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
                     <span id="current-status">System Online: Coding 💻</span>
@@ -98,33 +107,32 @@
                 </div>
             </div>
             
-            <!-- CINEMATIC PROFILE -->
-            <div class="relative flex justify-center">
-                <!-- IMPORTANT: ID used for animation -->
+            <!-- Cinematic Profile -->
+            <div class="relative flex justify-center gsap-hero-img">
                 <div id="profile-wrapper" class="relative w-72 h-72 md:w-96 md:h-96 opacity-0 transform scale-50 transition-all duration-1000 ease-out">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full blur-2xl opacity-40 animate-pulse"></div>
-                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10 hover:scale-105 transition duration-500" data-tilt>
+                    <img src="profile.jpg" alt="Manish Ghimire" class="w-full h-full object-cover rounded-3xl border-2 border-white/20 shadow-2xl relative z-10 transform transition duration-500 hover:scale-105" data-tilt>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TECH ECOSYSTEM -->
+    <!-- 6. TECH ECOSYSTEM -->
     <section id="tech-ecosystem" class="py-24 bg-white dark:bg-[#080808]">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-heading font-bold mb-16 text-center reveal">My Tech Ecosystem 🌐</h2>
+            <h2 class="text-4xl font-heading font-bold mb-16 text-center gsap-fade-up">My Tech Ecosystem 🌐</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-blue-500 transition group reveal hover-trigger" data-tilt>
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-blue-500 transition group hover-trigger gsap-fade-up" data-tilt>
                     <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-brain"></i></div>
                     <h3 class="text-2xl font-bold mb-3">Artificial Intelligence</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Leveraging LLMs and Neural Networks.</p>
+                    <p class="text-gray-500 dark:text-gray-400">Leveraging LLMs and Neural Networks to build smart applications.</p>
                 </div>
-                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-purple-500 transition group reveal delay-100 hover-trigger" data-tilt>
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-purple-500 transition group delay-100 hover-trigger gsap-fade-up" data-tilt>
                     <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-laptop-code"></i></div>
                     <h3 class="text-2xl font-bold mb-3">Full-Stack Web</h3>
                     <p class="text-gray-500 dark:text-gray-400">Modern web apps with React & Node.</p>
                 </div>
-                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-green-500 transition group reveal delay-200 hover-trigger" data-tilt>
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-gray-800 hover:border-green-500 transition group delay-200 hover-trigger gsap-fade-up" data-tilt>
                     <div class="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center text-green-600 text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-video"></i></div>
                     <h3 class="text-2xl font-bold mb-3">Digital Content</h3>
                     <p class="text-gray-500 dark:text-gray-400">Video editing and storytelling.</p>
@@ -133,15 +141,15 @@
         </div>
     </section>
 
-    <!-- ABOUT ME -->
+    <!-- 7. ABOUT ME & AI NARRATOR -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-slate-900/50">
-        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+        <div class="max-w-4xl mx-auto px-4 text-center gsap-fade-up">
             <h2 class="text-3xl font-heading font-bold mb-6">About Me</h2>
-            <div class="relative bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 mb-10">
+            <div class="relative bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-gray-200 dark:border-gray-700 mb-10">
                 <p id="about-text" class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-6">
                     "I am not just a developer; I am a creator." <br>
                     My journey began in the fields of <strong>Agriculture</strong> and the busy counters of a <strong>Mobile Shop</strong> in Nepal. 
-                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>.
+                    Today, I stand at the intersection of <strong>Technology and Artificial Intelligence</strong>, building tools that solve real-world problems.
                 </p>
                 <button onclick="readAboutMe()" id="read-btn" class="px-6 py-2 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 rounded-full font-bold text-sm hover:scale-105 transition flex items-center gap-2 mx-auto">
                     <i class="fas fa-volume-up"></i> Listen to my Story
@@ -149,38 +157,36 @@
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger" data-tilt><i class="fas fa-code text-3xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger" data-tilt><i class="fas fa-video text-3xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger" data-tilt><i class="fas fa-robot text-3xl text-pink-500 mb-2"></i><h3 class="font-bold">AI Tools</h3></div>
-                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger" data-tilt><i class="fas fa-seedling text-3xl text-green-500 mb-2"></i><h3 class="font-bold">Agriculture</h3></div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-code text-3xl text-blue-500 mb-2"></i><h3 class="font-bold">Coding</h3></div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-video text-3xl text-purple-500 mb-2"></i><h3 class="font-bold">Content</h3></div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-robot text-3xl text-pink-500 mb-2"></i><h3 class="font-bold">AI Tools</h3></div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl hover:shadow-xl transition hover-trigger gsap-fade-up" data-tilt><i class="fas fa-seedling text-3xl text-green-500 mb-2"></i><h3 class="font-bold">Agriculture</h3></div>
             </div>
         </div>
     </section>
 
-    <!-- LIBRARY -->
+    <!-- 8. LIBRARY -->
     <section id="library" class="py-24 bg-white dark:bg-black">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-heading font-bold mb-4 text-center reveal">Knowledge Hub 📚</h2>
+            <h2 class="text-4xl font-heading font-bold mb-4 text-center gsap-fade-up">Knowledge Hub 📚</h2>
             <div id="book-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 min-h-[300px] mt-8">
-                <!-- Books load here from JS -->
+                <div class="col-span-full text-center text-gray-500">Loading Library...</div>
             </div>
         </div>
     </section>
 
-    <!-- BLOG SECTION -->
+    <!-- 9. BLOG SECTION -->
     <section id="blog" class="py-20 bg-gray-50 dark:bg-slate-900/50">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-heading font-bold mb-12 text-center reveal">Latest Blogs</h2>
-            <div id="blog-container" class="grid md:grid-cols-3 gap-8">
-                <!-- Blogs load here from JS -->
-            </div>
+            <h2 class="text-3xl font-heading font-bold mb-12 text-center gsap-fade-up">Latest Blogs</h2>
+            <div id="blog-container" class="grid md:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <!-- 10. CONTACT SECTION -->
     <section id="contact" class="py-20 bg-gray-100 dark:bg-slate-900">
         <div class="max-w-3xl mx-auto px-4">
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden reveal hover-trigger" data-tilt>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden hover-trigger gsap-fade-up" data-tilt>
                 <div class="p-8 md:p-12">
                     <h2 class="text-3xl font-heading font-bold text-center mb-2">Get In Touch</h2>
                     <p class="text-center text-gray-500 mb-8">Send me a message!</p>
@@ -202,7 +208,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- 11. FOOTER -->
     <footer class="py-10 bg-white dark:bg-black border-t border-gray-800 text-center relative z-20">
         <div class="flex flex-wrap justify-center gap-6 mb-8 text-xs font-mono text-gray-500 border-b border-gray-200 dark:border-gray-800 pb-8 mx-auto max-w-4xl">
             <div class="flex items-center gap-2"><i class="fas fa-clock text-blue-500"></i> <span id="live-time">--:--:--</span></div>
@@ -220,10 +226,10 @@
                 </button>
             </div>
         </div>
-        <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire.</p>
+        <p class="text-gray-500 text-sm">&copy; 2025 Manish Ghimire. Built for the Future.</p>
     </footer>
 
-    <!-- MODALS & BUTTONS -->
+    <!-- 12. MODALS -->
     <div id="bank-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-gray-900 w-full max-w-sm rounded-3xl border border-gray-700 p-8 text-center relative">
             <button onclick="closeBankModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">&times;</button>
@@ -231,10 +237,10 @@
             <img src="bank-qr.jpg" alt="QR" class="w-48 h-48 mx-auto rounded-lg mb-4 border-4 border-white">
             <p class="font-bold text-lg text-blue-500">Global IME Bank</p>
             <p class="font-mono text-lg text-gray-400">30307010022172</p>
+            <p class="font-bold mt-1">Manish Ghimire</p>
         </div>
     </div>
 
-    <!-- Book Details Modal -->
     <div id="book-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-md">
         <div class="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-2xl p-6 shadow-2xl relative flex flex-col md:flex-row gap-6 max-h-[80vh] overflow-y-auto border border-gray-700">
             <button onclick="closeBookModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
@@ -248,16 +254,14 @@
         </div>
     </div>
 
+    <!-- 13. FLOATING BUTTONS -->
     <div class="fixed bottom-8 right-8 z-40 flex flex-col gap-4 items-end">
         <button id="scrollTopBtn" onclick="scrollToTop()" class="hidden w-12 h-12 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl items-center justify-center hover:scale-110 transition border border-gray-200 dark:border-gray-700"><i class="fas fa-arrow-up"></i></button>
         <button id="music-btn" onclick="toggleMusic()" class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition animate-bounce"><i class="fas fa-music text-xl"></i></button>
         <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg"></audio>
     </div>
 
-    <!-- ✅ FORCE NEW SCRIPT -->
-    <script src="script.js?v=5.0"></script>
-    <script>
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400, glare: true, "max-glare": 0.3 });
-    </script>
+    <script src="script.js"></script>
+    <script>VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400, glare: true, "max-glare": 0.3 });</script>
 </body>
-                    </html>
+            </html>
