@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <!-- Home -->
    <url>
       <loc>https://manish1-star.github.io/manish-portfolio/</loc>
-      <lastmod>2025-12-14</lastmod>
       <priority>1.0</priority>
    </url>
+   
+   <!-- New Blogs -->
+   <url><loc>https://manish1-star.github.io/manish-portfolio/ai-tools.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/coding-guide.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/building-portfolio.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/man.html</loc></url>
+   <url><loc>https://manish1-star.github.io/manish-portfolio/ai-guide.html</loc></url>
    <url><loc>https://manish1-star.github.io/manish-portfolio/biology.html</loc></url>
    <url><loc>https://manish1-star.github.io/manish-portfolio/chemistry.html</loc></url>
-   <url><loc>https://manish1-star.github.io/manish-portfolio/ai-guide.html</loc></url>
 </url>
