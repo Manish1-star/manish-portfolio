@@ -104,7 +104,15 @@ function loadMassiveLibrary() {
 // ==========================================
 // 4. BLOG DATA
 // ==========================================
-const myBlogs = [ 
+const myBlogs = [
+    {
+        "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Tech Reviews",
+        "date": "Dec 19, 2025",
+        "title": "Top 5 AI Tools You Must Try! 📺",
+        "desc": "Boost your productivity with these amazing AI tools. Watch the full video review and guide inside.",
+        "link": "ai-tools.html"
+    },
     {
         "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop", 
         "category": "Career Guide",
