@@ -106,6 +106,14 @@ function loadMassiveLibrary() {
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Career Guide",
+        "date": "Dec 18, 2025",
+        "title": "How to Learn Coding in Nepal? 💻",
+        "desc": "Want to build a career in programming? Which language to choose? How to get a job? Here is the complete roadmap.",
+        "link": "coding-guide.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop", 
         "category": "Tech & Future",
         "date": "Dec 16, 2025",
