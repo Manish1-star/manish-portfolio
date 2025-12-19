@@ -106,6 +106,14 @@ function loadMassiveLibrary() {
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Artificial Intelligence",
+        "date": "Dec 20, 2025",
+        "title": "The Race to AGI: When Will AI Outsmart Humans? 🧠",
+        "desc": "From ChatGPT to Superintelligence. Are we ready for Artificial General Intelligence (AGI)? A deep dive into the future.",
+        "link": "agi-future.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000&auto=format&fit=crop", 
         "category": "Future Tech",
         "date": "Dec 19, 2025",
