@@ -104,7 +104,15 @@ function loadMassiveLibrary() {
 // ==========================================
 // 4. BLOG DATA
 // ==========================================
-const myBlogs = [
+const myBlogs = [ 
+    {
+        "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Future Tech",
+        "date": "Dec 19, 2025",
+        "title": "Quantum Computing: The Next Revolution ⚛️",
+        "desc": "Beyond 0s and 1s. Discover how Quantum Computers will change medicine, security, and AI forever.",
+        "link": "quantum.html"
+    },
     { "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80", "category": "Web Dev", "date": "Dec 14", "title": "How I Built My Portfolio 💻", "desc": "Coding journey.", "link": "building-portfolio.html" },
     { "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80", "category": "Education", "date": "Dec 14", "title": "Man: The Masterpiece 🧍", "desc": "Human evolution.", "link": "man.html" },
     { "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80", "category": "Science", "date": "Dec 13", "title": "Chemistry: Science 🧪", "desc": "Molecules and life.", "link": "chemistry.html" },
