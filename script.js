@@ -150,6 +150,14 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Philosophy of AI",
+        "date": "Dec 20, 2025",
+        "title": "The Singularity: Will AI Surpass Us? 🧠",
+        "desc": "From Narrow AI to Superintelligence. Are we approaching the moment where machines become smarter than humans? A deep dive.",
+        "link": "singularity.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1000&auto=format&fit=crop", 
         "category": "Cyber Security",
         "date": "Dec 21, 2025",
