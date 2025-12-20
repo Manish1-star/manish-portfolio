@@ -106,6 +106,14 @@ function loadMassiveLibrary() {
 // ==========================================
 const myBlogs = [
     {
+        "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Future Tech",
+        "date": "Dec 20, 2025",
+        "title": "Chatbots are Dead? Enter AI Agents 🤖",
+        "desc": "Why ChatGPT is just the beginning. Learn about Autonomous AI Agents like Devin and AutoGPT that do the work for you.",
+        "link": "ai-agents.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1000&auto=format&fit=crop", 
         "category": "Tech Reviews",
         "date": "Dec 19, 2025",
