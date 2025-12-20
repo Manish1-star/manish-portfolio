@@ -150,6 +150,14 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Cyber Security",
+        "date": "Dec 21, 2025",
+        "title": "The Dark Side of AI: Deepfakes & Scams 🕵️‍♂️",
+        "desc": "AI can now clone your voice in 3 seconds. Are you safe? Learn about Deepfakes, AI Scams, and how to protect your digital identity in 2025.",
+        "link": "cyber-security.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop", 
         "category": "Geopolitics",
         "date": "Dec 20, 2025",
