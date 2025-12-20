@@ -148,7 +148,15 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 // 3. BLOG DATA (RESTORED)
 // ==========================================
-const myBlogs = [
+const myBlogs = [ 
+    {
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Geopolitics",
+        "date": "Dec 20, 2025",
+        "title": "The New World Order: Tech Wars & AI 🌍",
+        "desc": "Geopolitics is no longer just about borders. It is about Microchips, AI supremacy, and the rise of the Global South. A deep dive into modern power struggles.",
+        "link": "geopolitics.html"
+    },
     {
         "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1000&auto=format&fit=crop", 
         "category": "Tech Reviews",
