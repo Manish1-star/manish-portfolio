@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Guide to AI - Manish Ghimire</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="A comprehensive deep-dive into Artificial Intelligence. History, Types, LLMs, Ethics, and the Future of AGI.">
+    <meta name="keywords" content="Artificial Intelligence, AGI, Machine Learning, Deep Learning, AI History, Future of AI">
+
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body{font-family:'Inter',sans-serif}
+        h1,h2,h3{font-family:'Poppins',sans-serif}
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; }
+        .prose h2 { margin-top: 3rem; margin-bottom: 1rem; color: #2563eb; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-slate-900 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Nav -->
+    <nav class="p-4 bg-white dark:bg-slate-800 shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-blue-600 font-bold hover:underline flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+            <span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">MwNisH Mega Blog</span>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <article class="max-w-4xl mx-auto p-6 md:p-12 bg-white dark:bg-slate-800 mt-8 mb-12 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700">
+        
+        <!-- Header Image -->
+        <div class="relative h-96 w-full overflow-hidden rounded-xl mb-10 group">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop" alt="AI Brain" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-8 left-8 text-white">
+                <span class="bg-blue-600 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider">Mega Guide</span>
+                <h1 class="text-3xl md:text-5xl font-bold mt-4 leading-tight">
+                    The Ultimate Guide to Artificial Intelligence: Past, Present & Future 🧠
+                </h1>
+            </div>
+        </div>
+
+        <!-- Meta -->
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-700 pb-8 mb-10 text-sm text-gray-500 dark:text-gray-400">
+            <div class="flex items-center gap-4">
+                <img src="profile.jpg" alt="Manish" class="w-12 h-12 rounded-full border-2 border-blue-500">
+                <div>
+                    <p class="font-bold text-gray-900 dark:text-white text-lg">Manish Ghimire</p>
+                    <p>AI Researcher & Developer</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p><i class="far fa-calendar-alt"></i> Dec 21, 2025</p>
+                <p class="text-blue-500 font-bold">25 Min Read</p>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="bg-gray-100 dark:bg-slate-700/50 p-6 rounded-xl mb-10 border-l-4 border-purple-500">
+            <h3 class="font-bold text-xl mb-4 text-gray-900 dark:text-white">Table of Contents</h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-blue-600 dark:text-blue-400 text-sm font-medium">
+                <li><a href="#ch1" class="hover:underline">1. Introduction to AI</a></li>
+                <li><a href="#ch2" class="hover:underline">2. The History of AI</a></li>
+                <li><a href="#ch3" class="hover:underline">3. How AI Works (ML & DL)</a></li>
+                <li><a href="#ch4" class="hover:underline">4. Types of AI (ANI, AGI, ASI)</a></li>
+                <li><a href="#ch5" class="hover:underline">5. Generative AI & LLMs</a></li>
+                <li><a href="#ch6" class="hover:underline">6. AI in Daily Life</a></li>
+                <li><a href="#ch7" class="hover:underline">7. Ethics and Dangers</a></li>
+                <li><a href="#ch8" class="hover:underline">8. The Future (2030-2050)</a></li>
+            </ul>
+        </div>
+
+        <!-- Body -->
+        <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            
+            <p class="first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 first-letter:float-left first-letter:mr-2">
+                Artificial Intelligence (AI) is no longer a concept from science fiction movies. It is here. It is in your pocket, in your car, in your hospital, and even writing this very sentence. But what exactly is AI? How did we get here? And more importantly, where are we going?
+            </p>
+
+            <p>This guide is designed to be the <strong>most comprehensive resource</strong> you will read today. We will travel from the ancient myths of automated beings to the super-intelligent machines of the future.</p>
+
+            <hr class="border-gray-200 dark:border-slate-700 my-10">
+
+            <h2 id="ch1" class="text-3xl font-bold">1. Introduction: What is AI?</h2>
+            <p>At its simplest, Artificial Intelligence is the simulation of human intelligence processes by machines, especially computer systems. These processes include learning (the acquisition of information and rules for using the information), reasoning (using rules to reach approximate or definite conclusions), and self-correction.</p>
+            <p>But AI is not just one thing. It is a broad umbrella term that encompasses everything from a calculator to a self-driving car.</p>
+
+            <h2 id="ch2" class="text-3xl font-bold">2. The History of AI: From Myths to Maths</h2>
+            <p>The dream of creating a thinking machine dates back to ancient Greece. However, the formal field of AI research was born at a workshop at Dartmouth College in 1956.</p>
+            <ul>
+                <li><strong>1950:</strong> Alan Turing publishes "Computing Machinery and Intelligence," introducing the famous <em>Turing Test</em>.</li>
+                <li><strong>1956:</strong> The term "Artificial Intelligence" is coined by John McCarthy.</li>
+                <li><strong>1997:</strong> IBM's Deep Blue defeats world chess champion Garry Kasparov.</li>
+                <li><strong>2011:</strong> Apple introduces Siri, bringing AI assistants to the masses.</li>
+                <li><strong>2022:</strong> OpenAI launches ChatGPT, changing the world forever.</li>
+            </ul>
+
+            <h2 id="ch3" class="text-3xl font-bold">3. How AI Works: Machine Learning & Deep Learning</h2>
+            <div class="bg-blue-50 dark:bg-slate-700/50 p-6 rounded-xl border-l-4 border-blue-500 my-6">
+                <p><strong>Machine Learning (ML):</strong> Instead of programming a computer with specific rules (if X do Y), we feed it data and let it find the patterns itself.</p>
+                <p class="mt-2"><strong>Deep Learning (DL):</strong> A subset of ML inspired by the human brain. It uses "Neural Networks" with many layers to analyze complex data like images and audio.</p>
+            </div>
+
+            <h2 id="ch4" class="text-3xl font-bold">4. The 3 Types of AI</h2>
+            <p>Scientists categorize AI into three stages of evolution:</p>
+            <ol class="list-decimal pl-6 space-y-4">
+                <li><strong>Artificial Narrow Intelligence (ANI):</strong> AI that is good at one specific task (e.g., Chess, Face Recognition, Siri). This is where we are today.</li>
+                <li><strong>Artificial General Intelligence (AGI):</strong> AI that is as smart as a human. It can learn any intellectual task that a human being can. This is the goal of companies like OpenAI and Google DeepMind.</li>
+                <li><strong>Artificial Super Intelligence (ASI):</strong> An intellect that is much smarter than the best human brains in practically every field, including scientific creativity, general wisdom and social skills.</li>
+            </ol>
+
+            <h2 id="ch5" class="text-3xl font-bold">5. The Era of Generative AI & LLMs</h2>
+            <p>Large Language Models (LLMs) like GPT-4 and Gemini are the current superstars. They are trained on massive amounts of text data from the internet. They predict the next word in a sentence with uncanny accuracy, allowing them to write essays, code, and poetry.</p>
+
+            <h2 id="ch6" class="text-3xl font-bold">6. AI in Daily Life</h2>
+            <p>AI is already integrated into our daily routines in ways we often overlook:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                <div class="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg">
+                    <h4 class="font-bold">Healthcare</h4>
+                    <p class="text-sm">Detecting cancer in X-rays faster than doctors.</p>
+                </div>
+                <div class="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg">
+                    <h4 class="font-bold">Finance</h4>
+                    <p class="text-sm">Detecting credit card fraud in milliseconds.</p>
+                </div>
+                <div class="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg">
+                    <h4 class="font-bold">Transportation</h4>
+                    <p class="text-sm">Tesla's Autopilot and Google Maps optimization.</p>
+                </div>
+                <div class="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg">
+                    <h4 class="font-bold">Entertainment</h4>
+                    <p class="text-sm">Netflix and Spotify recommendation algorithms.</p>
+                </div>
+            </div>
+
+            <h2 id="ch7" class="text-3xl font-bold text-red-600">7. Ethics, Bias, and Dangers</h2>
+            <p>With great power comes great responsibility. The rise of AI brings serious concerns:</p>
+            <ul>
+                <li><strong>Job Displacement:</strong> Automation of white-collar jobs.</li>
+                <li><strong>Bias:</strong> AI models can be racist or sexist if trained on biased data.</li>
+                <li><strong>Deepfakes:</strong> The inability to distinguish real video from fake.</li>
+                <li><strong>The Alignment Problem:</strong> Ensuring AI's goals match human values.</li>
+            </ul>
+
+            <h2 id="ch8" class="text-3xl font-bold text-purple-600">8. The Future (2030-2050)</h2>
+            <p>Experts predict that by 2030, AI will contribute $15.7 trillion to the global economy. We might see the first AGI by 2029 (predicted by Ray Kurzweil).</p>
+            <p>The future could be a utopia where AI solves climate change and cures diseases, or a dystopia where privacy is non-existent. The outcome depends on how we regulate and build it today.</p>
+
+            <hr class="border-gray-200 dark:border-slate-700 my-10">
+
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 rounded-2xl text-center text-white shadow-lg">
+                <h3 class="text-2xl font-bold mb-2">Final Thought</h3>
+                <p class="opacity-90 italic">"The best way to predict the future is to invent it." - Alan Kay</p>
+                <p class="mt-4">As we stand on the brink of this revolution, the most important skill you can learn is <strong>Adaptability</strong>.</p>
+            </div>
+
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-12 text-center">
+            <a href="index.html#blog" class="inline-block px-8 py-3 bg-gray-800 text-white rounded-full font-bold hover:bg-black transition shadow-lg">
+                Read More Blogs
+            </a>
+        </div>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="text-center py-10 text-gray-500 text-sm bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
+        <p>&copy; 2025 Manish Ghimire. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
