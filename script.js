@@ -150,6 +150,14 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Mega Guide",
+        "date": "Dec 21, 2025",
+        "title": "The Ultimate Guide to AI (2025 Edition) 🧠",
+        "desc": "A complete 15-page equivalent guide covering everything from the history of AI to AGI, Ethics, and the Future of Humanity.",
+        "link": "ultimate-ai-guide.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", 
         "category": "Philosophy of AI",
         "date": "Dec 20, 2025",
