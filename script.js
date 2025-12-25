@@ -150,6 +150,14 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1000&auto=format&fit=crop", 
+        "category": "Future Tech",
+        "date": "Dec 25, 2025",
+        "title": "Web 4.0 & The Metaverse 🌐",
+        "desc": "The internet is evolving. From static pages to the Metaverse and Brain-Computer Interfaces. Are we ready for the symbiotic web?",
+        "link": "metaverse.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop", 
         "category": "Mega Guide",
         "date": "Dec 21, 2025",
