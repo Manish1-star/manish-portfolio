@@ -150,6 +150,14 @@ function closeBookModal() { document.getElementById('book-modal').classList.add(
 // ==========================================
 const myBlogs = [ 
     {
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop", 
+        "category": "In-Depth Analysis",
+        "date": "Dec 30, 2025",
+        "title": "The Great Shift 2025: AI & New World Order 🌏",
+        "desc": "Where is the world heading? A deep dive into the AI revolution, Chip Wars, and the future of Nepal in the global stage.",
+        "link": "mega-blog.html"
+    },
+    {
         "image": "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1000&auto=format&fit=crop", 
         "category": "Future Tech",
         "date": "Dec 25, 2025",
